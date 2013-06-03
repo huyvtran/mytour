@@ -1,0 +1,80 @@
+.date-picker-day-name,.date-picker-sunday-name {
+    color: #555;
+    background: #F2F2F2;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.date-picker-sunday-name {
+    color: red
+}
+
+.date-picker-date {
+    cursor: pointer
+}
+
+.date-picker-container {
+    background: #ccc;
+    display: none;
+    color: #fff;
+    padding: 0px;
+    z-index: 2000;
+    position: absolute;
+    text-align: center;
+    font-size: 11px;
+    box-shadow: #2A4280 0px 1px 2px;
+    border: 1px solid #6D84B7
+}
+
+.date-picker-cp {
+    background: #6D84B7;
+}
+
+.date-picker-cp a {
+    color: #fff
+}
+
+.time-picker-container {
+    z-index: 100;
+    width: 204px;
+    border: 3px solid #6D84B7;
+    border-left-width: 2px;
+    border-bottom-width: 2px;
+}
+
+.time-stone {
+    display: inline-block;
+    border-left: 1px solid #6D84B7;
+    border-bottom: 1px solid #6D84B7;
+    padding: 3px;
+    font-size: 10px;
+    background: #fff;
+}
+
+.time-stone:hover {
+    background: #F2F2F2
+}
+
+.status-picker-container {
+    background: #fff;
+    border: 2px solid #6D84B7;
+    border-right-width: 1px;
+    width: 330px;
+}
+
+.status-flag {
+    background: transparent url(../images/arrow-up.png) no-repeat 4px top;
+    height: 4px;
+}
+
+.status-stone:hover {
+    background: #F8F6CD;
+}
+
+.status-stone {
+    border-right: 1px solid #6D84B7;
+    display: inline-block;
+    padding: 4px;
+    text-align: center;
+    width: 21px
+}

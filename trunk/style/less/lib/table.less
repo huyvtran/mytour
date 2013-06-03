@@ -1,0 +1,33 @@
+@TableMiniHeaderBgColor: #f0f0f0;
+@TableMiniBorderColor: #cdcdcd;
+@TableMiniRowBoldColor: #EE3007;
+@TableMiniRowVisibleColor: #CFCFCF;
+table{
+    border-spacing:0;
+    border-collapse:collapse;
+    .mini{
+
+    th{
+    background: @TableMiniHeaderBgColor;
+    color: darken(@TableMiniHeaderBgColor,70%);
+}
+td,th {
+    padding:5px;
+    border:1px solid @TableMiniBorderColor;
+}
+tr.bold{
+    td{
+    color: @TableMiniRowBoldColor !important;
+}
+}
+tr.visible{
+    td{
+    color: @TableMiniRowVisibleColor !important;
+}
+}
+caption{
+    padding:5px;
+    font-weight:bold
+}
+}
+}

@@ -1,0 +1,164 @@
+#chat-frame {
+    background: #fff;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.chat-bar {
+
+}
+
+/* #chat-frame .lightbox-close{
+  display:inline-block;
+  width:13px;
+  height:13px;
+  background:#fff url(chat/close.png) no-repeat center center;
+  position:absolute;
+  right:1px;
+  top:5px;
+  opacity:0.8
+} */
+.chat-head {
+
+}
+
+.ms {
+    border: 1px solid #ccc;
+    height: 110px;
+    width: 220px;
+    padding: 5px;
+    overflow: auto
+}
+
+.chat-head .s {
+    border: none;
+    border-bottom: 1px solid #B1BCD5;
+    background: #fff url(chat/search.png) no-repeat 3px center;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 7px 5px;
+    padding-left: 20px;
+    width: 100%;
+    color: #3B5998;
+    font-weight: bold;
+    box-shadow: 0px 0px 1px #ccc
+}
+
+#chat-body {
+    padding: 5px;
+    min-height: 20px;
+    height: 220px;
+    overflow: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#chat-body i {
+    font-size: 11px;
+    color: #292929
+}
+
+.userimg {
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 1px;
+    border: 1px solid #ddd
+}
+
+.imc {
+    width: 15px;
+    height: 15px
+}
+
+.imct {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ddd
+}
+
+.online,.offline {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: url(chat/online.png) no-repeat center center
+}
+
+.offline {
+    background: url(chat/offline.png) no-repeat center center
+}
+
+#chat-body .selected {
+    background: #eee;
+}
+
+.cb {
+    height: 100%
+}
+
+.ct {
+    line-height: 17px;
+    font-family: Tahoma;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 80px;
+    padding: 5px;
+    resize: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.cb .nicEdit-button-undefined,.cb .nicEdit-buttonContain,.cb .nicEdit-button,.cb .nicEdit-button-hover,.cb .nicEdit-button-active
+{
+    background-color: #fff !important;
+    border: none !important
+}
+
+.cb .nicEdit-panelContain {
+    background: #fff !important;
+    border: none !important;
+}
+
+.cb .nicEdit-panelContain {
+    border-bottom: 1px solid #ccc !important
+}
+
+.cb .nicEdit-main {
+    border: none !important
+}
+
+.ir1,.ir2 {
+    background: #eee;
+    border-left: 1px solid #ccc
+}
+
+.cbar {
+    text-transform: uppercase;
+    font-size: 9px;
+    background: #eee;
+    border-bottom: 1px solid #ccc
+}
+
+.cbar a {
+    color: #292929;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0px 5px;
+}
+
+.cbar a:hover {
+    color: #292929
+}
+
+.stt img {
+    max-width: 13px;
+    max-height: 13px;
+    vertical-align: baseline
+}

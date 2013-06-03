@@ -1,0 +1,32 @@
+.tbc-day-name,.tbc-sunday-name {
+    color: #555;
+    background: #F2F2F2;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tbc-sunday-name {
+    color: red
+}
+
+.tbc-date {
+    cursor: pointer
+}
+
+.tbc-container {
+    background: #fff;
+    display: none;
+    color: #444;
+    padding: 0px;
+    text-align: center;
+    font-size: 11px;
+    border: 1px solid #D8DFEA
+}
+
+.tbc-cp {
+    background: #6D84B7;
+}
+
+.tbc-cp a {
+    color: #fff
+}

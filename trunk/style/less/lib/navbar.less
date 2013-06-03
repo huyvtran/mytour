@@ -1,0 +1,31 @@
+@NavbarMiniBorderColor: #cdcdcd;
+.navbar-mini{
+    display:inline-block;
+    .navbar-inner{
+    ul.nav{
+    list-style:none;
+    .clear-fix();
+    padding:0px;
+    margin:0px;
+    .brand{
+    //.border-radius(4px 0px 0px 4px);
+    border:1px solid @NavbarMiniBorderColor;
+}
+li{
+    list-style:none;
+    border-top:1px solid @NavbarMiniBorderColor;
+    border-bottom:1px solid @NavbarMiniBorderColor;
+    border-right:1px solid @NavbarMiniBorderColor;
+    padding:5px;
+    float:left;
+    &:last-child{
+        // .border-radius(0px 4px 4px 0px);
+}
+&.active{
+    background: lighten(@NavbarMiniBorderColor,10%);
+}
+}
+}
+}
+
+}

@@ -1,0 +1,91 @@
+.tree {
+    list-style: none;
+    padding-left: 10px;
+    clear: both;
+}
+
+.tree-root {
+    padding-top: 0px !important;
+    background: none !important
+}
+
+.tree-list {
+    background: url(images/line-y.gif) repeat-y left center;
+    clear: both;
+    padding-top: 2px
+}
+
+.tree-root>.tree-folder-outer {
+    background: none
+}
+
+.tree-root>.tree-folder-outer>.tree-node {
+    display: none;
+}
+
+.tree-folder-outer {
+    background: url(images/line-x.gif) repeat-x top left;
+    /* padding-left from title of folder */
+    top: 5px;
+    padding-left: 16px;
+    position: relative
+}
+
+.tree-folder-outer-last,.tree-folder-outer:last-child {
+    background-color: #fff
+}
+
+.tree-list-outer {
+    margin-left: 6px;
+}
+
+.tree-folder {
+    margin-top: 10px;
+    top: -6px;
+    position: relative;
+    background: #fff;
+    clear: both;
+    z-index: 10
+}
+
+.tree-title {
+    display: block;
+    font-weight: bold
+}
+
+.tree-item-outer {
+    display: block;
+    background: url(images/line-x.gif) repeat-x left bottom;
+    padding-left: 14px;
+    position: relative;
+}
+
+.tree-item {
+    background: #fff;
+    padding: 2px;
+    padding-left: 2px;
+    display: block;
+    position: relative;
+    top: 7px
+}
+
+.tree-node {
+    left: -4px;
+    top: -5px;
+    width: 9px;
+    height: 9px;
+    background: #fff url(images/minus.gif) no-repeat top left;
+    position: absolute
+}
+
+.tree-open {
+    background: #fff url(images/plus.gif) no-repeat top left;
+}
+
+.tree-check {
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    margin: 0;
+    margin-top: -5px;
+    margin-right: 5px;
+}

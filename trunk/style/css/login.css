@@ -1,0 +1,181 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body,th,td {
+    font-family: arial, sans-serif;
+    font-size: 13px;
+}
+
+a,a:active,a:link,a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    color: #887700;
+}
+
+input {
+    vertical-align: middle
+}
+
+body {
+    text-align: center;
+    background: #fff
+}
+
+.wrap {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    background: #fff
+}
+
+.header {
+    background: #3b5998;
+    position: relative;
+    padding: 0px 75px;
+    height: 80px
+}
+
+.header h1 {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 48px;
+    text-shadow: 0px 1px 1px #f0f0f0;
+    font-weight: bold;
+    line-height: 80px
+}
+
+.bg-login {
+    height: 465px;
+    min-width: 1000px
+}
+
+.login_left {
+    width: 59%;
+    float: left;
+}
+
+.inner_login_left {
+    width: 570px;
+    margin: auto;
+    text-align: justify;
+    margin-top: 110px;
+    line-height: 200%
+}
+
+.inner_login_left ul li {
+    list-style-type: square;
+}
+
+.login {
+    display: inline-block;
+    width: 40%;
+    float: right;
+}
+
+.inner_login h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3b5998;
+    border-bottom: 1px solid #9e9b9b;
+    padding: 10px 10px
+}
+
+.inner_login {
+    margin: 110px 0px 0px 50px;
+    padding: 0px 25px;
+    padding-bottom: 30px;
+    width: 330px;
+    border: 1px solid #8c8c8d;
+}
+
+.login span,.login label {
+    color: #090909;
+    font-weight: bold;
+    font-size: 12px
+}
+
+.login .forget_pass {
+    color: #090909;
+    font-size: 11px;
+    text-decoration: underline;
+    padding: 0px 10px
+}
+
+.login label {
+    font-size: 11px;
+    color: #2e5db8;
+    font-weight: normal
+}
+
+.login table tr td {
+    padding: 4px 0px
+}
+
+.footer {
+    background: #3b5998;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.footer a {
+    line-height: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff
+}
+
+.x-text {
+    background: #fff !important;
+    border: 1px solid #c7c7c7;
+    padding: 3px 0px;
+    outline: none
+}
+
+.cc {
+    padding: 10px
+}
+
+.desc {
+    padding: 5px;
+    text-align: left
+}
+
+.bb {
+    height: 36px;
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid #29447E;
+    background: #617AAC;
+    color: #fff;
+    font-weight: bold;
+    vertical-align: middle
+}
+
+.header h1 {
+    font-family: Times New Roman;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #fff
+}
+
+.logo1 {
+    background: url(login/logo1.png) no-repeat bottom left;
+    display: inline-block;
+    width: 42px;
+    height: 33px;
+    margin-bottom: -1px
+}

@@ -1,0 +1,41 @@
+
+  span.head a { 
+  color: #3B5998;
+  display:block; 
+
+  }
+  span.head a:hover { 
+  color: #3B5998;
+  }
+  span.selected a { 
+  color:#3B5998;
+
+  }
+  span.selected a:hover { 
+  color: #3B5998;
+  }
+  .sub_menu li a:hover{
+	color:#e59808;
+  }
+  ul.hidden{
+      display: none;
+  }
+  ul.visible{
+      display:block;
+  }
+  .sub_menu{  
+	margin-left: -35px;
+	margin-top: 20px;
+	line-height: 8px;
+  }
+  .sub_menu li{
+	list-style: none;
+	background: url(../images/sub_menu.png) no-repeat top left;
+	padding-bottom: 20px;
+  }
+  .sub_menu li a{
+	padding-left:18px;
+  }
+ 
+
+ 

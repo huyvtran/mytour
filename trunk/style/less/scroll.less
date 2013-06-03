@@ -1,0 +1,61 @@
+@ScrollbarTrackBg: #f7f7f7;
+@ScrollbarButtonBg: #aaa;
+@ScrollbarTrackShadow: #cecece;
+
+.scrollbar-track-vertical{
+    width:10px;
+    background:@ScrollbarTrackBg;
+    .box-shadow(inset 0px 0px 2px @ScrollbarTrackShadow);
+    .scrollbar-button{
+    width:100%;
+    background:@ScrollbarButtonBg;
+    min-height:30px;
+}
+
+.scrollbar-arrow-top,.scrollbar-arrow-bottom{
+    width:100%;
+    height:10px;
+    position:absolute;
+    display:none
+}
+
+.scrollbar-arrow-top{
+    top:0px;
+    left:0px;
+}
+.scrollbar-arrow-bottom{
+    bottom:0px;
+    left:0px;
+}
+}
+
+.scrollbar-track-horizotal{
+    height:10px;
+    background:@ScrollbarTrackBg;
+    .box-shadow(inset 0px 0px 2px @ScrollbarTrackShadow);
+    .scrollbar-button{
+    height:100%;
+    display:inline-block;
+    background:@ScrollbarButtonBg;
+    width:10px;
+}
+
+.scrollbar-arrow-left,.scrollbar-arrow-right{
+    height:100%;
+    width:10px;
+    position:absolute;
+    display:none
+}
+
+.scrollbar-arrow-left{
+    top:0px;
+    left:0px;
+}
+.scrollbar-arrow-right{
+    bottom:0px;
+    right:0px;
+}
+}
+.scrollbar-conner{
+    background:@ScrollbarTrackBg
+}

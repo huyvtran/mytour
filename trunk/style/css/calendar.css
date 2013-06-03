@@ -1,0 +1,146 @@
+.cday-hide {
+    display: none
+}
+
+.calendar-expand {
+    text-align: right;
+    padding: 4px 0px;
+    font-size: 11px
+}
+
+.calendar-ctr {
+    margin-top: 6px;
+    position: relative;
+    width: 90px;
+    padding-right: 12px;
+    display: inline-block;
+    text-align: center
+}
+
+.calendar-bar-container {
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc
+}
+
+.calendar-bar {
+    background: #637AAE;
+    padding: 5px;
+    color: #fff;
+    position: relative;
+    height: 30px
+}
+
+.next-calendar {
+    margin: 0;
+    display: inline-block;
+    width: 28px;
+    height: 16px;
+    background: url(../images/next-calendar.png) no-repeat top left;
+    margin-left: 2px
+}
+
+.pre-calendar {
+    margin: 0;
+    margin-left: 5px;
+    margin-top: 3px;
+    display: inline-block;
+    width: 28px;
+    height: 16px;
+    background: url(../images/pre-calendar.png) no-repeat top left
+}
+
+.calendar-options {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+
+.v-day,.v-month,.v-all,.v-week,.v-list {
+    color: #fff !important;
+    padding: 5px;
+    display: inline-block;
+    font-weight: bold
+}
+
+.v-current {
+    text-decoration: underline !important
+}
+
+.time-current {
+    color: red
+}
+
+.calendar-week-day {
+    text-align: center;
+    width: 100px;
+    text-transform: capitalize
+}
+
+.calendar-post {
+    padding: 4px 0px
+}
+
+.week-current {
+    color: #637AAE !important;
+    font-weight: bold
+}
+
+.calendar-month {
+    height: 90px
+}
+
+.calendar-month-ignore {
+    background: #eee
+}
+
+.x-calendar tr {
+    background: #fff !important
+}
+
+.calendar-month-item {
+    display: block;
+    padding: 2px;
+    text-align: right;
+    font-size: 11px
+}
+
+.calendar-day {
+    background: #CBCBCD;
+    width: 14%
+}
+
+.calendar-month-post {
+    text-align: left;
+    font-size: 10px;
+    display: block
+}
+
+.event-quick-box {
+    border: 2px dotted #637AAE;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0px 1px 1px #eee;
+    min-width: 150px
+}
+
+.event-yes {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: url(../images/event.png) no-repeat left bottom
+}
+
+.event-no {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: url(../images/event.png) no-repeat -19px bottom
+}
+
+.event-waiting {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: url(../images/event.png) no-repeat -40px bottom
+}
