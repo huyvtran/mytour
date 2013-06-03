@@ -1,0 +1,576 @@
+/* CSS Document */
+/*
+	Mr Thieu
+	17-10-2012
+	Su dung cho trang khuyáº¿n mÃ£i
+*/
+.m-titlehotel
+{
+	float: left;
+	width: 755px;
+	height: 80px;
+	position: relative;
+}
+.m-titlehotel span
+{
+	font-size: 18px;
+	color: #014c95;
+	position: absolute;
+	top: 30px;
+	left: 20px;
+}
+.m-toptitle
+{
+	float: left;
+	width: 747px;
+	height: 46px;
+	display: inline;
+	margin: 10px 0 0 5px;
+}
+.m-bgtitleleft
+{
+	float: left;
+	width: 42px;
+	height: 46px;
+	background: url(../images/bg-khuyenmaileft.png) no-repeat left top;
+}
+.m-bgtitlecenter
+{
+	float: left;
+	position: relative;
+	width: 661px;
+	height: 46px;
+	background: url(../images/bg-khuyenmaicenter.png) repeat-x left top;
+}
+.m-bgtitlecenter a
+{
+	position: absolute;
+	font-size: 14px;
+	top: 10px;
+	left: 3px;
+	color: #014c95;
+}
+.m-bgtitlecenter span
+{
+	 font-size: 11px;
+    left: 527px;
+    position: absolute;
+    top: 13px;
+	color: #014c95;
+}
+.m-bgtitleright
+{
+	float: left;
+	width: 42px;
+	height: 46px;
+	background: url(../images/bg-khuyenmairight.png) no-repeat left top;
+}
+.m-mainkhuyenmai
+{
+	float: left;
+	position: relative;
+	width: 743px;
+	border: 1px #b8d6fb solid;
+	border-radius: 0 0 3px 3px;
+	border-top: none;
+	display: inline;
+	margin: 0 0 5px 5px;
+}
+.m-mainkhuyenmai span
+{
+	float: left;
+	display: block;
+	display: inline;
+	margin: 10px;
+}
+.m-datkhuyenmai
+{
+	background: none repeat scroll 0 0 #FF8A01;
+    border: 1px solid #CC6F02;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 3px #999999;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    left: 582px;
+    padding: 8px 13px 0;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+}
+.m-checkdate
+{
+	float: left;
+	width: 742px;
+	height: 60px;
+	position: relative;
+}
+.m-ngayhan span
+{
+	display: block;
+	float: left;
+	font-size: 12px;
+	color: #014C95;
+	width: 200px;
+	padding: 4px 0 0 0;
+	font-weight:bold;
+	margin: 0;
+}
+.m-thoihan p
+{
+	float: left;
+	font-size: 13px;
+	color: #014C95;
+}
+.m-thoihan
+{
+	float: left;
+	width: 700px;
+	height: 30px;
+	padding: 0 0 0 10px;
+}
+.m-ngayhan
+{
+	float: left;
+	width: 700px;
+	height: 30px;
+	padding: 0 0 0 10px;
+}
+.m-ngayhan p
+{
+	display: block;
+	float: left;
+	font-size: 12px;
+	color: #014C95;
+	width: 200px;
+	position: relative;
+	margin: 0;
+}
+.m-ngayhan p span
+{
+	color: #FF8A01;
+    font-size: 18px;
+    left: 77px;
+    position: absolute;
+    top: -5px;
+}
+/*
+	Mr Thieu
+	18-10-2012
+	Su dung cho trang Booking
+*/
+.b-duondan
+{
+	float: left;
+	width: 100%;
+	height: 20px;
+}
+.b-main
+{
+	float:left;
+	width: 100%;
+}
+.b-bodyform
+{
+	float: left;
+	width: 1004px;
+	margin: 0 0 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background: #CCC;
+}
+.b-bodytop
+{
+	float: left;
+	width: 1004px;
+	height: 38px;
+}
+.b-bodyleft
+{
+	float: left;
+	width: 5px;
+	height: 40px;
+	background: url(../images/boxleft-detail.png) no-repeat left top scroll;
+}
+.b-bodycenter
+{
+	float: left;
+	width: 994px;
+	height: 40px;
+	background: url(../images/boxcenter-detail.png) repeat-x left top scroll;
+}
+.b-bodycenter span
+{
+	float: left;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #fff;
+	display: block;
+	padding: 10px 0 0 0;
+}
+.b-bodyright
+{
+	float: left;
+	width: 5px;
+	height: 40px;
+	background: url(../images/boxright-detail.png) no-repeat left top scroll;
+}
+.b-bodymain
+{
+	float: left;
+	width: 1002px;
+	margin: 0 0 0 11px;
+	border: 1px solid #ccc;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+}
+.b-titlepro
+{
+	float: left;
+	width: 1004px;
+	height: 100px;
+	position: relative;
+}
+.b-koapdungkm a
+{
+	font-size: 18px;
+	color: #78b802;
+}
+.b-koapdungkm span
+{
+	font-size: 12px;
+	color: #999;
+}
+.b-table
+{
+	float: left;
+	width: 950px;
+	margin: 0 0 0 26px;
+}
+.b-tableleft
+{
+	float:left;
+	width: 5px;
+	height: 28px;
+	background: url(../images/bg-bookleft.png) no-repeat left top scroll;
+}
+.b-tablecenter
+{
+	float:left;
+	width: 939px;
+	height: 28px;
+	background: url(../images/bg-bookcenter.png) repeat-x left top scroll;
+}
+.b-tablecenter span
+{
+	font-size: 14px;
+	color: #78b802;
+	display: block;
+	font-weight: bold;
+	padding: 5px 0 0 5px;
+}
+.b-tableright
+{
+	float:left;
+	width: 5px;
+	height: 28px;
+	background: url(../images/bg-bookright.png) no-repeat left top scroll;
+}
+.b-tablemain
+{
+	float: left;
+	width: 947px;
+	border: 1px solid #ccc;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	border-bottom: none;
+	margin: 0 0 10px 0;
+}
+table tr td
+{
+	border: 1px solid #ccc;
+	text-align: center;
+}
+table
+{
+	float: left;
+}
+.b-sumprice
+{
+	float: left;
+	width: 947px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background: url(../images/bg-form.jpg) repeat left top scroll;
+	margin: 0 0 5px 0;
+}
+.b-sumprice1
+{
+	float: left;
+	width: 100%;
+}
+#ulform1
+{
+	float: left;
+	width: 148px;
+	padding: 10px 0 0 10px;
+	line-height: 28px;
+}
+#ulform2
+{
+	float: left;
+	width: 400px;
+	padding: 10px 0 0 10px;
+	line-height: 28px;
+}
+.b-sumprice1 ul li span
+{
+	font-size: 14px;
+}
+.b-sumprice1 p
+{
+	display: block;
+	padding: 0 0 0 10px;
+}
+.b-texarea
+{
+	float: left;
+    height: 71px;
+    margin: 5px 0 0 10px;
+    width: 348px;
+}
+.b-sumprice2
+{
+	float: left;
+	width: 347px;
+	height: 182px;
+	border: 1px solid #0ba6c2;
+	background: #fff;
+	border-radius: 3px;
+	margin: 5px 0 5px 0;
+}
+#sumtop
+{
+	float:left;
+	width: 320px;
+	height: 33px;
+	border-bottom: 1px solid #ccc;
+	margin: 0 0 0 10px;
+}
+#sumtop span
+{
+	font-size: 18px;
+	float: left;
+	display: block;
+	padding: 5px 0 0 0;
+	width: 100px;
+}
+#sumtop b
+{
+	color: #ff8a01;
+	font-size: 18px;
+	float: left;
+	display: block;
+	padding: 5px 0 0 0;
+	width: 200px;
+}
+#sumbottom
+{
+	float: left;
+    height: 128px;
+    padding: 10px 0 0 10px;
+    width: 333px;
+}
+#sumbottom span
+{
+	font-size: 14px;
+}
+#sumbottom ul li b
+{
+	font-size: 16px;
+}
+#sumbottom ul li p
+{
+	font-size: 14px;
+
+}
+.b-thongtinlh
+{
+	float: left;
+	width: 947px;
+	background: url(../images/bg-form.jpg) repeat left top scroll;
+	border: 1px solid #ccc;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	margin: 0 0 5px 0;
+}
+.b-thongtinlh ul
+{
+	float: left;
+	width: 400px;
+	padding: 0 0 0 15px;
+}
+#b-form1
+{
+	float: left;
+	width: 100px;
+}
+#b-form1 span
+{
+	float: left;
+	width: 100px;
+	display: block;
+	padding: 10px  0 0 0;
+	font-size: 12px;
+	font-weight: bold;
+}
+#b-form2 input,
+#b-form2 select
+{
+	margin: 5px;
+	width: 280px;
+	height: 24px;
+	border: none;
+	border-radius: 2px;
+}
+.b-thanhtoantop
+{
+	background: url("../images/bg-bookcenter.png") repeat-x scroll left top transparent;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    height: 28px;
+    margin: 10px 0 0 23px;
+    width: 899px;
+}
+.b-thanhtoantop a
+{
+	color: #117587;
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	padding:5px 15px 0 15px;
+	float: left;
+	border-left: 1px solid #ccc;
+	height: 23px;
+}
+.b-tthanhtoan
+{
+	float: left;
+	width: 947px;
+	background: url(../images/bg-form.jpg) repeat left top scroll;
+	border: 1px solid #ccc;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	margin: 0 0 5px 0;
+	height: 212px;
+}
+.b-tthanhtoan ul
+{
+	float: left;
+	width: 900px;
+	padding: 15px 0 0 35px;
+}
+#diachi
+{
+	float: left;
+	width: 129px;
+}
+#diachi span
+{
+	font-size: 12px;
+}
+#thongtingon
+{
+	font-size: 12px;
+}
+.b-check
+{
+	float: left;
+	width: 900px;
+	height: 84px;
+}
+.b-check ul li
+{
+	text-align: center;
+	position: relative;
+}
+.b-check ul li span
+{
+	font-size: 14px;
+}
+
+/*  
+SỬa
+*/
+.b-check ul li .submitBtn
+{
+        cursor: pointer;
+	display: block;
+	width: 172px;
+	height: 40px;
+	padding: 5px 0 0 0;
+	font-size: 16px;
+	color: #fff;
+	background: #fe900f;
+	position: absolute;
+	top:0px;
+	left: 400px;
+	border: 1px solid #d97501;
+	border-radius: 3px;
+}
+#phuongthuc
+{
+	float: left;
+	width: 262px;
+}
+#phuongthuc li
+{
+	line-height: 23px;
+}
+#phuongthuc li span
+{
+	font-size: 12px;
+	font-weight: bold;
+}
+#seri
+{
+	float: left;
+	margin: 0 5px 0 0;
+	width: 50px;
+}
+.b-tabletop
+{
+	float: left;
+}
+#tablenho
+{
+	padding: 0 0 0 10px;
+}
+#tablenho span
+{
+	font-size: 12px;
+}
+/*  
+SỬa
+*/
+.b-koapdungkm
+{
+    float: left;
+    line-height: 28px;
+    padding: 12px 0 0 10px;
+}
+.b-sumprice12
+{
+	float: left;
+    width: 592px;
+}
+.b-sumprice21
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #0BA6C2;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    margin: 5px 0;
+    width: 347px;
+}

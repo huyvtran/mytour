@@ -1,0 +1,129 @@
+/* CSS Document */
+/*
+	Mr Thieu
+	01-11-2012
+	Su dung cho trang page-khuyenmai.html
+*/
+.e-search
+{
+	float: left;
+	width: 757px;
+	height: 30px;
+}
+.e-hotels
+{
+	float: left;
+	width: 362px;
+	height: 141px;
+	position: relative;
+	background: #fff;
+	border:1px solid #ccc;
+	border-radius: 3px;
+	margin: 5px 0 5px 5px;
+}
+.e-chiso
+{
+	width: 53px;
+	height: 50px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: url(../images/bg-phantram.png) no-repeat left top scroll;
+}
+.e-chiso span
+{
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+	top: 12px;
+	left: 7px;
+}
+.e-imghotel
+{
+	float: left;
+	width: 145px;
+	height: 104px;
+	padding: 15px 0 0 15px;
+}
+.e-detailpro
+{
+	float: left;
+	width: 200px;
+	height: 140px;
+}
+.e-detailpro ul li
+{
+	float: left;
+	width: 200px;
+}
+.e-detailpro ul li a
+{
+	color: #014c95;
+	font-size: 14px;
+	font-weight: bold;
+}
+.e-detailpro ul li i
+{
+	font-size: 12px;
+	display: block;
+	width: 28px;
+	padding: 2px 2px 0 0;
+	float: left;
+}
+.e-detailpro ul li span
+{
+	float: left;
+	font-size: 16px;
+	color: #78b802;
+}
+.e-detailpro ul li em
+{
+	font-size: 11px;
+}
+.e-proleft
+{
+	float: left;
+	width: 250px;
+	height: 87px;
+	margin: 5px 0 5px 5px;
+	border-bottom: 1px dashed #e8095d;
+}
+.e-imgproleft
+{
+	float:left;
+	width: 100px;
+	height: 78px;
+}
+.e-detailproleft
+{
+	float: left;
+	width: 150px;
+	height: 87px;
+}
+.e-detailproleft a
+{
+	width: 150px;
+	height: 20px;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	color: #014c95;
+	text-align: center;
+}
+.e-detailproleft em
+{
+	display: block;
+	width: 150px;
+	font-size: 12px;
+	text-align: center;
+}
+.e-detailproleft span
+{
+	display: block;
+	width: 150px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ad1310;
+	text-align: center;
+}

@@ -1,0 +1,2694 @@
+/* CSS Document */
+/*
+	Mr Thieu
+	05-10-2012
+	Su dung cho trang index
+*/
+body
+{
+	background: #929292;
+}
+.boun
+{
+	margin: 0 auto;
+	width: 1030px;
+	background: #fff;
+}
+.background
+{
+	margin: 0 auto;
+	width: 1030px;
+	float: left;
+	background: #fff;
+}
+.h-bounhead
+{
+	background: #78b802;
+	box-shadow: 0 2px 5px #999;
+	width: 100%;
+	height: 65px;
+	position: relative;
+	z-index: 1000;
+}
+.h-header
+{
+	margin: 0 auto;
+	width: 1024px;
+	height: 65px;
+}
+.h-logo
+{
+	float: left;
+    height: 49px;
+    padding: 12px 0 0;
+    width: 200px;
+}
+.h-menu
+{
+	float: left;
+	width: 800px;
+	height: 64px;
+}
+.h-menu ul
+{
+	padding: 18px 0 0;
+}
+.h-menu ul li
+{
+	float: left;
+	width: 100px;
+	height: 26px;
+    padding: 6px 0 0;
+	margin: 0 0 0 5px;
+	text-align: center;
+	border: 1px solid #78b802;
+	border-radius: 5px;
+}
+.h-menu ul li a
+{
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 30px;
+	display: block;
+}
+.h-menu ul li a:hover
+{
+	color: #014c95;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 2px 3px #666;
+}
+#h-khuyenmai
+{
+	border: none;
+	width: 112px;
+	height: 40px;
+	padding: 4px 0 0 0;
+	box-shadow: none;
+}
+#h-khuyenmai a
+{
+	border: none;
+	width: 112px;
+	height: 47px;
+	display: block;
+	line-height: 37px;
+	box-shadow: none;
+	background: url(../images/khuyen-mai.png) no-repeat left top scroll;
+}
+#h-khuyenmai a:hover
+{
+	border: none;
+	width: 112px;
+	height: 47px;
+	display: block;
+	line-height: 37px;
+	box-shadow: none;
+	background: url(../images/khuyen-mai.png) no-repeat left top scroll;
+}
+.h-bounmain
+{
+	margin: 0 auto;
+	width: 1024px;
+}
+.h-maintop
+{
+	float: left;
+	width: 100%;
+	margin: 5px 0 0 0;
+}
+.h-lienhe
+{
+	float:left;
+	width: 210px;
+	height: 339px;
+}
+.h-lienhetop
+{
+	float: left;
+	width: 210px;
+	height: 40px;
+}
+.h-lienheleft
+{
+	float: left;
+	height: 42px;
+    width: 38px;
+	background:url(../images/box-nho-left.png) no-repeat left top scroll;
+}
+.h-lienhecenter
+{
+	float: left;
+	width: 162px;
+	height: 42px;
+	position:relative;
+	background:url(../images/box-nho-center.png) repeat-x left top scroll;
+}
+.h-lienhecenter span
+{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: #fff;
+	font-size: 16px;
+}
+.h-lienheright
+{
+	float: left;
+	width: 10px;
+	height: 42px;
+	background:url(../images/box-nho-right.png) no-repeat right top scroll;
+}
+.h-lienhebottom
+{
+	float: left;
+	height: 297px;
+    width: 208px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.h-livechat
+{
+	float: left;
+	width: 69px;
+	height: 54px;
+	padding: 10px 0 0 17px;
+    width: 86px;
+}
+.h-mail
+{
+	float: left;
+	width: 208px;
+	height: 60px;
+	padding: 10px 0 0 0;
+}
+.h-mail span
+{
+	float: left;
+    font-size: 12px;
+    height: 20px;
+    padding: 0 0 0 17px;
+    width: 187px;
+}
+.h-mail span p
+{
+	font-weight: bold;
+	color: #0054a6;
+}
+.h-mail span a
+{
+	color:#FF0000;
+}
+.h-thukm
+{
+	float: left;
+	width: 190px;
+	height: 93px;
+	padding: 0 0 0 17px;
+	position: relative;
+}
+.h-thukm span
+{
+	color: #0054a6;
+	font-size: 12px;
+	font-weight: bold;
+}
+.h-textkm
+{
+	margin: 10px 0 0 0;
+	width: 159px;
+}
+.h-submitkm
+{
+	left: 97px;
+    position: absolute;
+    top: 58px;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	width: 87px;
+	height: 28px;
+	background: url(../images/dk-khuyen-mai.png) no-repeat left top scroll;
+}
+.h-submitkm:hover
+{
+	color: #0054a6;
+}
+.h-bounbaner
+{
+	float: left;
+	width: 807px;
+	height: 357px;
+	background: url(../images/nen-baner.png) no-repeat left bottom scroll;
+	display: inline;
+	margin: 0 0 0 5px;
+}
+.h-baner
+{
+	float: left;
+	width: 807px;
+	height: 337px;
+	position: relative;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+.h-imgbaner
+{
+	width: 801px;
+	height: 331px;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+}
+.h-quangcao
+{
+	width: 801px;
+	height: 80px;
+	background:  #666666;
+	position: absolute;
+	top: 254px;
+	left: 3px;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+}
+.h-quangcao span a
+{
+	display: block;
+	padding: 10px 0 0 10px;
+	font-size: 24px;
+	color: #ff9999;
+}
+.h-quangcao p
+{
+	font-size: 16px;
+	color: #fff;
+	display: block;
+	padding: 0 0 0 30px;
+}
+.h-search
+{
+	width: 258px;
+	height: 286px;
+	position: absolute;
+	top: 47px;
+	left: 546px;
+}
+.h-searchleft
+{
+	float: left;
+	width: 6px;
+	height: 286px;
+	background: url(../images/bg-search-left.png) no-repeat left top scroll;
+}
+.h-searchcenter
+{
+	float: left;
+	width: 246px;
+	height: 286px;
+	background: url(../images/bg-search-center.png) repeat-x left top scroll;
+}
+.h-searchright
+{
+	float: left;
+	width: 6px;
+	height: 286px;
+	position: relative;
+	background: url(../images/bg-search-right.png) no-repeat right top scroll;
+}
+.h-namecity
+{
+	float: left;
+	width: 233px;
+	height: 49px;
+	display: inline;
+    margin: 7px 0 0 7px;
+	position: relative;
+}
+.h-namecity ul li span
+{
+	font-size: 13px;
+	color: #333333;
+}
+#h-textspan1
+{
+	font-size: 14px;
+}
+#h-textspan2
+{
+	font-size: 14px;
+}
+.h-namehotel
+{
+	width: 200px;
+	height: 20px;
+}
+.h-nameselect
+{
+	height: 25px;
+    width: 206px;
+}
+.h-calender
+{
+	height: 25px;
+	display: inline;
+    margin: 5px 0 0 5px;
+    padding: 4px 0 0;
+}
+.h-seasubmit
+{
+	position: absolute;
+	left: 86px;
+	top: 8px;
+	width: 127px;
+	height: 35px;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	background: url(../images/search-tk.png) no-repeat left top scroll;
+}
+.h-seasubmit:hover
+{
+	color: #0054a6;
+	background: url(../images/search-tkhover.png) no-repeat left top scroll;
+}
+.h-mainbottom
+{
+	float: left;
+	width: 757px;
+}
+.h-mainright
+{
+	float: left;
+	width: 266px;
+}
+.h-bodyleft
+{
+	float: left;
+	width: 755px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.backphong
+{
+	float: left;
+	width: 755px;
+	border-radius: 3px;
+	background: #f1f1f1;
+	box-shadow: 0 0 2px;
+}
+.titlephong
+{
+	float: left;
+	width: 753px;
+}
+.titlephong span
+{
+	color: #278900;
+	font-size: 18px;
+	display: block;
+	padding: 5px 0 5px 50px;
+	margin: 0 0 0 5px;
+	background: url(../images/icon-chitiet1.png) no-repeat left center;
+}
+.backphong2
+{
+	float: left;
+	width: 743px;
+	background: #fff;
+	margin: 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.imgphong
+{
+	float: left;
+	width: 312px;
+	background: #666;
+	height: 235px;
+	margin: 5px;
+}
+.contacphong
+{
+	float: left;
+	width: 405px;
+	height: 235px;
+	margin: 5px;
+}
+.contacphong span
+{
+	font-size: 14px;
+}
+.contacphong i
+{
+	font-size: 14px;
+	color: #278900;
+}
+.contacphong img
+{
+	padding: 2px 0 0 5px;
+}
+.contacphong a
+{
+	display: block;
+	padding: 5px;
+	width: 100px;
+	height: 21px;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	margin: 15px 15px 15px 0;
+	box-shadow: 0 0 2px #949393;
+	border-radius: 3px;
+	background: #ff9600;
+}
+.contacphong p
+{
+	font-size: 14px;
+	color: #126bb7;
+	font-weight: bold;
+}
+.thongtinchung
+{
+	float: left;
+	width: 743px;
+}
+.thongtintitle
+{
+	float: left;
+	width: 743px;
+	height: 28px;
+	background: #f1f1f1;
+	box-shadow: 0 0 2px;
+	border-top: 3px solid #278900;
+}
+.thongtintitle span
+{
+	color: #126BB7;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 0 0 10px;
+}
+.thongtinnoidung
+{
+	float: left;
+    margin: 20px;
+    width: 700px;
+}
+.thongtinnoidung ul li
+{
+	float: left;
+	width: 175px;
+}
+.thongtinnoidung ul li span
+{
+	font-size: 12px;
+	color: #000;
+}
+#yesone
+{
+	background: url("../images/yes.png") no-repeat scroll left center transparent;
+    float: left;
+    padding: 0 0 0 21px;
+    width: 200px;
+}
+#noone
+{
+	background: url("../images/no.png") no-repeat scroll left center transparent;
+    float: left;
+    padding: 0 0 0 21px;
+    width: 200px;
+}
+.h-topbox
+{
+	float: left;
+	width: 755px;
+}
+.h-boxleft
+{
+	float: left;
+	width: 54px;
+	height: 44px;
+	background: url(../images/box-lon-left.png) no-repeat left top scroll;
+}
+.h-boxcenter
+{
+	float: left;
+	position: relative;
+	width: 655px;
+	height: 44px;
+	background: url(../images/box-lon-center.png) repeat-x left top scroll;
+}
+.h-boxright
+{
+	float: left;
+	width: 46px;
+	height: 44px;
+	background: url(../images/box-lon-right.png) no-repeat right top scroll;
+}
+.h-boxcenter span
+{
+	left: 14px;
+    position: absolute;
+    top: 15px;
+	color: #fff;
+	font-size: 15px;
+}
+.h-boxcenter p
+{
+	left: 216px;
+    position: absolute;
+    top: 15px;
+	font-size: 12px;
+	color: #fff;
+}
+.h-boxcenter a
+{
+	color: #fff;
+    font-size: 12px;
+    left: 572px;
+    position: absolute;
+    top: 17px;
+}
+.h-boxgiatot
+{
+	float: left;
+	width: 755px;
+}
+.h-produc
+{
+	float: left;
+	position: relative;
+	width: 178px;
+	height: 203px;
+	background: #FFFFFF;
+	display:inline;
+	margin: 5px;
+}
+.h-proimg
+{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+.h-produc span a
+{
+	position: absolute;
+	top: 127px;
+	left: 5px;
+	color: #0054a6;
+	font-weight: bold;
+	font-size: 12px;
+}
+.h-price
+{
+	position: absolute;
+	top: 174px;
+	left: 5px;
+	color: #0054a6;
+	font-size: 12px;
+}
+.h-persen
+{
+	position: absolute;
+	top: 174px;
+	left: 110px;
+	color: #0054a6;
+	font-size: 12px;
+}
+#h-gia1
+{
+	font-size: 12px;
+	color: #666666;
+}
+#h-gia2
+{
+	font-size: 12px;
+	color: #666666;
+}
+#h-giatang1
+{
+	font-size: 14px;
+	color: #ff8a01;
+	font-weight: bold;
+}
+#h-giatang2
+{
+	font-size: 14px;
+	color: #ff8a01;
+	font-weight: bold;
+}
+.h-bodyright
+{
+	float: left;
+	width: 259px;
+	display: inline;
+	margin: 0 0 0 5px;
+	border: 1px solid #ccc;
+	border-radius:3px;
+}
+.h-hoteltop
+{
+	float: left;
+	width: 260px;
+	height: 44px;
+}
+.h-hotelleft
+{
+	float: left;
+	width: 38px;
+	height: 44px;
+	background: url(../images/box-nho-left.png) no-repeat left top scroll;
+}
+.h-hotelcenter
+{
+	float: left;
+	position: relative;
+	width: 212px;
+	height: 44px;
+	background: url(../images/box-nho-center.png) repeat-x left top scroll;
+}
+.h-hotelcenter span
+{
+	position: absolute;
+	top: 11px;
+	left: 1px;
+	color: #fff;
+	font-size: 15px;
+}
+.h-hotelright
+{
+	float: left;
+	width: 10px;
+	height: 44px;
+	background: url(../images/box-nho-right.png) no-repeat right top scroll;
+}
+.h-hoteltopmain
+{
+	float: left;
+	width: 250px;
+	display: inline;
+	margin: 0 0 0 5px;
+	padding: 5px 0 0 0;
+}
+.h-hoteltopmain span
+{
+	font-size: 12px;
+	font-weight: bold;
+	color: #0054a6;
+}
+.h-hoteltopmain ul li a
+{
+	font-size: 12px;
+	color: #0054a6;
+}
+.h-hoteltopmain ul li span
+{
+	float: right;
+	padding: 0 5px 0 0;
+	color: #ff8a01;
+}
+.h-hoteltopmain ul
+{
+	padding: 5px 0 0 0;
+}
+.h-hoteltopmain ul li
+{
+	height: 26px;
+}
+.h-bodybottom1
+{
+	float: left;
+	width: 755px;
+	margin: 5px 0 0 0;
+	border: 1px solid #ccc;
+    border-radius: 3px 3px 
+}
+.h-boxbottom1
+{
+	width: 755px;
+	height: 320px;
+}
+.h-boxbottom1 ul
+{
+	float:left;
+	padding: 7px 0 0 10px;
+}
+.h-boxbottom1 ul li
+{
+	float: left;
+	padding: 2px 0 0 0;
+	background: #eaeaea;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	margin: 3px 0 0 0;
+}
+.h-titleresort
+{
+	float: left;
+	width: 314px;
+	font-size: 12px;
+	padding: 0 0 0 5px;
+}
+.h-titleresort a
+{
+	color: #0054a6;
+}
+.h-imgresort
+{
+	float: left;
+	width: 152px;
+}
+.h-date
+{
+	float: left;
+	width: 144px;
+	font-size: 12px;
+	color: #8c8c8c;
+}
+.h-priceresort
+{
+	float: left;
+	width: 100px;
+	font-size: 12px;
+	color: #ff8a01;
+	font-weight: bold;
+}
+.h-bodybottom2
+{
+	float: left;
+	width: 755px;
+	margin: 5px 0 0 0;
+	border: 1px solid #ccc;
+    border-radius: 3px 3px 
+}
+.h-boxbottom2
+{
+	float: left;
+	width: 755px;
+	height: 296px;
+}
+.h-produc2
+{
+	float: left;
+	position: relative;
+	width: 339px;
+	height: 100px;
+	margin: 0 0 0 11px;
+}
+.h-produc2 h3 a
+{
+	font-size: 12px;
+	color: #0054a6;
+}
+.h-imgproduc2
+{
+	left: 5px;
+    position: absolute;
+    top: 5px;
+}
+.h-detailproduc2
+{
+	height: 76px;
+    left: 93px;
+    position: absolute;
+    top: 6px;
+    width: 244px;
+}
+.h-produc2 span
+{
+	float: left;
+	font-size: 12px;
+}
+.h-produc2 p
+{
+	font-size: 11px;
+	color: #9a9a9a;
+}
+.h-bodyright1
+{
+	float: left;
+	width: 259px;
+	height: 442px;
+	display: inline;
+	margin: 5px 0 0 5px;
+	border: 1px solid #ccc;
+	border-radius:3px;
+}
+.h-hoteltopmain1
+{
+	float: left;
+	width: 217px;
+}
+.h-hoteltopmain1 ul
+{
+	float: left;
+	width: 217px;
+	padding: 5px 0 0 9px;
+}
+.h-hoteltopmain1 ul li
+{
+	height: 22px;
+	background: url(../images/list.png) no-repeat left center scroll;
+}
+.h-hoteltopmain1 ul li a
+{
+	font-size: 12px;
+	display: block;
+	padding: 3px 0 0 17px;
+	color: #0054a6;
+}
+.h-footer
+{
+	float: left;
+	width: 100%;
+	margin: 5px 0 0 0;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+.h-khachsanthanhpho
+{
+	float: left;
+	margin: 10px 0 0 0;
+	width: 100%;
+	height: 20px;
+}
+.h-khachsanthanhpho span
+{
+	padding: 0 0 0 10px;
+	font-size: 14px;
+	color: #5e8218;
+	font-weight: bold;
+}
+.h-footer1
+{
+	float: left;
+    height: 160px;
+    width: 169px;
+}
+.h-footer1 ul
+{
+	padding: 0 0 0 10px;
+}
+.h-footer1 ul li 
+{
+	background: url(../images/list.png) no-repeat left center scroll;
+}
+.h-footer1 ul li a
+{
+	display: block;
+	padding: 2px 0 0 15px;
+	font-size: 12px;
+	color: #0054a6;
+}
+.h-footer2
+{
+	float: left;
+	width: 570px;
+	height: 70px;
+	padding: 28px 0 0 28px;
+}
+.h-footer3
+{
+	float: left;
+    height: 86px;
+    position: relative;
+    width: 415px;
+}
+#h-share1
+{
+	left: 342px;
+    position: absolute;
+    top: 47px;
+}
+#h-share2
+{
+	left: 294px;
+    position: absolute;
+    top: 47px;
+}
+/*
+	Mr Thieu
+	09-10-2012
+	Su dung cho trang catalogue
+*/
+.c-lienhe
+{
+	float: left;
+    height: 254px;
+    width: 256px;
+	display: inline;
+	margin: 5px 0 0 5px;
+}
+.c-lienhetop
+{
+	float: left;
+	width: 259px;
+	height: 40px;
+}
+.c-lienheleft
+{
+	float: left;
+	height: 42px;
+    width: 38px;
+	background:url(../images/box-nho-left.png) no-repeat left top scroll;
+}
+.c-lienhecenter
+{
+	float: left;
+	width: 211px;
+	height: 42px;
+	position:relative;
+	background:url(../images/box-nho-center.png) repeat-x left top scroll;
+}
+.c-lienhecenter span
+{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: #fff;
+	font-size: 16px;
+}
+.c-lienheright
+{
+	float: left;
+	width: 10px;
+	height: 42px;
+	background:url(../images/box-nho-right.png) no-repeat right top scroll;
+}
+.c-lienhebottom
+{
+	float: left;
+	height: 210px;
+    width: 257px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.c-search
+{
+	float: left;
+	width: 757px;
+	height: 227px;
+}
+#trang-ck
+{
+	float: left;
+	display: block;
+	padding: 0 0 0 12px;
+	margin: 5px 0 0 5px;
+	font-size: 12px;
+	background: url(../images/trang-ck.png) no-repeat left center scroll;
+}
+.c-searchmain
+{
+	float: left;
+    height: 183px;
+    margin: 5px 0 0;
+    width: 744px;
+	border: 6px solid #ff8a01;
+	box-shadow: 0 2px 3px #666;
+}
+.c-searchcenter
+{
+	float: left;
+    height: 174px;
+    padding: 10px 0 0 50px;
+    width: 693px;
+}
+.c-namecity
+{
+	float: left;
+	width: 233px;
+	height: 49px;
+	display: inline;
+    margin: 7px 0 0 7px;
+	position: relative;
+}
+.c-namecitybox
+{
+	float: right;
+	width: 233px;
+	height: 49px;
+	padding: 0 40px 0 0;
+	position: relative;
+}
+.c-produc
+{
+	float: left;
+	position: relative;
+	width: 175px;
+	height: 203px;
+	background: #FFFFFF;
+	display:inline;
+	margin: 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.c-produc:hover
+{
+	border: 1px solid #ff8a01;
+	border-radius: 3px;
+}
+.c-produc span a
+{
+	position: absolute;
+	top: 127px;
+	left: 5px;
+	color: #0054a6;
+	font-weight: bold;
+	font-size: 12px;
+}
+.c-star
+{
+	position: absolute;
+	top: 161px;
+	left: 5px;
+}
+.c-price
+{
+	position: absolute;
+	top: 181px;
+	left: 5px;
+}
+.c-price span
+{
+	font-size: 12px;
+}
+.c-price a
+{
+	font-size: 13px;
+	color: #78b802;
+	font-weight: bold;
+}
+.c-titleresort
+{
+	float: left;
+	width: 235px;
+	font-size: 12px;
+	padding: 4px 0 0 5px;
+}
+.c-imgresort
+{
+	float: left;
+	width: 85px;
+}
+.c-priceresort
+{
+	float: left;
+	width: 66px;
+	font-size: 12px;
+	color: #ff8a01;
+	font-weight: bold;
+}
+.c-boxbottom1
+{
+	width: 755px;
+}
+.c-boxbottom1 ul
+{
+	float:left;
+	padding: 7px 0 0 5px;
+}
+.c-ul1
+{
+	float:left;
+	width: 349px;
+	border-right: 1px solid #ccc;
+	padding: 0 0 0 5px;
+	margin: 12px 0 0 0;
+}
+.c-ul2
+{
+	float:left;
+	width: 349px;
+	padding: 0 0 0 5px;
+	margin: 12px 0 0 0;
+}
+.c-boxbottom1 ul li
+{
+	float: left;
+	padding: 3px 0 0 0;
+	margin: 3px 0 0 0;
+}
+.c-ul1 span
+{
+	font-size: 14px;
+	padding: 3px 0 0 9px;
+	color: #78b802;
+}
+.c-ul2 span
+{
+	font-size: 14px;
+	padding: 3px 0 0 9px;
+	color: #78b802;
+}
+.c-bodytag
+{
+	float: left;
+    height: 90px;
+    width: 755px;
+	margin: 5px 0 0 0;
+}
+.c-bodytag a
+{
+	float: left;
+	font-size: 12px;
+	display: block;
+	margin: 0 0 0 5px;
+}
+.c-titletag
+{
+	float: left;
+    height: 26px;
+    width: 51px;
+	background: url(../images/tag-bg.png) no-repeat left top scroll;
+}
+/*
+	Mr Thieu
+	11-10-2012
+	Su dung cho trang detail
+*/
+.d-search
+{
+	float: left;
+	width: 757px;
+	background: url(../images/nen-detail.png) no-repeat left bottom scroll;
+	height: 260px;
+}
+.d-searchmain
+{
+	float: left;
+    height: 216px;
+    margin: 5px 0 0;
+	background: #fff;
+    width: 754px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #666666;
+	position: relative;
+}
+.d-imgtitle
+{
+	width: 135px;
+	height: 135px;
+	position: absolute;
+	z-index: 10;
+	top: 10px;
+	left: 10px;
+	border: 1px solid #ff8a01;
+	border-radius: 3px;
+	background: #fff;
+}
+.d-imgtitle img
+{
+	margin: 7px 0 0 7px;
+}
+.d-title
+{
+	position: absolute;
+	z-index: 20;
+	top: 10px;
+	left: 177px;
+	width: 479px;
+	height: 20px;
+	border: 1px solid #ff8a01;
+	border-radius: 3px;
+	background: #fff;
+}
+.d-title h2 a
+{
+	font-size: 12px;
+	font-weight: bold;
+	color: #0054a6;
+	display: block;
+	padding: 2px 0 0 5px;
+}
+.d-bodytitle
+{
+	float: left;
+	position: absolute;
+	top: 20px;
+	left: 76px;
+	width: 669px;
+	height: 187px;
+	border: 1px solid #ff8a01;
+	border-radius: 3px;
+}
+.d-star
+{
+	float: left;
+	padding: 16px 0 0 101px;
+	height: 20px;
+    width: 567px;
+}
+.d-khdetail
+{
+	float: left;
+    height: 90px;
+    padding: 0 0 0 101px;
+    width: 567px;
+}
+.d-khdetail p
+{
+	font-size: 12px;
+}
+.d-khdetail span
+{
+	font-size: 12px;
+}
+.d-price
+{
+	float: left;
+	width: 465px;
+	height: 60px;
+	padding: 0 0 0 101px;
+}
+.d-price span
+{
+	float: left;
+	padding: 2px 0 0 0;
+	font-size: 12px;
+}
+.d-price a
+{
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fe0000;
+	display: block;
+	margin: 0 0 0 2px;
+	border: 1px solid #ccc;
+	border-radius:2px;
+	width: 69px;
+}
+.d-bouncontact
+{
+	float: left;
+	width: 465px;
+	height: 30px;
+	padding: 14px 0 0 0;
+}
+#d-contact1
+{
+	float: left;
+	height: 20px;
+    width: 70px;
+	margin: 0 0 0 10px;
+	border-radius:3px;
+	background: #fc9a27;
+}
+#d-contact2
+{
+	float: left;
+	height: 20px;
+    width: 70px;
+	margin: 0 0 0 10px;
+	border-radius:3px;
+	background: #57a0fa;
+}
+#d-contact3
+{
+	float: left;
+	height: 20px;
+    width: 70px;
+	margin: 0 0 0 10px;
+	border-radius:3px;
+	background: #ff6d6d;
+}
+#d-contact4
+{
+	float: left;
+	height: 20px;
+    width: 70px;
+	margin: 0 0 0 10px;
+	border-radius:3px;
+	background: #9bd72d;
+}
+#d-contact1 a
+{
+	font-size: 10px;
+	display: block;
+	padding: 4px 0 0 2px;
+	border: none;
+	color: #000;
+}
+#d-contact2 a
+{
+	font-size: 10px;
+	display: block;
+	padding: 4px 0 0 2px;
+	border: none;
+	color: #000;
+}
+#d-contact3 a
+{
+	font-size: 10px;
+	display: block;
+	padding: 4px 0 0 2px;
+	border: none;
+	color: #000;
+}
+#d-contact4 a
+{
+	font-size: 10px;
+	display: block;
+	padding: 4px 0 0 2px;
+	border: none;
+	color: #000;
+}
+.d-danhgia
+{
+	float: left;
+	height: 52px;
+    width: 77px;
+	background: #57a0fa;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 3px #666;
+	text-align: center;
+}
+.d-danhgia a
+{
+	font-size: 12px;
+	color: #fff;
+	display: block;
+	padding: 6px 0 0 0;
+}
+.d-danhgia p
+{
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	display: block;
+	padding: 3px 0 0 0;
+}
+.d-hotelleft
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxleft-detail.png) no-repeat left top scroll;
+}
+.d-hotelcenter
+{
+	float: left;
+	width: 745px;
+	height: 39px;
+	background: url(../images/boxcenter-detail.png) repeat-x left top scroll;
+}
+.d-hotelright
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxright-detail.png) no-repeat right top scroll;
+}
+.d-hotelcenter ul li
+{
+	float: left;
+}
+
+.d-hotelcenter ul li a
+{
+	display: block;
+	text-align: center;
+	padding: 3px 13px 0 13px;
+	height: 23px;
+	margin: 5px 0 0 5px;
+	border: 1px solid #78b802;
+	font-size: 16px;
+	color: #fff;
+}
+.d-hotelcenter ul li a:hover
+{
+	color: #014c95;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius:3px;
+}
+.d-ulli
+{
+	font-size: 12px;	
+}
+.d-ulli span
+{
+	font-size: 12px;
+}
+.d-chitiet
+{
+	float: left;
+	width: 756px;
+}
+.d-chitiet span
+{
+	font-size: 13px;
+	
+}
+.d-giaphong
+{
+	float: left;
+	width: 757px;
+	height: 102px;
+	margin: 5px 0 8px 0;
+}
+.d-giaphongleft
+{
+	float: left;
+	width: 52px;
+	height: 102px;
+	background: url(../images/bg-giaphongleft.png) no-repeat left top scroll;
+}
+.d-giaphongcenter
+{
+	float: left;
+	width: 691px;
+	height: 102px;
+	position: relative;
+	background: url(../images/bg-giaphongcenter.png) repeat-x left top scroll;
+}
+.d-giaphongright
+{
+	float: left;
+	width: 14px;
+	height: 102px;
+	background: url(../images/bg-giaphongright.png) no-repeat right top scroll;
+}
+.d-pen
+{
+	float: left;
+	width: 674px;
+	height: 10px;
+	position: absolute;
+	top: 23px;
+	left: 11px;
+	border-bottom: 1px solid #fff;
+}
+.d-phonggia
+{
+    height: 32px;
+    left: 10px;
+    position: absolute;
+    text-align: center;
+    top: 17px;
+    width: 104px;
+    z-index: 10;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	background: #f7911e;
+}
+.d-phonggia span
+{
+	font-size: 16px;
+	color: #fff;
+	display: block;
+	padding: 5px 0 0 0;
+}
+.d-phongdetail
+{
+	position: absolute;
+	width: 691px;
+	height: 34px;
+	top: 58px;
+	float: left;
+}
+.d-phongdetail span
+{
+	font-size: 12px;
+	display: block;
+	padding: 6px 16px 0;
+	color: #fff;
+	float: left;
+}
+.d-phongdetail input
+{
+	float: left;
+	width: 100px;
+	margin: 2px 0 0 0;
+}
+.d-phongdetail a
+{
+	color: #014C95;
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 20px;
+    padding: 5px 0 0;
+    text-align: center;
+    width: 97px;
+	background: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 3px #666;
+}
+.d-phongdetail a:hover
+{
+	background: #dedede;
+}
+.d-ul1
+{
+	float:left;
+	width: 349px;
+	border-right: 1px solid #ccc;
+	padding: 0 0 0 5px;
+	margin: 12px 0 5px 0;
+}
+.d-ul1 ul li
+{
+	width: 300px;
+	padding: 0 0 0 18px;
+}
+.d-ul1 ul li a
+{
+	font-size: 12px;
+	display: block;
+	padding: 2px 0 0 0;
+}
+.d-ul2
+{
+	float:left;
+	width: 349px;
+	padding: 0 0 0 5px;
+	margin: 12px 0 5px 0;
+}
+#yes
+{
+	width: 300px;
+	padding: 0 0 0 18px;
+	background: url(../images/yes.png) no-repeat left center;
+}
+#no
+{
+	width: 300px;
+	padding: 0 0 0 18px;
+	background: url(../images/no.png) no-repeat left center;
+}
+.d-ul2 ul li a
+{
+	font-size: 12px;
+	display: block;
+	padding: 2px 0 0 0;
+}
+.d-boxbottom2
+{
+	float: left;
+	width: 755px;
+}
+.d-quydinh
+{
+	float: left;
+	width: 718px;
+}
+.d-boxbottom2 p
+{
+	padding: 5px 0 0 10px;
+}
+.d-quangcao1
+{
+	float: left;
+    height: 237px;
+    width: 256px;
+	display: inline;
+	margin: 5px 0 5px 7px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.d-showprice
+{
+	float: left;
+	width: 245px;
+	height: 170px;
+	background: #78b802;
+	border-radius: 5px;
+	display: inline;
+	margin: 5px;
+}
+.d-priceone
+{
+	float: left;
+	width: 245px;
+	height: 100px;
+	border-bottom: 1px solid #fff;
+}
+.d-priceone a
+{
+	float: left;
+	font-size: 24px;
+	color: #fff;
+	font-weight: bold;
+	display: block;
+	padding: 35px 0 0 30px;
+}
+.d-pricetow
+{
+	float: left;
+	position: relative;
+	width: 245px;
+	height: 66px;
+}
+.d-pricetow span
+{
+	position: absolute;
+	display: block;
+	color: #fff;
+	font-size: 12px;
+	top: 10px;
+	left: 35px;
+}
+.d-pricetow a
+{
+	position: absolute;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	top: 35px;
+	left: 66px;
+}
+.d-pricedetail
+{
+	float: left;
+    height: 47px;
+    width: 190px;
+	text-align: center;
+	padding: 5px 0 0 37px;
+}
+.d-pricedetail span
+{
+	font-size: 12px;
+}
+.d-tksearch
+{
+	float: left;
+	width: 261px;
+	height: 286px;
+	display: inline;
+	margin: 5px 0 5px 6px;
+}
+.d-map
+{
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    height: 108px;
+	display: inline;
+    margin: 0 0 5px 7px;
+    width: 255px;
+}
+.d-map img
+{
+	padding: 5px 0 0 6px;
+}
+.d-quangcao2
+{
+	float: left;
+	width: 249px;
+	background: #78b802;
+	border-radius: 3px;
+	margin: 5px 0 0 0;
+}
+.d-dongq1
+{
+	float: left;
+	width: 241px;
+	background: #689f02;
+	text-align: center;
+	display: inline;
+	margin: 2px 0 0 3px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+}
+.d-dongq1 a
+{
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 23px;
+	display: block;
+}
+.d-dongq2
+{
+	float: left;
+	width: 249px;
+}
+.d-gialine
+{
+	float: left;
+    height: 67px;
+    width: 124px;
+	text-align: center;
+	padding: 5px 0 0 0;
+	border-bottom: 1px solid #fff;
+}
+.d-gialine span
+{
+	color: #fff;
+	font-size: 12px;
+}
+.d-gialine p
+{
+	color: #fff;
+	font-size: 18px;
+}
+.d-gialine2
+{
+	float: left;
+    height: 55px;
+    width: 124px;
+	text-align: center;
+	padding: 5px 0 0 0;
+	border-bottom: 1px solid #fff;
+}
+.d-gialine2 span
+{
+	color: #fff;
+	font-size: 12px;
+}
+.d-gialine2 p
+{
+	color: #fff;
+	font-size: 18px;
+}
+.d-gialine2 a
+{
+	display: block;
+	line-height: 28px;
+	width: 93px;
+	margin: 5px 0 0 0;
+	background: url(../images/nut-mua.png) no-repeat left top scroll;
+	color: #0054a6;
+	border-radius: 3px;
+	font-size: 14px;
+}
+.d-giaone
+{
+	float: left;
+    height: 55px;
+    width: 83px;
+	text-align: center;
+	padding: 5px 0 0 0;
+	border-bottom: 1px solid #fff;
+}
+.d-giaone span
+{
+	color: #fff;
+	font-size: 12px;
+}
+.d-giaone p
+{
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+/*
+	Mr Thieu
+	15-10-2012
+	Su dung cho trang hotel-city.html
+*/
+.k-search
+{
+	float: left;
+	width: 757px;
+}
+#titlelisttp
+{
+	float: left;
+	width: 757px;
+}
+#titlelisttp span
+{
+	font-size: 14px;
+	color: #0047AB;
+	font-weight: bold;
+	padding: 10px 0 10px 10px;
+	display: block;
+}
+.k-titlehotel a
+{
+	color: #014c95;
+	font-size: 16px;
+}
+.k-titlehotel p span
+{
+	font-size: 13px;
+}
+.k-chitiet
+{
+	float: left;
+    width: 755px;
+	background: #e8e7e7;
+}
+.k-hotelproduc
+{
+	float: left;
+	width: 743px;
+	height: 199px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	display: inline;
+	margin: 5px 0 5px 5px;
+	background: #fff;
+}
+.k-imgproduc
+{
+	float: left;
+	width: 169px;
+	height: 199px;
+	text-align: center;
+}
+.k-imgproduc img
+{
+	float: left;
+	margin: 10px 0 0 29px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.k-imgproduc a
+{
+	float: left;
+	display: block;
+	width: 181px;
+	font-size: 12px;
+	color: #014c95;
+}
+.k-imgproduc a:hover
+{
+	color: #ff8c05;
+}
+.k-detailproduc
+{
+	float: left;
+	width: 572px;
+	height: 199px;
+}
+.k-titleproduc
+{
+	float: left;
+	width: 562px;
+	height: 80px;
+	position: relative;
+}
+.k-contact
+{
+	float: left;
+	width: 562px;
+	height: 94px;
+}
+.k-contact p
+{
+	float: left;
+	padding: 0 5px 0 0;
+	clear: both;
+}
+.k-xemchitiet
+{
+	float: left;
+	width: 562px;
+	height: 25px;
+	position: relative;
+}
+.k-xemchitiet a
+{
+	display: block;
+    font-size: 12px;
+    height: 16px;
+    left: 0;
+    padding: 4px 0 0;
+    position: absolute;
+    top: 4px;
+    width: 149px;
+	background: url(../images/chitiet.png) no-repeat right center scroll;
+}
+.k-xemchitiet p
+{
+	position: absolute;
+	top: 2px;
+	left: 200px;
+	font-size: 12px;
+}
+.k-xemchitiet p span
+{
+	color: #ff8a01;
+}
+.k-titleproduc a
+{
+	position:absolute;	
+	top:10px;
+	left:0px;
+	font-size: 16px;
+	color: #014c95;
+	font-weight: bold;
+}
+.k-titleproduc span
+{
+	position: absolute;
+	top: 10px;
+	left: 425px;
+	color: #78b802;
+	font-weight: bold;
+}
+.k-titleproduc p
+{
+	position: absolute;
+	top: 26px;
+	left: 459px;
+	font-size: 12px;
+	color: #78b802;
+}
+.k-titleproduc img
+{
+	position: absolute;
+	top: 29px;
+	left: 0px;
+}
+#btn1
+{
+	position: absolute;
+	top: 45px;
+	left: 0px;
+	font-size: 11px;
+	color: #000;
+	display: block;
+	width: 71px;
+	height:18px;
+	background: #97cb36;
+	text-align: center;
+	padding: 2px 0 0 0;
+	border: 1px solid #78b802;
+	border-radius: 3px;
+}
+#btn4
+{
+	position: absolute;
+	top: 45px;
+	left: 0px;
+	font-size: 11px;
+	color: #000;
+	display: block;
+	width: 71px;
+	height:18px;
+	background: #dedede;
+	text-align: center;
+	padding: 2px 0 0 0;
+	border: 1px solid #78b802;
+	border-radius: 3px;
+}
+#btn2
+{
+	position:absolute;
+	top:45px;
+	left:82px;	
+	font-size:11px;
+	color:#0e0e0e;
+	background:#56d6c5;
+	display:block;
+	height:18px;
+	width:71px;
+	text-align:center;
+	padding:2px 0 0 0;
+	border:1px solid #35aa9b;
+	border-radius:3px;
+}
+
+#btn3 {
+position: absolute;
+top: 49px;
+left: 439px;
+font-size: 12px;
+color: #ffffff;
+display: block;
+background: #ff8a01;
+height: 35px;
+width: 100px;
+text-align: center;
+padding: 0px 0 0 0;
+border: 1px solid cf7306;
+border-radius: 3px;
+
+}
+.k-showchitiet
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    margin: 5px 0 0;
+    width: 755px;
+}
+.k-showchitiet ul
+{
+	float: left;
+	width: 736px;
+	padding: 5px 0 5px 5px;
+}
+.k-showchitiet ul li
+{
+	float: left;
+	width: 729px;
+	height: 25px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.k-titleshow
+{
+	float: left;
+	width: 420px;
+	height: 20px;
+}
+.k-titleshow a
+{
+	display: block;
+    font-size: 12px;
+    padding: 3px 0 0 5px;
+}
+.k-giashow
+{
+	float: left;
+	width: 200px;
+	height: 20px;
+}
+.k-giashow span
+{
+	display: block;
+	padding: 3px 0 0 0;
+	font-size: 14px;
+	color: #78b802;
+}
+.k-datgiashow
+{
+	float: left;
+	width: 100px;
+	height: 20px;
+}
+.k-datgiashow a
+{
+	margin: 3px 0 0 0;
+	color: #FFFFFF;
+    display: block;
+    font-size: 12px;
+    height: 18px;
+    text-align: center;
+    width: 73px;
+	background: #ff8a01;
+	border-radius:3px;
+}
+#k-dong1
+{
+	border-bottom: 1px solid #ccc;
+	border-left: none ;
+	border-right: none;
+}
+.k-phantrang
+{   
+    float: right;
+    margin-top: 50px;
+    padding-right: 50px;
+}
+.k-phantrang ul li
+{
+	float: left;
+}
+.k-phantrang ul li a
+{
+    display: block;
+    font-size: 12px;
+    height: 19px;
+    margin: 0 0 0 2px;
+    padding: 3px 0 0 7px;
+    width: 15px;
+	background: url(../images/phantrang-so.png) no-repeat left top scroll;
+}
+.k-phantrang ul li a:hover
+{
+	background: url(../images/phantrang-hover.png) no-repeat left top scroll;
+}
+.k-phantrang-1
+{
+	float:right;
+	width: 142px;
+	height: 30px;
+        margin-bottom: 20px;
+}
+.k-phantrang-1 ul li
+{
+	float: left;
+}
+.k-phantrang-1 ul li a
+{
+    display: block;
+    font-size: 12px;
+    height: 19px;
+    margin: 0 0 0 2px;
+    padding: 3px 0 0 7px;
+    width: 15px;
+	background: url(../images/phantrang-so.png) no-repeat left top scroll;
+}
+.k-phantrang-1 ul li a:hover
+{
+	background: url(../images/phantrang-hover.png) no-repeat left top scroll;
+}
+#phantrang1
+{
+	display: block;
+    font-size: 12px;
+    height: 19px;
+    margin: 0 0 0 2px;
+    padding: 3px 0 0 7px;
+    width: 15px;
+	background: url(../images/phantrang-left.png) no-repeat left top scroll;
+}
+#phantrang2
+{
+	display: block;
+    font-size: 12px;
+    height: 19px;
+    margin: 0 0 0 2px;
+    padding: 3px 0 0 7px;
+    width: 15px;
+	background: url(../images/phantrang-right.png) no-repeat left top scroll;
+}
+.k-boxkhuyenmai
+{
+	float: left;
+	width: 257px;
+	height: 57px;
+	display: inline;
+	margin: 0 0 0 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background: url(../images/box-khuyenmai.png) no-repeat right top scroll;
+}
+.k-boxkhuyenmai span
+{
+	display: block;
+    padding: 10px 56px 0 6px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #014c95;
+}
+.k-hoteltopmain1
+{
+	float: left;
+	width: 217px;
+}
+.k-hoteltopmain1 ul li
+{
+	float: left;
+    height: 50px;
+    margin: 0 0 0 5px;
+    width: 249px;
+	border-bottom: 1px dashed #ccc;
+	position: relative;
+}
+.k-hoteltopmain1 ul li a
+{
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #014c95;
+}
+.k-hoteltopmain1 ul li img
+{
+	position: absolute;
+	top: 27px;
+	left: 5px;
+}
+.k-hoteltopmain1 ul li span
+{
+	position: absolute;
+	top: 27px;
+	left: 179px;
+	font-size: 12px;
+	color: #ff8a01;
+}
+.k-hoteltopmain2
+{
+	float: left;
+	width: 217px;
+}
+.k-hoteltopmain2 ul li
+{
+	float: left;
+    height: 50px;
+    margin: 0 0 0 5px;
+    width: 249px;
+	border-bottom: 1px dashed #ccc;
+	background: url(../images/bg-danhgia.png) no-repeat left center scroll;
+	position: relative;
+}
+.k-hoteltopmain2 ul li a
+{
+	position: absolute;
+	top: 10px;
+	left: 38px;
+	font-size: 12px;
+	color: #014c95;
+}
+.k-hoteltopmain2 ul li span
+{
+	position: absolute;
+	top: 25px;
+	left: 38px;
+	font-size: 11px;
+	color: #666;
+}
+.j-banggia
+{
+	float: left;
+	width: 700px;
+	padding: 10px 0 0 10px;
+}
+.j-banggia span
+{
+	color: #FF8A01;
+	font-size: 16px;
+	font-weight: bold;
+}
+.addphong
+{
+	float: left;
+    height: 85px;
+    padding: 10px 0 0;
+    text-align: center;
+}
+table
+{
+border-collapse:collapse;
+}
+table,th, td
+{
+border: 1px solid #8e8e8e;
+border-radius: 3px;
+}
+.k-titleshow2
+{
+	float: left;
+	width: 137px;
+	height: 20px;
+}
+.k-titleshow2 a
+{
+	display: block;
+    font-size: 12px;
+    padding: 3px 0 0 5px;
+}
+.k-giashow2
+{
+	float: left;
+	width: 240px;
+	height: 20px;
+	border-right: 1px solid #ccc;
+}
+.k-giashow2 span
+{
+	display: block;
+	padding: 3px 0 0 0;
+	font-size: 14px;
+	color: #78b802;
+}
+.addphong span
+{
+	display: block;
+	padding: 10px 0 0 0;
+}
+.addphong a
+{
+	display: block;
+	padding: 10px 0 0 0;
+}
+.addphong select
+{
+	display: block;
+	margin: 10px 0 0 19px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.k-hotelproduc1 {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    display: inline;
+    float: left;
+   height: 150px;
+    margin: 5px 0 5px 5px;
+    width: 743px;
+}
+
+
+.k-imgproduc1 {
+    float: left;
+    height: 199px;
+    text-align: center;
+    width: 169px;
+}
+.k-imgproduc1 img
+{
+	float: left;
+	margin: 10px 0 0 29px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.k-imgproduc1 a
+{
+	float: left;
+	display: block;
+	width: 181px;
+	font-size: 12px;
+	color: #014c95;
+}
+.k-imgproduc1 a:hover
+{
+	color: #ff8c05;
+}
+
+.k-detailproduc1 {
+    float: left;
+    height: 199px;
+    width: 572px;
+}
+
+
+.k-titleproduc1 {
+    float: left;
+   height: 50px;
+    position: relative;
+    width: 562px;
+}
+.k-titleproduc1 a {
+    color: #014C95;
+    font-size: 16px;
+    font-weight: bold;
+    left: 0;
+    position: absolute;
+    top: 10px;
+}
+.k-titleproduc1 img {
+    left: 0;
+    position: absolute;
+    top: 29px;
+}
+
+
+
+/*--ACCOUNT --------------------------------------------------------------------------------------------*/
+/* CSS Document */
+.smainbottom
+{
+	float: left;
+	width: 100%;
+}
+.smainleft
+{
+	position: relative;
+	float: left;
+	width: 217px;
+	margin: 12px 0 0 9px;
+	border-radius: 3px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.msearch {
+    float: left;
+    width: 100%;
+}
+.stitleleft
+{
+	float: left;
+	width: 217px;
+	height: 33px;
+	background: #78b802;
+	border-radius: 3px;
+	position: relative;
+}
+.stitleleft span
+{
+	float: left;
+	display: block;
+	margin: 4px 0 0 10px;
+    padding: 3px 0 0 24px;
+	color: #fff;
+	background: url(../images/icon-quanly.png) no-repeat left center;
+}
+.bgcolor
+{
+	position: absolute;
+	background: url(../images/goctron.png) no-repeat left top;
+	top: 0px;
+	left: 200px;
+	width: 20px;
+	height: 20px;
+	z-index: 1000;
+}
+.smaincon
+{
+	float: left;
+	width: 205px;
+}
+.smaincon ul li a
+{
+	font-size: 14px;
+	color: #000;
+	padding: 0 0 0 13px;
+	margin: 0 0 0 5px;
+	background:url(../images/list-2.png) no-repeat left center;
+}
+.smaincon ul li
+{
+	line-height: 28px;
+}
+.smaincenter
+{
+	position: relative;
+	float: left;
+	width: 784px;
+	margin: 12px 0 0 9px;
+	border-radius: 3px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.stitlecenter
+{
+	float: left;
+	width: 784px;
+	height: 33px;
+	background: #78b802;
+	border-radius: 3px;
+	position: relative;
+}
+.stitlecenter span
+{
+	float: left;
+	display: block;
+	margin: 4px 0 0 10px;
+    padding: 3px 0 0 24px;
+	color: #fff;
+	background: url(../images/icon-quanly1.png) no-repeat left center;
+}
+.stablelist
+{
+	float: left;
+}
+.stablelist table
+{
+	margin:6px 0 6px 6px;
+}
+.bgcolor2
+{
+	position: absolute;
+	background: url(../images/goctron.png) no-repeat left top;
+	top: 0px;
+	left: 768px;
+	width: 20px;
+	height: 20px;
+	z-index: 1000;
+}
+
+
+}
+
+
+
+
+
+
+/*------------------------------------------------------------------------*/
+.sbouncenter
+{
+	float: left;
+	width: 768px;
+	border-bottom: 1px solid #ccc;
+	margin: 8px 0 0 8px;
+}
+.scontact
+{
+	float: left;
+	width: 592px;
+	margin: 0 0 9px 0;
+}
+#stitlwcon
+{
+	float: left;
+	width: 100%;
+	display: block;
+	padding: 0 0 0 10px;
+	color: #025cb8;
+	font-weight: bold;
+	font-size: 14px;
+}
+.scontact ul
+{
+	float: left;
+	width: 204px;
+	margin: 3px 0 0 0;
+}
+.scontact ul li
+{
+	float: left;
+	width: 250px;
+	margin: 3px 0 0 0;
+}
+.scontact ul li span
+{
+	display: block;
+	margin-left: 22px;
+	font-size: 17px;
+}
+.scontact ul li input
+{
+	width: 200px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+.scontact ul li select
+{
+	width: 204px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+.scontact ul li textarea
+{
+	width: 200px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+#sngaydat
+{
+	float: left;
+	width: 82px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+#sronghon
+{
+	width: 288px;
+}
+#sronghon i
+{
+	float: left;
+	font-style: normal;
+	display: block;
+	padding: 0 5px 0 5px;
+}
+#schecked
+{
+	width: auto;
+}
+#sseriv
+{
+	width: 42px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+.ssubmitconten
+{
+	float:left;
+	width: 704px;
+	padding: 20px 0 0 320px;
+	height: 51px;
+}
+#scapnhat
+{
+	border: none;
+	background: #78b802;
+	color: #fff;
+	border-radius: 3px;
+	height: 26px;
+}
+#shuybo
+{
+	border: none;
+	background: #bfbbbb;
+	color: #000;
+	border-radius: 3px;
+	height: 26px;
+}
+
+.comment 
+{
+        width: 90%;    
+        background: #f9f9f9;
+        border: 1px solid #ececea;
+        padding: 5px;
+        margin: 10px auto;
+}
+
+.comment-form
+{        
+        margin: 20px 0 10px 35px;
+        float: left;
+}
+
+.comment-form img
+{
+    float: left;
+    margin-right: 10px;
+}
+
+.comment-form span
+{
+    display: block;
+}
+
+.comment-form textarea
+{
+    margin: 10px 0 0 0;
+}
+
+.comment-form input
+{
+        border: none;
+        width: 70px;
+        padding: 5px;
+        margin: -30px 0 0 70px;
+        border: 1px solid #ececea;
+        float: right;   
+        font-size: 14px;
+        font-weight: bold;
+        color: #5997C6;
+        cursor: pointer;
+}
+
+.comment .desc
+{
+     width: 80%;
+}

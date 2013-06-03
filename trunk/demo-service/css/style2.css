@@ -1,0 +1,849 @@
+/* CSS Document */
+/*
+	Mr Thieu
+	22-10-2012
+	Su dung cho trang khách sạn
+*/
+.o-produc
+{
+	float: left;
+	width: 370px;
+	height: 100px;
+	padding: 5px 0 0 0;
+}
+.o-producimg
+{
+	float: left;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+.o-producdetail
+{
+	float: left;
+	width: 268px;
+	height: 100px;
+}
+.o-producdetail ul li span
+{
+	font-size: 12px;
+	color: #666;
+}
+.o-producdetail ul li a
+{
+	font-size: 16px;
+	color: #014c95;
+	font-weight: bold;
+}
+.o-producdetail ul li p
+{
+	font-size: 12px;
+	color: #014c95;
+	font-style: italic;
+}
+.o-produc2
+{
+	float: left;
+	width: 355px;
+	height: 160px;
+	padding: 5px 0 0 5px;
+}
+.o-produc2img
+{
+	float: left;
+	width: 150px;
+	height: 160px;
+	text-align: center;
+}
+.o-price
+{
+	border: 1px solid #ccc;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    height: 34px;
+	display: inline;
+    margin: 5px 0 0 8px;
+    width: 132px;
+}
+.o-produc2detail
+{
+	float: left;
+	width: 200px;
+	height: 132px;
+}
+.o-produc2detail ul li a
+{
+	font-size: 16px;
+	color: #014c95;
+	font-weight: bold;
+}
+.o-boxbottom1
+{
+	width: 755px;
+}
+.o-produc2detail ul li span
+{
+	font-size: 12px;
+	color: #666;
+	font-style: italic;
+}
+.o-price span
+{
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	color: #78b802;
+	padding: 9px 0 0 0;
+}
+.o-produc2detail ul li img
+{
+	padding: 5px 0 0 5px;
+}
+.o-produc3
+{
+	float: left;
+	width: 362px;
+	height: 110px;
+	padding: 8px 0 0 0;
+}
+.o-imgdanhgia
+{
+	float: left;
+    height: 109px;
+    width: 118px;
+	text-align: center;
+}
+.o-produc3detail
+{
+	float: left;
+	width: 242px;
+	height: 118px;
+}
+.o-produc3detail a
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #014c95;
+}
+.o-produc3detail span
+{
+	font-size: 12px;
+	color: #666;
+}
+.o-produc3detail p
+{
+	font-size: 12px;
+	font-style: italic;
+	color: #666;
+}
+.o-producleft
+{
+	float: left;
+	width: 248px;
+	height: 71px;
+}
+.o-imgproducleft
+{
+	float: left;
+	width: 82px;
+	height: 71px;
+}
+.o-producleftdetail
+{
+	float:left;
+	width: 165px;
+	height: 71px;
+}
+.o-producleftdetail ul li a
+{
+	font-size: 14px;
+	color: #78b802;
+}
+.o-producleftdetail ul li p
+{
+	font-size: 12px;
+	color: #666;
+}
+.o-hoteltopmain1
+{
+	float: left;
+	width: 217px;
+}
+.o-boun1
+{
+	float: left;
+	padding: 0 0 0 25px;
+	margin: 0 0 0 3px;
+	background: url(../images/icon-viet1.png) no-repeat left top scroll;
+}
+.o-boun1 span
+{
+	font-size: 12px;
+	line-height: 24px;
+}
+.o-boun2
+{
+	float: left;
+	padding: 0 0 0 25px;
+	margin: 0 0 0 3px;
+	background: url(../images/icon-viet2.png) no-repeat left top scroll;
+}
+.o-boun2 span
+{
+	font-size: 12px;
+	line-height: 24px;
+}
+.o-boun3
+{
+	float: left;
+	padding: 0 0 0 25px;
+	margin: 0 0 0 3px;
+	background: url(../images/icon-viet3.png) no-repeat left top scroll;
+}
+.o-boun3 span
+{
+	font-size: 12px;
+	line-height: 24px;
+}
+.o-boun4
+{
+	float: left;
+	padding: 0 0 0 25px;
+	margin: 0 0 0 3px;
+	background: url(../images/icon-viet4.png) no-repeat left top scroll;
+}
+.o-boun4 span
+{
+	font-size: 12px;
+	line-height: 24px;
+}
+.o-boun5
+{
+	float: left;
+	padding: 0 0 0 25px;
+	margin: 0 0 0 3px;
+	background: url(../images/icon-viet5.png) no-repeat left top scroll;
+}
+.o-boun5 span
+{
+	font-size: 12px;
+	line-height: 24px;
+}
+/*
+	Mr Thieu
+	24-10-2012
+	Su dung cho trang Đánh Giá
+*/
+
+.f-mainleft
+{
+	float: left;
+	width: 504px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	display: inline;
+	margin: 5px 0 0 5px;
+}
+.f-maintop
+{
+	float: left;
+	width: 504px;
+	height: 50px;
+}
+.f-maintopleft
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxleft-detail.png) no-repeat left top scroll;
+}
+.f-maintopcenter
+{
+	float: left;
+	width: 494px;
+	height: 39px;
+	background: url(../images/boxcenter-detail.png) repeat-x left top scroll;
+}
+.f-maintopcenter span
+{
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	display: block;
+	padding: 9px 0 0 5px;
+}
+.f-maintopright
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxright-detail.png) no-repeat left top scroll;
+}
+.f-mainproduc
+{
+	float: left;
+	width: 498px;
+	display: inline;
+	margin: 5px 0 0 5px;
+}
+.f-mainproduc span
+{
+	color: #ff8a01;
+	font-size: 18px;
+	font-weight: bold;
+}
+.f-imgpro
+{
+	float: left;
+    height: 108px;
+    width: 132px;
+}
+.f-detailpro
+{
+	float: left;
+	width: 347px;
+	height: 108px;
+}
+.f-detailpro a
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #014c95;
+}
+.f-detailpro span
+{
+	font-size: 12px;
+	font-style: italic;
+	color: #333;
+	font-weight:normal;
+}
+.f-detailpro p
+{
+	font-size: 12px;
+	color: #333;
+}
+#xemthem
+{
+	float: right;
+	font-size: 12px;
+	font-weight: normal;
+}
+.f-produc2
+{
+	float: left;
+	width: 232px;
+	padding: 0 0 5px 17px;
+}
+.f-produc2 span
+{
+	font-size: 14px;
+	color: #ff8a01;
+	font-weight: bold;
+}
+.f-produc2 a
+{
+	font-size: 12px;
+	font-weight: bold;
+	color: #014c95;
+}
+.f-produc2 p
+{
+	font-size: 11px;
+	font-style: italic;
+	color: #333;
+}
+.f-produc2 ul
+{
+	padding: 8px 0 0 0;
+}
+.f-mainbottom
+{
+	float: left;
+	width: 100%;
+	margin: 5px 0 0 0;
+}
+.f-votetop
+{
+	float: left;
+	width: 1024px;
+}
+.f-votetitle
+{
+	float: left;
+	width: 1024px;
+}
+.f-votetitleleft
+{
+	float: left;
+	width: 9px;
+	height: 33px;
+	background: url(../images/im-boxgleft.png) no-repeat left top scroll;
+}
+.f-votetitlecenter
+{
+	float: left;
+	width: 1005px;
+	height: 33px;
+	position: relative;
+	background: url(../images/im-boxgcenter.png) repeat-x left top scroll;
+}
+.f-votetitleright
+{
+	float: left;
+	width: 9px;
+	height: 33px;
+	background: url(../images/im-boxgright.png) no-repeat left top scroll;
+}
+.f-mmo1
+{
+	float: left;
+	width: 43px;
+	height: 23px;
+	position: absolute;
+	top: 31px;
+	left: 237px;
+	background: url(../images/im-boxdanhgiacenter.png) no-repeat left top scroll;
+}
+.f-mmo2
+{
+	float: left;
+	width: 43px;
+	height: 23px;
+	position: absolute;
+	top: 31px;
+	left: 717px;
+	background: url(../images/im-boxdanhgiacenter.png) no-repeat left top scroll;
+}
+.f-votedetail
+{
+	float: left;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.f-bounvote
+{
+	float: left;
+	width: 500px;
+	padding: 5px 0 0 10px;
+	margin: 5px 0 5px 0;
+	border-right: 1px solid #ccc;
+}
+.f-votedetailleft
+{
+	float: left;
+	width: 485px;
+	height: 50px;
+	background: url(../images/vote-good.png) no-repeat left top;
+}
+.f-votedetailleft2
+{
+	float: left;
+	width: 485px;
+	height: 50px;
+	background: url(../images/vote-bad.png) no-repeat left top;
+}
+.f-votedetailleft2 span
+{
+	font-size: 18px;
+	font-weight: bold;
+	color: #78be42;
+	display: block;
+	padding: 10px 0 0 60px;
+}
+.f-votedetailleft span
+{
+	font-size: 18px;
+	font-weight: bold;
+	color: #78be42;
+	display: block;
+	padding: 10px 0 0 60px;
+}
+.f-votems
+{
+	float: left;
+	width: 480px;
+	padding: 0 0 5px 0;
+}
+#xemthem2 a
+{
+	float: right;
+	font-size: 12px;
+	font-weight: normal;
+}
+.f-votems a
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #0d61b2;
+}
+.f-votems em
+{
+	font-size: 18px;
+	color: #ff8a01;
+}
+.f-votems p
+{
+	font-size: 11px;
+	color: #6f6f6f;
+	font-style: italic;
+}
+.f-votems span
+{
+	font-size: 12px;
+	color: #333;
+}
+.f-bounvote2
+{
+	float: left;
+	width: 500px;
+	padding: 5px 0 0 10px;
+	margin: 5px 0 5px 0;
+}
+/*
+	Mr Thieu
+	25-10-2012
+	Su dung cho trang danhgia-detail
+*/
+.g-mainleft
+{
+	float: left;
+	width: 265px;
+}
+.g-tksearch
+{
+	float: left;
+	width: 261px;
+	height: 286px;
+	display: inline;
+	margin: 5px 0 5px 0;
+}
+.g-map
+{
+	float: left;
+	width: 256px;
+	height: 227px;
+	background:  #999;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+.g-map a
+{
+	display: block;
+    height: 22px;
+    left: 164px;
+    position: absolute;
+    top: 0px;
+    width: 92px;
+	background: #0283df;
+	font-size: 12px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 0 0 0;
+	border-radius: 0 5px 0 5px;
+}
+.g-bodyright1
+{
+	float: left;
+	width: 259px;
+	display: inline;
+	margin: 5px 0 0 0;
+	border: 1px solid #ccc;
+	border-radius:3px;
+}
+.g-hoteltopmain1
+{
+	float: left;
+	width: 240px;
+	padding: 0 0 0 17px;
+}
+.g-hoteltopmain1 ul
+{
+	padding: 0 0 5px 0;
+}
+.g-hoteltopmain1 a
+{
+	font-size: 12px;
+	font-weight: bold;
+	color: #0054a6;
+}
+.g-hoteltopmain1 p
+{
+	font-style: italic;
+	font-size: 12px;
+	color: #666;
+}
+.g-mainright
+{
+	float: left;
+	width: 757px;
+	margin: 5px 0 0 0;
+}
+.g-hotels
+{
+	float: left;
+	width: 757px;
+	height: 116px;
+	border-bottom: 1px solid #ff8a01;
+	border-top: 1px solid #ff8a01;
+}
+.g-hoteltitle1
+{
+	float: left;
+	width: 550px;
+	height: 116px;
+}
+.g-hoteltitle1 ul
+{
+	padding: 10px 0 0 10px;
+}
+.g-hoteltitle1 ul li a
+{
+	font-size: 18px;
+	color: #0054a6;
+}
+.g-hoteltitle1 ul li img
+{
+	padding: 5px 0 0 10px;
+}
+.g-hoteltitle1 ul li p
+{
+	font-size: 12px;
+	color: #666;
+}
+.g-anhang
+{
+	border: none;
+	height: 34px;
+    width: 172px;
+	color: #fff;
+	border-radius: 3px;
+	font-weight: bold;
+	background: #ff8a01;
+	cursor: pointer;
+	margin: 20px 0 0 0;
+}
+.g-hoteltitle2
+{
+	float: left;
+	width: 199px;
+	height: 116px;
+}
+.g-bodag
+{
+	text-align: center;
+	width: 75px;
+	height: 49px;
+	background: #0283df;
+	color: #fff;
+	margin: 10px 0 0 0;
+	padding: 5px 0 0 0;
+	border-radius: 5px;
+}
+.g-bodag p
+{
+	font-size: 18px;
+	font-weight: bold;
+}
+.g-bodag span
+{
+	font-size: 12px;
+}
+#g-uathich
+{
+	width: 150px;
+	height: 18px;
+	padding: 3px 0 0 25px;
+	margin: 10px 0 0 0;
+	background: url(../images/icon-uathich.png) no-repeat left center scroll;
+}
+#g-uathich a
+{
+	font-size: 12px;
+	color: #0283df;
+}
+.g-hotelcheck
+{
+	float: left;
+	width: 755px;
+	height: 116px;
+	border: 1px solid #ff8a01;
+	border-radius: 3px;
+	margin: 5px 0 0 0;
+}
+.g-titlecheck
+{
+	float: left;
+	width: 755px;
+	height: 30px;
+}
+.g-spancheck
+{
+	float:left;
+	width: 500px;
+	padding: 10px 0 0 10px;
+}
+.g-spancheck span
+{
+	color: #78b802;
+	font-size: 16px;
+}
+.g-spancheck2
+{
+	float:left;
+	width: 229px;
+	height: 20px;
+	background: url(../images/icon-uathich2.png) no-repeat left center;
+	margin: 10px 0 0 0;
+}
+.g-spancheck2 span
+{
+	display: block;
+	color: #ff8a01;
+	font-size: 12px;
+	padding: 3px 0 0 27px;
+}
+.g-maincheck
+{
+	float: left;
+	width: 755px;
+	height: 84px;
+}
+.g-ngay
+{
+	float:left;
+	width: 36px;
+	height: 60px;
+	padding: 10px 0 0 12px;
+}
+.g-ngay span
+{
+	float: left;
+	font-size: 12px;
+	color: #333;
+}
+.g-ngay select
+{
+	height: 30px;
+	text-align: center;
+}
+.g-thang
+{
+	float:left;
+	width: 126px;
+	height: 60px;
+	padding: 25px 0 0 5px;
+}
+.g-thang select
+{
+	height: 30px;
+	text-align: center;
+}
+.g-maincheck a
+{
+	float: left;
+	display: block;
+	width: 119px;
+	height: 28px;
+	background: #ff8a01;
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px 0 0 0;
+	border: 1px solid #de7801;
+	border-radius: 3px;
+	display: inline;
+	margin: 22px 0 0 53px;
+}
+.g-bodymain
+{
+	float: left;
+	width: 755px;
+	margin: 5px 0 0 0;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.g-maintop
+{
+	float: left;
+	width: 755px;
+	height: 39px;
+}
+.g-maintopleft
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxleft-detail.png) no-repeat left top scroll;
+}
+.g-maintopcenter
+{
+	float: left;
+	width: 745px;
+	height: 39px;
+	background: url(../images/boxcenter-detail.png) repeat-x left top scroll;
+}
+.g-maintopcenter span
+{
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	display: block;
+	padding: 9px 0 0 5px;
+}
+.g-maintopright
+{
+	float: left;
+	width: 5px;
+	height: 39px;
+	background: url(../images/boxright-detail.png) no-repeat left top scroll;
+}
+.g-voteno1
+{
+	float: left;
+	width: 740px;
+	margin: 5px 0 5px 5px;
+	border-bottom: 1px solid #ccc;
+}
+.g-khachang
+{
+	float: left;
+	width: 149px;
+	height: 65px;
+	text-align: center;
+	padding: 5px 0 0 0;
+}
+.g-khachang span
+{
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+}
+.g-khachang p
+{
+	font-size: 14px;
+	color: #0283df;
+}
+.g-khachang em
+{
+	font-size: 12px;
+	color: #666;
+}
+.g-ykien
+{
+	float: left;
+	width: 570px;
+}
+.g-ykien p
+{
+	font-size: 14px;
+	color: #78b802;
+}
+.g-ykien span
+{
+	font-size: 12px;
+	color: #666;
+}
