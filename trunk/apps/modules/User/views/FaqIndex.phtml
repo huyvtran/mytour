@@ -1,0 +1,68 @@
+<?php
+function faq_menu($items) {
+	foreach ($items as $k => $item) {
+		$t = true;
+		for ($i = 0; $i < count($items); $i++) {
+			if ($item['parent_id'] == $items[$i]['ID']) {
+				$t = false;
+				break;
+			}
+		}
+		if ($t) {
+			$items[$k]['parent_id'] = '0';
+		}
+	}
+	return faq_menu_recruise($items);
+}
+
+$dp_ord = 1;
+
+function faq_menu_recruise($items, $parent_id = '0', $c = 0) {
+	global $dp_ord;
+	if (!$dp_ord)
+		$dp_ord = 1;
+	//limit deep
+	if ($c > 10)
+		return "";
+	$html = '';
+	foreach ($items as $k => $a) {
+		if ($a['is_menu'] == 'no') {
+			unset($items[$k]);
+			continue;
+		}
+		if ($a['parent_id'] == $parent_id) {
+			$html .= "<li class='c$c'>
+					<a onclick=\"load_faq('".BASE_URL."/User/Faq/View?ID={$a['ID']}')\">{$a['title']}</a></li>";
+
+			unset($items[$k]);
+			$html .= "<ul>".faq_menu_recruise($items, $a['ID'], $c + 1)."</ul>";
+		}
+	}
+	return $html;
+}
+?>
+<div style="width: 100%; height: 100%">
+<table width="100%" height="100%" border="0" cellpadding="0">
+	<tr>
+		<td valign="top" width="230" style="border-right: 1px solid #9FB9D8">
+		<div style="position: relative">
+		<div style="border-bottom: 1px solid #9FB9D8; padding: 5px">
+		<div><input type="text" onkeypress="search_faq()"
+			placeholder="Tìm kiếm" value="" id="faq_s" class="x-text"
+			style="width: 210px; height: 19px" /></div>
+		</div>
+
+		<ul id='faqmenu'>
+		<?php _e(faq_menu(self::get('posts'))); ?>
+		</ul>
+		</div>
+		</td>
+		<td valign="top">
+		<div style="min-height: 100px; background: none" id="faq-rap">
+		<div id="faq-content" style="padding: 8px"></div>
+		<div style="clear: both"></div>
+		</div>
+		</td>
+	</tr>
+</table>
+</div>

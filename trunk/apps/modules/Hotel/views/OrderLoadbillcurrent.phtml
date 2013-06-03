@@ -1,0 +1,17 @@
+<?php
+
+list($date_start, $date_end, $room_type_id,$hotel_id,$symbol,$is_apply_campaign,$campain_highest) 
+        = self::get(array('date_start', 'date_end', 'room_type_id','hotel_id','symbol','is_apply_campaign','campain_highest'));
+
+
+for ($i = strtotime($date_start); $i <= strtotime($date_end); $i = $i + 86400) {
+    $arrayPriceDates = price_of_day(date('Y-m-d', $i), $room_type_id , $hotel_id,$is_apply_campaign,$campain_highest);
+    if($arrayPriceDates['is_plan_price'] ==  0){
+         _e('Giá phòng ngày ' . date('d-m-Y', $i) . ' là : Chưa có KH giá <br>');
+    }else{
+         _e('Giá phòng ngày ' . date('d-m-Y', $i) . ' là : ');
+         $price_end = str_replace( array('=') , '', $arrayPriceDates['price_end']);
+         _e(show_money($price_end) . '  ' . $symbol . '/ 1 phòng  <br>');
+    }
+}
+?>

@@ -1,0 +1,247 @@
+<?php
+$hotel = self::get('hotel');
+$room_services = self::get('room_services');
+$colum = 4;
+$hotel_rules = self::get('hotel_rules');
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("Tạo mới loại phòng")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+        <div class="tab-bar" style="border-right:1px solid #ccc">
+            <span class="clear"></span>
+        </div>
+        <div class="form-message"></div>
+        <div class="x-form-container">
+            <table width="100%" cellpadding="4" class="x-form" border="0">
+                <tr>
+                    <td colspan="4" class="section">
+                        Thông tin chung
+                    </td>
+                </tr>
+                <tr>
+                    <td class="c1">
+                        <p style="width:145px"><?php _e(translate('default.room.field.title') . ':') ?></p>
+                    </td>
+                    <td class="c2">
+                        <input name="title" type="text" style="width:250px;" class="x-text bor" value=""/>
+                    </td>
+
+                    <td class="c1"><p style="width: 200px">
+                            <?php _e(translate('default.hotel.field.hotel_id') . ':') ?></p>
+                    </td>
+                    <td class="c2" width="250">
+                        <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>">
+                            <?php _e($hotel['title']) ?>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="c1">
+                        <?php _e(translate('default.hotel.field.price') . ':') ?>
+                    </td>
+                    <td class="c2">
+                        <input name="price" type="text" style="width:150px;" class="x-text bor" value=""/>
+                        <select name="currency_id" class="x-select bor" style="width:100px">                   
+                            <?php _e(select_options(Plugins::getOptions('currencies'), 'title')); ?>	
+                        </select>
+                    </td>
+
+                    <td class="c1">
+                        Dịch vụ thêm giường :
+                    </td>
+                    <td class="c2">
+                        <input name="has_extrabed" type="checkbox" value="1"/>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="c1" >
+                        <?php _e(translate('default.hotel.field.number') . ':') ?>
+                    </td>
+                    <td class="c2">
+                        <input type="number" value="" name="number" class="x-text x-number-text bor"/>
+
+                    </td>
+
+                    <td class="c1">
+                        Giá thêm giường :
+                    </td>
+                    <td class="c2">                               
+                        <input name="extrabed_price" type="text" style="width:150px;" class="x-text bor" disabled="disabled"/>
+                        <span class="type-price-extrabed"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="c1">
+                        <?php _e(translate('default.hotel.field.size_people') . ':') ?>
+                    </td>
+                    <td class="c2">
+                        <input type="number" value="" name="size_people" class="x-text x-number-text bor"/>
+                    </td>
+
+                    <td class="c1">
+                        <?php _e(translate('default.hotel.field.area') . ':') ?>
+                    </td>
+                    <td class="c2">
+                        <input name="area" type="text" style="width:150px;" class="x-text bor" value=""/>
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td class="c1" valign="top">
+                        <?php _e(translate('default.desc') . ':') ?>
+                    </td>
+                    <td class="c2" colspan="3">
+                        <textarea name="desc" class="x-text bor" style="width:668px" rows="7"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="c1">
+                        <?php _e(translate('default.image')); ?>:
+                    </td>
+                    <td class="c2" style="position: relative">
+                        <?php _e(tpl_upload('img', 'rooms')) ?>
+                    </td>
+                </tr>     
+                <!--Rule Price -->
+                <tr>
+                    <td colspan="4" class="section">
+                        Áp dụng quản lí giá
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" cellpadding="20"></td>
+                </tr>
+                <?php
+                if (isset($hotel_rules) && count($hotel_rules) > 0):
+                    $row_rules = ceil(count($hotel_rules) / $colum);
+                    for ($i = 0; $i < $row_rules; $i++):
+                        ?>
+                        <tr width="100%">
+                            <?php
+                            for ($j = 0; $j < $colum; $j++):
+                                $a = $hotel_rules[$i * $colum + $j];
+                                ?>
+                                <?php if (isset($a['ID'])): ?>
+
+                                    <td class="c1" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                        <input type="checkbox" name="hotel_rules[]" value="<?php _e($a['ID']) ?>" />
+                                    </td>
+
+                                    <td class="c2">
+                                        <b><?php _e($a['title']); ?></b>
+                                    </td>
+                                    <?php
+                                    if ($j % 2 == 1) {
+                                        _e("</tr><tr width='100%'>");
+                                    }
+                                    ?>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+
+                            <?php
+                        endfor;
+                    endif;
+                    ?>
+                    </td>
+                </tr>
+                <!-- SERVICES -->
+                <tr>
+                    <td colspan="4" class="section">
+                        Dịch vụ phòng
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" cellpadding="20"></td>
+                </tr>
+                <?php
+                if (isset($room_services) && count($room_services) > 0):
+                    $row_services = ceil(count($room_services) / $colum);
+                    for ($i = 0; $i < $row_services; $i++):
+                        ?>
+                        <tr width="100%">
+                            <?php
+                            for ($j = 0; $j < $colum; $j++):
+                                $a = $room_services[$i * $colum + $j];
+                                ?>
+                                <?php if (isset($a['ID'])): ?>
+                                    <td class="c1" valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                        <input type="checkbox" name="services[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?>/>
+                                    </td>
+                                    <td class="c2" valign="top">
+                                        <b><?php _e($a['title']); ?></b>
+                                    </td>
+                                    <?php
+                                    if ($j % 2 == 1) {
+                                        _e("</tr><tr width='100%'>");
+                                    }
+                                    ?>
+                                <?php endif; ?>
+
+                            <?php endfor; ?>
+                        </tr>
+                        <?php
+                    endfor;
+                endif;
+                ?> 
+                   
+                <tr >
+                    <td></td>
+                    <td align="center" style="padding-top: 15px">
+                        <?php _e(tpl_button_add()) ?>
+                        <?php _e(tpl_button_cancel('#Hotel/Room')) ?>
+                    </td>
+                </tr>
+            </table>
+            </table>
+        </div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        //đơn vị của giá thêm giường giống với đơn vị tiền của giá phòng
+        var value = jQuery('select[name="currency_id"] option:selected').text();
+        if(jQuery('input[name="has_extrabed"]').is(':checked')){
+            jQuery('.type-price-extrabed').text(value);
+        }
+        jQuery('select[name="currency_id"]').change(function(){
+            if(jQuery('input[name="has_extrabed"]').is(':checked')){
+                var value = jQuery('select[name="currency_id"] option:selected').text();
+                jQuery('.type-price-extrabed').text(value);
+            }
+        });
+       
+        //Click vào thêm giường mới hiển ra ô nhập giá
+        jQuery('input[name="has_extrabed"]').change(function(){
+            if(jQuery(this).is(':checked')){
+                jQuery('input[name="extrabed_price"]').removeAttr('disabled');
+                var value = jQuery('select[name="currency_id"] option:selected').text();
+                jQuery('.type-price-extrabed').text(value);
+            }else{
+                jQuery('input[name="extrabed_price"]').attr('disabled',true);
+                jQuery('input[name="extrabed_price"]').attr('value','');
+                jQuery('.type-price-extrabed').text('');
+            }
+        })
+    });
+</script>

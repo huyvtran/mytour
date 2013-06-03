@@ -1,0 +1,128 @@
+<?php
+$post = self::get('post');
+?>
+<div class="user-message-view-panel">
+    <b>Cài đặt tin nhắn</b>
+</div>
+<div class="user-message-form">
+    <form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+        <table cellpadding="5" width="100%">
+            <tr>
+                <td class="lb" width="10%" align="center"><b>Sắp xếp mặc định</b></td>
+                <td class="input">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10" align="center">
+                            </td>
+                            <td class="lb">
+                                Tin nhắn đến:
+                                <select name="sort_inbox" class="x-select">
+                                    <option value="date"<?php if ($post['sort_inbox'] == 'date') _e(' selected') ?>>Mới nhất</option>
+                                    <option value="read"<?php if ($post['sort_inbox'] == 'read') _e(' selected') ?>>Chưa đọc</option>
+                                </select>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Tin đã gửi:
+                                <select name="sort_outbox" class="x-select">
+                                    <option value="date"<?php if ($post['sort_outbox'] == 'date') _e(' selected') ?>>Gửi gần nhất</option>
+                                    <option value="reply"<?php if ($post['sort_outbox'] == 'reply') _e(' selected') ?>>Phản hồi gần nhất</option>
+                                </select>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Thông báo:
+                                <select name="sort_notice" class="x-select">
+                                    <option value="date"<?php if ($post['sort_notice'] == 'date') _e(' selected') ?>>Mới nhất</option>
+                                    <option value="read"<?php if ($post['sort_notice'] == 'read') _e(' selected') ?>>Chưa đọc</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border-top:1px solid #ccc">
+                <td class="lb" width="10%" align="center"><b>Số tin hiển thị trên mỗi trang</b></td>
+                <td class="input">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10" align="center">
+                            </td>
+                            <td class="lb">
+                                <select name="page_range" class="x-select">
+                                    <option value="25"<?php if ($post['page_range'] == 25) _e(' selected') ?>>25</option>
+                                    <option value="50"<?php if ($post['page_range'] == 50) _e(' selected') ?>>50</option>
+                                    <option value="75"<?php if ($post['page_range'] == 75) _e(' selected') ?>>75</option>
+                                    <option value="100"<?php if ($post['page_range'] == 100) _e(' selected') ?>>100</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border-top:1px solid #ccc">
+                <td class="lb" width="10%" align="center"><b>Hiển thị thu gọn</b></td>
+                <td class="input">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10" align="center">
+                            </td>
+                            <td class="lb">
+                                <input type="checkbox" name="quick_display" value="1" <?php if ($post['quick_display'] == 1) _e(' checked') ?> /> đồng ý <br/><br/>
+                                <small><i>Nếu đồng ý các tin nhắn đã di chuyển vào thư mục sẽ không hiện trong hộp tin nhắn đến</i></small>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border-top:1px solid #ccc">
+                <td class="lb" width="10%" align="center"><b>Thư mục</b></td>
+                <td class="input" valign="top" align="left">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10">
+
+                            </td>
+                            <td>
+                                <div><a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Addfolder')">Thêm thư mục</a></div>
+                                <?php foreach (self::get('folders') as $f): ?>
+                                    <div class="pad-horizotal pad-vertical">
+                                        - <?php _e($f['title']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <small><a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Editfolder?ID=<?php _e($f['ID']) ?>')">sửa</a> - <a onclick="module_delete('<?php _e(baseUrl()) ?>/Message/Index/Deletefolder?ID=<?php _e($f['ID']) ?>')">xóa</a></small>
+                                    </div>
+                                <?php endforeach; ?>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border-top:1px solid #ccc">
+                <td class="lb" width="10%" align="center"><b>Chữ ký</b></td>
+                <td class="input">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10" align="center">
+                            </td>
+                            <td class="lb">
+                                <input type="checkbox" name="use_signature" value="1" <?php if ($post['use_signature'] == 1) _e(' checked') ?> />
+                                Sử dụng chữ ký <br/><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <?php _e(tpl_editor('signature', $post['signature'])) ?>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="border-top:1px solid #ccc">
+                <td class="lb" width="10%" align="center"></td>
+                <td class="input" valign="top" align="left">
+                    <table cellpadding="2" width="100%">
+                        <tr>
+                            <td width="10"></td>
+                            <td>
+                                <button type="submit" class="btn"><i class="icon-ok icon-white"></i> Cập nhật</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

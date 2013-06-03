@@ -1,0 +1,26 @@
+<?php
+    $post       = self::get('post');
+    $id         = $post['ID'];  
+    $title      = $post['title'];
+?>
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+<div class="x-form-container" style="overflow: true;">
+<input type="hidden" value="<?php _e($id);?>" name="ID"/>
+<div class="form-message"></div>
+<table width="100%" border="0" cellpadding="5" class="x-form">    
+	<tr>
+            <td class="x-form-label"><?php _e(translate('default.title').':') ?></td>
+            <td class="x-form-content">
+		<input name="title" type="text" style="width:250px;" class="x-text" value="<?php _e($title) ?>"/>
+            </td>
+	</tr>
+        
+	<tr>
+		<td align="center" colspan="2">
+			<?php _e(tpl_button_add()) ?>
+			<a onclick="remove_frame(this)" class="x-button x-fresh">Hủy bỏ</a>
+		</td>
+	</tr>
+</table>
+</div>
+</form>

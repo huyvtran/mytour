@@ -1,0 +1,12 @@
+<?php
+$post = self::get('post');
+$users = self::get('users');
+$to = array();
+foreach ($users as $a) {
+    $to[] = get_user_link_online($a);
+}
+?>
+<u>Tiêu đề: </u><b><?php _e($post['subject']) ?></b> <br/>
+<u>Lúc: </u> <?php _e(show_date('H:i:s d/m/Y', $post['date'])) ?> <br/>
+<u>Đến: </u> <?php _e(implode(', ', $to)) ?> <br/>
+<div class="clear"></div>

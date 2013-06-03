@@ -1,0 +1,65 @@
+<?php $id = getId(); ?>
+<div class="x-list-title">
+<table width="100%" border="0" height="100%">
+	<tr>
+		<td align="left">
+		<h2>Nhật kí truy cập</h2>
+		</td>
+		<td align="right">
+		<div class="x-list-options"><?php _e(tpl_search_form(baseUrl()."/Admin/Log/Search", '#Admin/Log')); ?>
+                    <a class="x-button" onclick="module_delete('<?php _e(baseUrl()); ?>/Admin/Log/Delete')">Làm rỗng</a>
+                </div>
+		</td>
+	</tr>
+</table>
+</div>
+
+<?php $vars = self::get('vars'); ?>
+<table width="100%" cellpadding="0" cellspacing="0" class="x-list">
+    <tr>
+        <th class="k">TT</th>
+        <th width="180"><?php show_order_link('Ngày', 'date', '#Admin/Log', $vars); ?>
+        </th>
+        <th width="180"><?php show_order_link('Truy cập', 'user_id', '#Admin/Log', $vars); ?>
+        </th>
+        <th width="180"><?php show_order_link('IP', 'ip', '#Admin/Log', $vars); ?>
+        </th>
+        <th><?php show_order_link('Trình duyệt', 'browser', '#Admin/Log', $vars); ?>
+        </th>
+    </tr>
+    <?php foreach ( self::get('posts') as $k => $a ) : ?>
+        <tr>
+            <td class="k">
+                <?php _e($k + 1); ?>
+            </td>
+            <td align="center">
+                <?php _e(show_date('d/mY H:i:s', $a['date'])); ?>
+            </td>
+            <td align="center">
+                <?php if ( $a['user_id'] != 0 ) : ?>
+                    <?php _e(get_user_link($a['user_id'], $a['username'])); ?>
+                <?php else : ?>
+                    <?php _e('Khách'); ?>
+                <?php endif; ?>
+            </td>
+            <td align="center">
+                <?php _e($a['ip']); ?>
+            </td>
+
+            <td align="center">
+                <?php
+                $a = parse_user_agent($a['browser']);
+                _e("{$a['platform']} | {$a['browser']} - {$a['version']}");
+                ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    <tr>
+        <td colspan="5" class="page">
+            <div class="x-page">
+                <?php self::e('page'); ?>
+            </div>
+        </td>
+    </tr>
+
+</table>

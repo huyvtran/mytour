@@ -1,0 +1,231 @@
+<?php
+$hotel = self::get('hotel');
+$room_types = self::get('room_types');
+$currencies = self::get('currencies');
+$campaigns = self::get('campaigns');
+$column = 2;
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Tạo mới chính sách hủy </h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)" autocomplete="off">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+
+        <div class="form-message"></div>
+        <div class="tabs">
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+                <tr>
+                    <td colspan="4" class="section">
+                        Thông tin chung
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" cellpadding="20"></td>
+                </tr>                         
+                        <tr>
+                            <td class="c1">Khách sạn : </td>
+                            <td  colspan="3">
+                                <h3><a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>"> <?php _e($hotel['title']); ?></a></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">Tiêu đề : </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_normal('title')) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1">Chính sách: </td>
+                            <td colspan="3">
+                                <table>
+                                    <tr>
+                                        <td>1. &nbsp;
+                                            <input type="hidden" name="IDD[]" value="1"/>
+                                            <select class="bor" name="type[0]" style="width:150px">
+                                                <option value="no_show">No Show</option>
+                                                <option value="any_days">Any Days</option>
+                                                <option value="no_cancellations">No Cancellations</option>
+                                            </select>
+                                            <input class="bor" name="value[0]" type="text" style="width:100px" />
+                                            <select class="bor" name="unit[0]">
+                                                <option value="-1">Đêm</option>
+                                                <option value="0">%</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>"><?php _e($value['title']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin: </b>&nbsp;&nbsp;
+                                            <?php _e(tpl_input_number('prior_checkin[0]')) ?>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <input name="is_apply[0]" type="hidden" value="on"/>
+                                            <input name="is_apply[0]" type="checkbox" checked="checked" disabled="disabled"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>2. &nbsp;
+                                            <input type="hidden" name="IDD[]" />
+                                            <select class="bor" name="type[1]" style="width:150px" disabled="disabled">
+                                                <option value="within">Within</option>
+                                            </select>
+                                            <input class="bor" name="value[1]" type="text" style="width:100px"  disabled="disabled"/>
+                                            <select class="bor" name="unit[1]"   disabled="disabled">
+                                                <option value="-1">Đêm</option>
+                                                <option value="0">%</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>"><?php _e($value['title']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin: </b>&nbsp;&nbsp;
+                                            <input type="number"  name="prior_checkin[1]" class="x-text x-number-text"  disabled="disabled"/>
+                                            &nbsp;&nbsp;&nbsp;<input name="is_apply[1]" type="checkbox" onchange="$(this).parent(1).find('input[name*=ID]').set('value',this.checked ? 1 : 0);$(this).parent(1).find('select[name*=type],input[name*=value],select[name*=unit],input[name*=prior_checkin]').attr('disabled',this.checked ? null : 'disabled')"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>3. &nbsp;
+                                            <input type="hidden" name="IDD[]" />
+                                            <select class="bor" name="type[2]" style="width:150px"  disabled="disabled">
+                                                <option value="within">Within</option>
+                                            </select>
+                                            <input class="bor" name="value[2]" type="text" style="width:100px"  disabled="disabled" />
+                                            <select class="bor" name="unit[2]" disabled >
+                                                <option value="-1">Đêm</option>
+                                                <option value="0">%</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>"><?php _e($value['title']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin: </b>&nbsp;&nbsp;
+                                            <input type="number"  name="prior_checkin[2]" class="x-text x-number-text" disabled/>
+                                            &nbsp;&nbsp;&nbsp;<input name="is_apply[2]" type="checkbox" onchange="$(this).parent(1).find('input[name*=ID]').set('value',this.checked ? 1 : 0);$(this).parent(1).find('select[name*=type],input[name*=value],select[name*=unit],input[name*=prior_checkin]').attr('disabled',this.checked ? null : 'disabled')"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">Là chính sách mặc định: </td>
+                            <td class="c2" style="padding:15px">
+                                <input type="checkbox" name="policy_default" />
+                            </td>
+                        </tr>
+                <tr>
+                    <td colspan="4" class="section">
+                       Áp dụng cho loại phòng
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" cellpadding="20"></td>
+                </tr> 
+                        <tr>
+                            <td class="c1"></td>
+                            <td colspan="3">
+                                <table  width ="100%" cellpadding="10">
+                                    <?php
+                                    if (isset($room_types) && count($room_types) > 0):
+                                        foreach ($room_types as $key => $value):
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name='room_type_id[<?php _e($key) ?>]' value="<?php _e($value['ID']) ?>" 
+                                                           onchange="$(this).parent(1).find('input[name*=date_start],input[name*=date_end]').attr('disabled',this.checked ? null : 'disabled')"
+                                                           />
+                                                           <?php _e($value['title']); ?>
+                                                </td>
+                                                <td>
+                                                    Từ ngày : <?php _e(tpl_input_date("date_start[$key]", '', 'disabled')) ?>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Đến ngày : <?php _e(tpl_input_date("date_end[$key]", '', 'disabled')) ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </table>
+                            </td>
+                        </tr>
+                <tr>
+                    <td colspan="4" class="section">
+                       Áp dụng cho khuyến mãi
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" cellpadding="20"></td>
+                </tr>                         
+                        <tr>
+                            <td class="c1"></td>
+                            <td colspan="3">
+                                <table  width ="100%" cellpadding="10">
+                                    <?php
+                                    if (isset($campaigns) && count($campaigns) > 0):
+                                        $row_campaign = ceil(count($campaigns) / $column);
+                                        for ($i = 0; $i < $row_campaign; $i++):
+                                            ?>
+                                            <tr width="100%">
+                                                <?php
+                                                for ($j = 0; $j < $column; $j++):
+                                                    $a = $campaigns[$i * $column + $j];
+                                                    ?>
+                                                    <td valign="top" width="<?php _e(ceil(100 / $column)) ?>%"  >
+                                                        <?php if (isset($a['ID']) && empty($a['checked'])): ?>
+                                                            <input type="checkbox" name="campaign[]" value="<?php _e($a['ID']) ?>" />
+                                                            <?php _e($a['title']); ?></br>
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                <?php endfor; ?>
+                                            </tr>
+                                            <?php
+                                        endfor;
+                                    endif;
+                                    ?>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.desc') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_textarea('desc')) ?>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td width="15%"></td>
+                            <td>
+                                <?php _e(tpl_button_add()) ?>
+                                <?php _e(tpl_button_cancel('#Hotel/CancelPolicy')) ?>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,51 @@
+<?php
+$posts = self::get('posts');
+
+foreach ($posts as $post) {
+    if ($post['user_id'] == 0) {
+        $post_ans = $post;
+    } else {
+        $post_rep = $post;
+    }
+}
+$id = getId();
+?>
+
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input name="ID" type="hidden" value="<?php _e(self::get('ID', getInt('ID'))) ?>"/>
+    <input name="root" type="hidden" value="<?php _e(self::get('ID', getInt('ID'))) ?>"/>
+    <div class="x-form-container" style="overflow: true;">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">    
+            <tr>
+                <td class="x-form-label"><?php _e('Khách hàng :') ?></td>
+                <td class="x-form-content">
+                    <?php _e($post_ans['fullname']) ?>
+                </td>
+            </tr>
+
+            <tr>	
+                <td class="x-form-label" valign="top"><?php _e('Phản hồi :') ?></td>
+                <td class="x-form-content">
+                    <textarea name="comment" style="width:250px" class="x-text bor" rows="6"><?php _e($post_ans['comment']) ?></textarea>                
+                </td>
+            </tr>        
+
+            <tr>	
+                <td class="x-form-label" valign="top"><?php _e('Trả lời :') ?></td>
+                <td class="x-form-content">
+                    <input type="hidden" name="reply_id" value="<?php _e($post_rep['ID']) ?>" />
+                    <textarea name="reply" style="width:250px" class="x-text bor" rows="6"><?php _e($post_rep['comment']) ?></textarea>                
+                </td>
+            </tr>                
+
+            <tr>
+                <td align="center" colspan="2">
+                    <?php _e(tpl_button_add()) ?>
+                    <a onclick="remove_frame(this)" class="x-button x-fresh">Hủy bỏ</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+

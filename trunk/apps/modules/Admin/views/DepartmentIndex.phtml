@@ -1,0 +1,96 @@
+<?php
+
+function department_map( $items ) {
+    foreach ( $items as $k => $item ) {
+        $t = true;
+        for ( $i = 0; $i < count($items); $i++ ) {
+            if ( $item['parent_id'] == $items[$i]['ID'] ) {
+                $t = false;
+                break;
+            }
+        }
+        if ( $t ) {
+            $items[$k]['parent_id'] = '0';
+        }
+    }
+    return department_map_recruise($items);
+
+}
+
+$dp_ord = 1;
+
+function department_map_recruise( $items, $parent_id = '0', $c = 0 ) {
+    global $dp_ord;
+    if ( !$dp_ord )
+        $dp_ord = 1;
+    //limit deep
+    if ( $c > 10 )
+        return "";
+    $html = "";
+    foreach ( $items as $k => $a ) {
+        if ( $a['parent_id'] == $parent_id ) {
+            $html .= "<tr>
+					<td align='center' class='k'>" . ($dp_ord++) . "</td>
+					<td width='350'>
+						<span" . ($parent_id == 0 ? ' style="color:red;font-weight:bold"' : '') . "><span style='color:#bbb;'>" . str_repeat(" ─ ─ ", $c)."</span>"
+                    . "<input type='hidden' name='ID[]' value='{$a['ID']}'/>
+                                <input name='ord[]' title='Sửa thứ tự phòng ban' type='text' value='{$a['ord']}' style='color:#bbb;text-align:center;padding:2px;border:none;background:transparent' size='1'/>
+                            {$a['title']}</span>
+					</td>
+					<td>
+						{$a['desc']}
+					</td>
+					<td class='k' align='center'>
+						<a onclick=\"load_inframe('" . baseUrl() . "/Admin/Department/edit?ID={$a['ID']}',{title: ' Sửa phòng ban',auto_hidden: true })\" class='x-edit'></a>
+					</td>
+					<td  class='k' align='center'>
+					<a onclick=\"module_delete('" . baseUrl() . "/Admin/Department/delete?ID={$a['ID']}')\" class='x-delete'></a>
+					</td>
+					</tr>";
+
+            unset($items[$k]);
+            $html .= department_map_recruise($items, $a['ID'], $c + 1);
+        }
+    }
+    return $html;
+
+}
+?>
+
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate('admin.department.list.title')) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <a onclick="load_inframe('<?php _e(baseUrl()); ?>/Admin/Department/Add',{title: ' Thêm phòng ban mới', auto_hidden: true })" class="x-button x-button-add">Tạo mới</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form onsubmit="return ajax_form(this,true)" action="<?php _e(baseUrl()) ?>/Admin/Department/Ord" onsubmit='alert(111)' method="post">
+    <table cellpadding="5" class="x-list" width="100%">
+        <tr>
+            <th class="k" align="center">
+                <?php _e(translate('default.list.index')); ?>
+            </th>
+            <th>
+                <?php _e(translate('admin.department.field.title')) ?>
+            </th>
+            <th>
+                <?php _e(translate('admin.department.field.desc')) ?>
+            </th>
+            <th colspan="2">
+                <?php _e(translate('default.list.action')); ?>
+            </th>
+        </tr>
+        <?php _e(department_map(self::get('departments'))); ?>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+    </table>
+    <input type='submit' style='visibility:hidden' value='aaaa'/>
+</form>

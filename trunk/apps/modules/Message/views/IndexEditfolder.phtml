@@ -1,0 +1,53 @@
+<?php
+$post = self::get('post');
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>"/>
+    <div class="form-message"></div>
+    <table cellpadding="5">
+        <tr>
+            <td align="right">
+                <b>Tên:</b>
+            </td>
+            <td> <?php _e(tpl_input_small('title', $post['title'])) ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <i>Tự động chuyển vào mục này khi tin nhắn:</i>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Được gửi từ:</b>
+            </td>
+            <td>
+                <?php _e(tpl_select_users('from[]', 'Gửi từ', self::get('users'))) ?>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+            </td>
+            <td>
+                <select name="logic" class="x-select">
+                    <option value="1"<?php if ($post['logic'] == 1) _e(' selected') ?>>và</option>
+                    <option value="0"<?php if ($post['logic'] == 0) _e(' selected') ?>>hoặc</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Có chứa các từ khóa:</b>
+                <br/> <i> phân tách bởi dấu , </i>
+            </td>
+            <td>
+                <?php _e(tpl_input_small('text_filter', $post['text_filter'])) ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <?php _e(tpl_button_add()) ?>
+            </td>
+        </tr>
+    </table>
+</form>

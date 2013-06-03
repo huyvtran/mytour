@@ -1,0 +1,62 @@
+<?php
+$langs = self::get('langs');
+$modules = self::get('modules');
+$terms = self::get('terms');
+?>
+<div class="x-list-title">
+<table height="100%" width="100%" border="0" cellpadding="0">
+	<tr>
+		<td>
+		<h2>Languages</h2>
+		</td>
+	</tr>
+</table>
+</div>
+
+<table border="0" width="100%" cellpadding="5" class="x-form-container">
+	<tr>
+		<td width="120" align="center" valign="top"
+			style="border-right: 1px solid #ccc; height: 400px"><?php foreach ($langs as $a) : ?>
+		<h2><a href="#Admin/Language?hl=<?php _e($a);?>"> <?php _e($a); ?></a></h2>
+		<?php endforeach; ?></td>
+
+		<?php if (count($modules) > 0) : ?>
+		<td width="120" valign="top" style="border-right: 1px solid #ccc;"><?php foreach ($modules as $a) : ?>
+		<h3><a
+			href="#Admin/Language?hl=<?php _e(get('hl'));?>&m=<?php _e(basename($a,'.php'));?>">
+			<?php _e(basename($a, '.php')); ?></a></h3>
+			<?php endforeach; ?></td>
+			<?php endif; ?>
+
+			<?php if (count($terms) > 0) : ?>
+		<td valign="top">
+		<h2><?php _e(get('hl')) ?> &gt; <?php _e(get('m')) ?></h2>
+		<form action="<?php _e(baseUrl())?>/Admin/Language" method="post"
+			onsubmit="return ajax_form(this)"><input type="hidden" name="hl"
+			value="<?php _e(get('hl'))?>" /> <input type="hidden" name="m"
+			value="<?php _e(get('m'))?>" />
+		<table cellpadding="5">
+		<?php foreach ($terms as $k => $a) : ?>
+			<tr>
+				<td>{<?php _e($k); ?>}</td>
+				<td>
+					<?php _e(tpl_input_hidden("lang_term[]", $k)); ?>
+					<?php _e(tpl_input_normal("lang_value[]", $a)); ?>
+					<a onclick="$(this.parentNode).find('input[type!=checkbox]').each(function(){ this.disabled = !this.disabled })">
+						<input type='checkbox' name="lang_delete[]" value="<?php _e($k)?>"/>
+					</a>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+			<tr>
+				<td></td>
+				<td><?php _e(tpl_button_add()) ?></td>
+			</tr>
+		</table>
+		</form>
+		</td>
+		<?php endif; ?>
+
+		<td></td>
+	</tr>
+</table>

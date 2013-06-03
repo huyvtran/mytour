@@ -1,0 +1,14 @@
+<?php $a = self::get('post'); ?>
+<form action="<?php _e(actionUrl()) ?>"
+      onsubmit="return ajax_form(this)" method="post">
+    <center>
+        <div id="getpass">
+            <h2 class="tt">Lấy lại mật khẩu</h2>
+            <div class="cc">
+                <div class="desc">Hãy nhập vào địa chỉ email của bạn:</div>
+                <input type="text" value="" class="getpass" />
+                <button class='bb'>Xác nhận</button>
+            </div>
+        </div>
+    </center>
+</form>

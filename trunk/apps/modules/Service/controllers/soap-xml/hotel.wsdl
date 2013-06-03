@@ -1,0 +1,448 @@
+<?xml version ='1.0' encoding ='UTF-8' ?>
+<definitions name='Office'
+             targetNamespace='_URL_'
+             xmlns:tns='_URL_?wsdl'
+             xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+             xmlns='http://schemas.xmlsoap.org/wsdl/'>
+    <message name='getList'>
+        <part name='page_range' type='xsd:string'/>
+        <part name='page' type='xsd:string'/>
+        <part name='sort_field' type='xsd:string'/>
+        <part name='sort_type' type='xsd:string'/>
+    </message>
+    <message name='getInfo'>
+        <part name='hotel_id' type='xsd:string'/>
+    </message>
+    <message name='getInfoRoomType'>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+    </message>
+    <message name='getRulePriceInfo'>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='rule_id' type='xsd:string'/>
+    </message>
+    <message name='getRoomType'>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='page_range' type='xsd:string'/>
+        <part name='page' type='xsd:string'/>
+        <part name='sort_field' type='xsd:string'/>
+        <part name='sort_type' type='xsd:string'/>
+    </message>
+   
+    <message name='bookRoom'>
+        <part name='root_id' type='xsd:string'/>
+        <part name='title' type='xsd:string'/>
+        <part name='desc' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='amount' type='xsd:string'/>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+        <part name='customer_name' type='xsd:string'/>
+        <part name='customer_email' type='xsd:string'/>
+        <part name='customer_address' type='xsd:string'/>
+        <part name='customer_phone' type='xsd:string'/>
+        <part name='location_id' type='xsd:string'/>
+        <part name='state_id' type='xsd:string'/>
+        <part name='has_extrabed' type='xsd:string'/>
+        <part name='order_type_id' type='xsd:string'/>
+        <part name='is_apply_campaign' type='xsd:string'/>
+        <part name='customer_id' type='xsd:string'/>
+        <part name='total_price' type='xsd:string'/>
+        <part name='date_created' type='xsd:string'/>
+        <part name='date_updated' type='xsd:string'/>
+        <part name='root_id' type='xsd:string'/>
+        <part name='is_last' type='xsd:string'/>
+        <part name='payment_status' type='xsd:string'/>
+        <part name='status' type='xsd:string'/>
+    </message>
+    
+    
+    <message name='getResult'>
+        <part name='result' type='xsd:string'/>
+    </message>
+    
+    <message name='getCountries'>
+    </message>
+    <message name='getDefaultStates'>
+    </message>
+    <message name='priceOfDate'>
+        <part name='date_input' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='is_apply_campaign' type='xsd:string'/>
+    </message>
+    <message name='findRoomTypeHotel'>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+    </message>
+    
+    <message name='orderPendings'>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+        <part name='time' type='xsd:string'/>
+        <part name='number' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='ip' type='xsd:string'/>
+    </message>
+    <message name='getBookLatencyConfig'>
+      
+    </message>
+    
+    <message name='getRoomNumberFree'>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='allotment' type='xsd:string'/>
+    </message>
+    
+    <message name='getOrderCustomer'>
+        <part name='customer_id' type='xsd:string'/>
+    </message>
+    <message name='getInfoOrder'>
+        <part name='order_id' type='xsd:string'/>
+    </message>
+    <message name='getFeedback'>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='customer_id' type='xsd:string'/>
+        <part name='feedback' type='xsd:string'/>
+    </message>
+    <message name='getAllFeedback'>
+        <part name='hotel_id' type='xsd:string'/>
+    </message>    
+  
+    
+    <message name='updateOrder'>
+        <part name='order_id' type='xsd:string'/>
+        <part name='title' type='xsd:string'/>
+        <part name='desc' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='amount' type='xsd:string'/>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+        <part name='customer_name' type='xsd:string'/>
+        <part name='customer_email' type='xsd:string'/>
+        <part name='customer_address' type='xsd:string'/>
+        <part name='customer_phone' type='xsd:string'/>
+        <part name='location_id' type='xsd:string'/>
+        <part name='state_id' type='xsd:string'/>
+        <part name='has_extrabed' type='xsd:string'/>
+        <part name='order_type_id' type='xsd:string'/>
+        <part name='is_apply_campaign' type='xsd:string'/>
+        <part name='customer_id' type='xsd:string'/>
+        <part name='total_price' type='xsd:string'/>
+        <part name='date_created' type='xsd:string'/>
+        <part name='date_updated' type='xsd:string'/>
+        <part name='root_id' type='xsd:string'/>
+        <part name='is_last' type='xsd:string'/>
+        <part name='payment_status' type='xsd:string'/>
+        <part name='status' type='xsd:string'/>
+    </message>
+    
+    <message name='getOldOrders'>
+        <part name='order_id' type='xsd:string'/>
+    </message>
+    
+    <message name='checkRoomClose'>
+        <part name='date_start' type='xsd:string'/>
+        <part name='date_end' type='xsd:string'/>
+        <part name='room_type_id' type='xsd:string'/>
+        <part name='hotel_id' type='xsd:string'/>
+    </message>
+    <message name='sendPayment'>
+        <part name='status' type='xsd:string'/>
+    </message>
+    
+    
+    <portType name='OfficePortType'>
+        <operation name='getList'>
+            <input message='tns:getList'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getInfo'>
+            <input message='tns:getInfo'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getInfoRoomType'>
+            <input message='tns:getInfoRoomType'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getRulePriceInfo'>
+            <input message='tns:getRulePriceInfo'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getRoomType'>
+            <input message='tns:getRoomType'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='bookRoom'>
+            <input message='tns:bookRoom'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getCountries'>
+            <input message='tns:getCountries'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getDefaultStates'>
+            <input message='tns:getDefaultStates'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='priceOfDate'>
+            <input message='tns:priceOfDate'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='findRoomTypeHotel'>
+            <input message='tns:findRoomTypeHotel'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='orderPendings'>
+            <input message='tns:orderPendings'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getBookLatencyConfig'>
+            <input message='tns:getBookLatencyConfig'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getRoomNumberFree'>
+            <input message='tns:getRoomNumberFree'/>
+            <output message='tns:getResult'/>
+        </operation>
+        
+        <operation name='getOrderCustomer'>
+            <input message='tns:getOrderCustomer'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getInfoOrder'>
+            <input message='tns:getInfoOrder'/>
+            <output message='tns:getResult'/>
+        </operation>  
+        <operation name='getFeedback'>
+            <input message='tns:getFeedback'/>
+            <output message='tns:getResult'/>
+        </operation> 
+        <operation name='getAllFeedback'>
+            <input message='getAllFeedback'/>
+            <output message='tns:getResult'/>
+        </operation>           
+        
+        <operation name='updateOrder'>
+            <input message='tns:updateOrder'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='getOldOrders'>
+            <input message='tns:getOldOrders'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='checkRoomClose'>
+            <input message='tns:checkRoomClose'/>
+            <output message='tns:getResult'/>
+        </operation>
+        <operation name='sendPayment'>
+            <input message='tns:sendPayment'/>
+            <output message='tns:getResult'/>
+        </operation>
+       
+    </portType>
+    <binding name='OfficeBinding' type='tns:OfficePortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='getList'>
+            <soap:operation soapAction='urn:office#getList'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getInfo'>
+            <soap:operation soapAction='urn:office#getInfo'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getInfoRoomType'>
+            <soap:operation soapAction='urn:office#getInfoRoomType'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getRulePriceInfo'>
+            <soap:operation soapAction='urn:office#getRulePriceInfo'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getRoomType'>
+            <soap:operation soapAction='urn:office#getRoomType'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='bookRoom'>
+            <soap:operation soapAction='urn:office#bookRoom'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getCountries'>
+            <soap:operation soapAction='urn:office#getCountries'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getDefaultStates'>
+            <soap:operation soapAction='urn:office#getDefaultStates'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='priceOfDate'>
+            <soap:operation soapAction='urn:office#priceOfDate'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='findRoomTypeHotel'>
+            <soap:operation soapAction='urn:office#findRoomTypeHotel'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='orderPendings'>
+            <soap:operation soapAction='urn:office#orderPendings'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getBookLatencyConfig'>
+            <soap:operation soapAction='urn:office#getBookLatencyConfig'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getRoomNumberFree'>
+            <soap:operation soapAction='urn:office#getRoomNumberFree'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getOrderCustomer'>
+            <soap:operation soapAction='urn:office#getOrderCustomer'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getInfoOrder'>
+            <soap:operation soapAction='urn:office#getInfoOrder'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation> 
+        <operation name='getFeedback'>
+            <soap:operation soapAction='urn:office#getFeedback'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation> 
+        <operation name='getAllFeedback'>
+            <soap:operation soapAction='urn:office#getAllFeedback'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>                       
+        <operation name='updateOrder'>
+            <soap:operation soapAction='urn:office#updateOrder'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='getOldOrders'>
+            <soap:operation soapAction='urn:office#getOldOrders'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='checkRoomClose'>
+            <soap:operation soapAction='urn:office#checkRoomClose'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        <operation name='sendPayment'>
+            <soap:operation soapAction='urn:office#sendPayment'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:office' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+        
+    </binding>
+    <service name='OfficeService'>
+        <port name='OfficePort' binding='OfficeBinding'>
+            <soap:address location='_URL_'/>
+        </port>
+    </service>
+</definitions>

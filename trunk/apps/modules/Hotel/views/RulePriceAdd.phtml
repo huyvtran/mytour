@@ -1,0 +1,199 @@
+<?php
+$hotel = self::get('hotel');
+$room_types = self::get('room_types');
+$currencies = self::get('currencies');
+$colum = 4;
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.add.price.rule")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+
+        <div class="form-message"></div>
+        <div class="tabs" style="border:none">
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" border="0" class="x-form">
+
+                        <tr>
+                            <td colspan="4" class="section">
+                                Thông tin chung
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" cellpadding="20"></td>
+                        </tr>                        
+
+                        <tr>
+                            <td class="c1" >
+                                <?php _e(translate('default.title') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <input name="title" type="text" style="width:250px;" class="x-text bor" value=""/>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.hotel_id') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>"> <?php _e($hotel['title']); ?></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1"><?php _e(translate('default.hotel.field.date_start')) ?>:</td>
+                            <td class="c2">
+                                <?php _e(tpl_input_date('date_start')); ?>
+                            </td>
+
+                            <td class="c1"><?php _e(translate('default.hotel.field.date_end')) ?>:</td>
+                            <td class="c2">
+                                <?php _e(tpl_input_date('date_end')); ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-form-label">
+                                <?php _e(translate('default.hotel.field.days')) ?>:
+                            </td>
+                            <td class="x-form-content" nowrap="nowrap">
+                                <?php
+                                $n = array('0', '1', '2', '3', '4', '5', '6', '7');
+                                ?>
+                                <?php for ($i = 1; $i < 7; $i++): ?>
+                                    <input name="days[]" type="checkbox" value="<?php _e($i % 7) ?>"<?php _e(in_array($i, $n) ? ' checked' : '' ) ?> />
+                                    <?php _e(translate('default.work.day' . ($i))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php endfor; ?>
+                                <input name="days[]" type="checkbox" value="0"<?php _e(in_array(0, $n) ? ' checked' : '' ) ?> />
+                                <?php _e(translate('default.work.day' . (0))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php
+                                ?>
+                            </td>
+                        </tr>
+
+                        <tr id="<?php _e($id) ?>">
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.value') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <select name="sign" class="x-select sign-rule">
+                                    <option value="+">+</option>
+                                    <option value="-">-</option>
+                                    <option value="=">=</option>
+                                </select>
+
+                                <input name="value" type="text" style="width:150px;" class="x-text bor" value=""/>
+                                <select name="currency_id" class="x-select">
+                                    <?php foreach ($currencies as $value): ?>
+                                        <option value="<?php _e($value['ID']) ?>"><?php _e($value['title']) ?></option>
+                                    <?php endforeach; ?>
+                                    <option class="percent" value="0">%</option>
+                                </select>
+                            </td>
+                            <td class="c1">
+                                Mức ưu tiên :
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_number('priority')) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td class="c1">
+                                <?php _e(translate('default.desc') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <textarea name="desc" style="width:250px" class="x-text bor" rows="6"></textarea>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="section">
+                                <?php _e(translate("default.hotel.rule.room_types")) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" cellpadding="20"></td>
+                        </tr>  
+                        <tr>
+                            <td class="c1" >
+
+                            </td>
+                            <td colspan="3">
+                                <table cellpadding="10" width ="100%">
+                                    <?php
+                                    if (isset($room_types) && count($room_types) > 0):
+                                        $row_rooms = ceil(count($room_types) / $colum);
+                                        for ($i = 0; $i < $row_rooms; $i++):
+                                            ?>
+                                            <tr width="100%">
+                                                <?php
+                                                for ($j = 0; $j < $colum; $j++):
+                                                    $a = $room_types[$i * $colum + $j];
+                                                    ?>
+                                                    <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                        <?php if (isset($a['ID'])): ?>
+                                                            <input type="checkbox" name="room_types[]" value="<?php _e($a['ID']) ?>" />
+                                                            <?php _e($a['title']); ?></br>
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                <?php endfor; ?>
+                                            </tr>
+                                            <?php
+                                        endfor;
+                                    endif;
+                                    ?>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="15%"></td>
+                            <td>
+                                <?php _e(tpl_button_add()) ?>
+                                <?php _e(tpl_button_cancel('#Hotel/RulePrice')) ?>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('#<?php _e($id) ?>').each(function(){ 
+        var elem = this;
+        $(this)
+        .find(".sign-rule")
+        .onChange(function(){ 
+            $(elem)
+            .find(".percent")
+            .set("disabled",this.value == '=');
+            if( this.value == '=' 
+                &&  $(elem).find(".percent").parent(0) != '0' ){
+                $(elem).find(".percent").parent(0).set('value', 
+                $(elem).find(".percent").pre(0).attr('value') )
+            }
+        });
+    });
+</script>

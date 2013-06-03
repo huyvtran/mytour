@@ -1,0 +1,151 @@
+<?php
+list($posts, $vars, $page, $date_from, $date_to) = self::get(array('posts', 'vars', 'page', 'date_from', 'date_to'));
+$link = '#Hotel/Close';
+$room_types = self ::get('room_types');
+$id = getId();
+$id1 = getId();
+$id2 = getId();
+$id3 = getId();
+
+$date_close = array();
+foreach ($posts as $post) {
+    $date_close[$post['date']] = $post;
+}
+?>
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" > 
+    <div class="x-list-title">
+        <table width="100%" border="0" height="100%">
+            <tr>
+                <td align="left"><h2>Danh sách đóng dịch vụ</h2></td>
+                <td align="left"> Từ ngày
+                    <input id="<?php _e($id1) ?>" type="text" name="date_from" value="<?php _e($date_from) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?room_type_id='+ $('#<?php _e($id3) ?>').get('value') +'&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; } })" class="x-text x-date" autocomplete="off">
+                    đến <input id="<?php _e($id2) ?>" type="text" name="date_to" value="<?php _e($date_to) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?room_type_id='+ $('#<?php _e($id3) ?>').get('value') +'&date_from='+$('#<?php _e($id1) ?>').get('value')+'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">                                
+                </td>
+                <td align="right">
+                    <select class="bor" name="room_type_id" id="<?php _e($id3) ?>">
+                        <?php foreach ($room_types as $key => $value): ?>
+                            <?php
+                            if ($value['ID'] == get('room_type_id')) {
+                                $selected = 'selected="selected"';
+                            } else {
+                                $selected = '';
+                            }
+                            ?>
+                            <option value="<?php _e($value['ID']) ?>" <?php _e($selected) ?> >
+                                <?php _e($value['title']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <a onclick="module_ajax('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Index','<?php _e($id); ?>',this)" class="x-button" >
+                        Cập nhật
+                    </a>
+                    <a href="#Hotel/Close?room_type_id=<?php _e(getInt('room_type_id'))?>&date_from=<?php _e(get('date_from'))?>&date_to=<?php _e(get('date_to'))?>" class="x-button x-fresh">Làm lại</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <table cellpadding="0" class="x-list" width="100%">
+        <tr>
+            <th class="k"><?php _e(translate('default.list.index')) ?></th>
+            <th witdth="30%"><?php _e('Ngày') ?></th>
+            <th><?php _e('Thứ') ?></th>
+            <th><?php _e('Đóng Allotment') ?>
+            </th>
+            <th><?php _e('Đóng Khuyến Mãi') ?></th>
+            <th><?php _e('Đóng Loại Phòng') ?></th>
+        </tr>
+        <tr>
+            <th class="k"></th>
+            <th witdth="30%"></th>
+            <th></th>
+            <th>
+                <input type="checkbox" name="checkall_allotment"/>
+            </th>
+            <th><input type="checkbox" name="checkall_campaign"/></th>
+            <th><input type="checkbox" name="checkall_room_type"/></th>
+        </tr>
+        <?php $stt = 0; ?>
+        <?php for ($i = strtotime(change_date_format($date_from)); $i <= strtotime(change_date_format($date_to)); $i = $i + 86400): ?>
+            <?php
+                $date_i = date('Y-m-d',$i);
+                if(isset($date_close[$date_i]) && !empty($date_close[$date_i])){
+                    $no_campaign = $date_close[$date_i]['no_campaign'];
+                    ($no_campaign == 1)? $check_campaign = ' checked="checked"':$check_campaign='';
+                   
+                    $no_allotment = $date_close[$date_i]['no_allotment'];
+                    ($no_allotment == 1)? $check_allotment = ' checked="checked"':$check_allotment='';
+                   
+                    $no_room_type = $date_close[$date_i]['no_room_type'];
+                    ($no_room_type == 1)? $check_room_type = ' checked="checked"':$check_room_type='';
+                }else{
+                    $check_campaign = '';
+                    $check_allotment ='';
+                    $check_room_type ='';
+                }
+               
+            ?>
+            <tr>
+                <td align="center"><?php _e($stt + 1) ?> </td> 
+                <td witdth="30%" align="center"> <?php _e(show_date(date('d-m-Y', $i))) ?> </td>
+                <td align="center"><?php _e(thu_of_date(date('d-m-Y', $i))) ?></td>
+                <td align="center">
+                    <input name="no_allotment[<?php _e($date_i) ?>]"  type="checkbox" <?php _e($check_allotment) ?> class="cbk_no_allotment"/>
+                </td>
+                <td align="center">
+                    <input name="no_campaign[<?php _e($date_i) ?>]"   type="checkbox" <?php _e($check_campaign) ?> class="cbk_no_campaign"/>
+                </td>
+                <td align="center">
+                    <input name="no_room_type[<?php _e($date_i) ?>]"  type="checkbox" <?php _e($check_room_type) ?> class="cbk_no_room_type"/>
+                </td>
+            </tr>
+            <?php $stt++; ?>
+        <?php endfor; ?>
+<!--        <tr>
+            <td colspan="10" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>-->
+    </table>
+
+</form>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('select[name="room_type_id"]').change(function(){
+            var room_type_id = jQuery(this).val();
+            if(room_type_id != 0){
+                window.location = baseURL+"/User#Hotel/Close?room_type_id="+ room_type_id + '&date_from=<?php _e($date_from) ?>&date_to=<?php _e($date_to) ?>' ;
+            }else{
+                window.location = baseURL+"/User#Hotel/Close" + '?date_from=<?php _e($date_from) ?>&date_to=<?php _e($date_to) ?>' ;
+            }
+        });
+        
+        //checkall
+        jQuery('input[name="checkall_allotment"]').change(function(){
+            if(jQuery(this).is(':checked')){
+                jQuery('.cbk_no_allotment').attr('checked',true);
+            }else{
+                jQuery('.cbk_no_allotment').attr('checked',false);
+            }
+        })
+        
+        jQuery('input[name="checkall_campaign"]').change(function(){
+            if(jQuery(this).is(':checked')){
+                jQuery('.cbk_no_campaign').attr('checked',true);
+            }else{
+                jQuery('.cbk_no_campaign').attr('checked',false);
+            }
+        })
+        
+        jQuery('input[name="checkall_room_type"]').change(function(){
+            if(jQuery(this).is(':checked')){
+                jQuery('.cbk_no_room_type').attr('checked',true);
+            }else{
+                jQuery('.cbk_no_room_type').attr('checked',false);
+            }
+        })
+    })
+</script>

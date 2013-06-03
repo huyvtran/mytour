@@ -1,0 +1,151 @@
+<?php
+    $post = self::get('post');
+    $person = self::get('person');
+?>
+<form method="post" action="<?php _e(actionUrl($this)) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" value="<?php _e($post['ID']) ?>" name="ID"/>
+    <div class="x-list-title">
+        <table width="100%" border="0" height="100%">
+            <tr>
+                <td align="left">
+                    <h2><?php _e(translate('admin.user.edit.title')) ?></h2>
+                </td>
+                <td align="right"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="x-form-container">
+        <table border="0" cellpadding="5" class="x-form" width="100%">
+            <tr class="row-message">
+                <td colspan="2">
+                    <div class="form-message"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="180" class="x-form-label">
+                    <?php _e(translate('admin.user.field.username')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('username', $post['username'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.password')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <input name="password" type="password" style="width:200px" class="x-text u-pas" value="" disabled/>
+                    &nbsp;<input name="changepass" value="yes" type="checkbox" onclick="$(this.parentNode.parentNode.parentNode).find('.u-pas').set('disabled',!this.checked)"/> <?php _e(translate('admin.user.is_change_password')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.confirm_password')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <input type="password" name="re_password" style="width:200px" class="x-text u-pas" value="" disabled/>
+                </td>
+            </tr>
+           
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.email')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('email', $post['email'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.name')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('fullname', $post['fullname'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.phone')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('phone', $post['phone'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.group')) ?>:
+                </td>
+                <td>
+                    <select name="group_id" class="x-select">
+                        <?php foreach ( self::get('groups') as $k => $v ): ?>
+                            <option value="<?php _e($v['ID']); ?>"<?php $v['ID'] == $post['group_id'] ? _e(' selected') : '' ?>><?php _e($v['title']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('admin.user.field.role')) ?>:
+                </td>
+                <td>
+                    <?php $roles = explode(',', $post['roles']); ?>
+                    <div>
+                        <div style="padding:10px 0px;color:red">
+                            <input type="hidden" name="inherit_roles" value="yes"/>
+
+                            <label for="inherit_roles">
+                                <input type="checkbox" name="inherit_roles" onclick="$(this.parentNode.parentNode.parentNode).find('table input[type=checkbox]').set('disabled',!this.checked)" value="no"<?php $post['inherit_roles'] == 'no' ? _e(' checked') : '' ?>/> Tùy chỉnh lại quyền </label>
+                        </div>
+                        <?php
+                        $id_global = getId();
+                        $id_document = getId();
+                        $array = implode(",", array('#' . $id_global, '#' . $id_document));
+                        ?>
+                        <table width="100%" style="background:#fff" border="1" bordercolor="#cccccc" cellpadding="0">
+                            <?php
+                            $proles = self::getConfig('modules.roles');
+                            $row = ceil(count($proles) / 4);
+                            $colum = 4;
+
+                            for ( $i = 0; $i < $row; $i++ ) {
+                                ?>
+                                <tr>
+                                    <?php
+                                    for ( $j = 0; $j < $colum; $j++ ) {
+                                        $a = $proles[$i * $colum + $j];
+                                        ?>	<td valign="top" width="<?php _e(ceil(100/$colum))?>%">
+                                            <table width="100%" cellpadding="5">
+                                                <tr class="role-section">
+                                                    <td align="center" height="20" width="10">
+                                                        <?php if ( $a[0] ): ?>
+                                                            <input type="checkbox" onclick="$(this).parent('table').slice(0,1).find('input[name*=roles]').set('checked',this.checked)"/>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td><?php _e($a[0]) ?></td>
+                                                </tr>
+                                                <?php foreach ( (array) $a[1] as $k ) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" name="roles[]" value="<?php _e($k) ?>" <?php in_array($k, $roles) ? _e(' checked') : '' ?><?php $post['inherit_roles'] == 'yes' ? _e(' disabled') : '' ?>/>
+                                                        </td>
+                                                        <td><?php _e(translate('default.role.' . $k)) ?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table></td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label"></td>
+                <td>
+                    <?php _e(tpl_button_add()); ?>
+                    <?php _e(tpl_button_cancel('#Admin/User')); ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

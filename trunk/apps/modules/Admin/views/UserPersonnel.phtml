@@ -1,0 +1,90 @@
+<?php $post = self::get('post'); ?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>" />
+    <div class="x-list-title">
+        <table width="100%" border="0" cellpadding="0">
+            <tr>
+                <td>
+                    <h2><?php _e(translate('personnel.import.title')) ?></h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="x-form-container">
+        <div class="desc" style="">
+            Tạo nhanh người dùng từ danh sách nhân sự, chú ý nhân sự đã có tài khoản sẽ không được tạo lại
+        </div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">
+            <tr>
+                <td class="x-form-label">Tiến trình xử lý:</td>
+                <td>
+                    <div class="form-message"><?php _e(tpl_progress(0)); ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('default.user.personnel.field.group')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <select name="group_id" class="x-select">
+                        <?php _e(select_options(Plugins::getOptions('groups'), 'title')); ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Mật khẩu mặc định:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_small('passwd')) ?> <i>Để trống nếu random</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label" width="220">
+                    Gửi email:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_checkbox('send_email', '1', null, null, null, ' _related="sms_content"')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label" width="220">
+                    <?php _e(translate('default.user.personnel.field.send_sms')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_checkbox('send_sms', '1', null, null, null, ' _related="sms_content"')) ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label" width="220">
+                    Nội dung email/sms:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_textarea('sms_content', self::get('sms_content'))) ?>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div>
+                        <h4>Tùy biến:</h4>
+                        <ul>
+                            <li>{staff_code}: Mã nhân viên</li>
+                            <li>{staff_name}: Họ tên nhân viên</li>
+                            <li>{username}: Tên đăng nhập</li>
+                            <li>{password}: Mật khẩu</li>
+                            <li>{url}: Đường dẫn office</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label"></td>
+                <td class="x-form-input">
+                    <?php _e(tpl_button_add()); ?>
+                    <?php _e(tpl_button_cancel('#Admin/User')); ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

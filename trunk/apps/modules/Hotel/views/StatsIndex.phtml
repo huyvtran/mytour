@@ -1,0 +1,413 @@
+<?php
+$post = self::get('post');
+$view = self::get('view');
+$room_type = self::get('room_type');
+        
+$date_from = self::get('date_from');
+$date_to = self::get('date_to');
+$id1 = getId();
+$id2 = getId();
+$id3 = getId();
+$id4 = getId();
+
+$mode = get('mode');
+$filter = get('filter');
+$link = 'Hotel/Stats';
+
+if (!empty($post)) {
+    
+    if ($mode == 'form') {
+        
+        $xAxis = array();
+        $data = array();
+        
+        foreach ($post as $p) {    
+            if ( $filter == 'day' ) {
+              array_push($xAxis, date('d/m/Y', strtotime($p['of_date'])));                                        
+              
+            }else
+            if ( $filter == 'month' ) {
+              array_push($xAxis, date('m/Y', strtotime($p['of_date'])));    
+              
+            }else
+            if ( $filter == 'quarter' ) {
+              array_push($xAxis, 'Quý '.$p['of_date']);    
+            }else
+            if ( $filter == 'year' ) {
+              array_push($xAxis, $p['of_date']);                                                                    
+            }
+
+            array_push($data, (int) $p['number_of_form']);
+        }               
+        
+        if ( $filter == 'day' ) {            
+          $title = 'Thống kê số lượng đơn theo ngày';
+          $subtitle =  'từ ngày ' . get('date_from') . ' - ' . get('date_to');
+          
+        }else
+        if ( $filter == 'month' ) {
+          $title = 'Thống kê số lượng đơn theo tháng';
+          $subtitle =  'từ tháng ' . get('date_from') . ' - ' . get('date_to');    
+          
+        }else
+        if ( $filter == 'quarter' ) {
+          $title = 'Thống kê số lượng đơn theo quý';
+          $subtitle =  'từ quý ' . get('date_from') . ' - ' . get('date_to') . ' năm ' . get('year');
+          
+        }else
+        if ( $filter == 'year' ) {
+          $title = 'Thống kê số lượng đơn theo năm';                                                                  
+          $subtitle =  'từ năm ' . get('date_from') . ' - ' . get('date_to');
+        }  
+        
+        $name = self::get('name'); 
+        $xAxis = json_encode($xAxis);
+        $data = json_encode($data);       
+        
+    } else
+    if ($mode == 'gender') {
+        
+        $total_gender = count($post);
+        $total_male = 0;
+        $total_female = 0;
+
+        foreach ($post as $a) {
+            if ($a['gender'] == 0) {
+                $total_male += 1;
+            } else {
+                $total_female +=1;
+            }
+        }
+
+        $per_male = round(($total_male / $total_gender) * 100, 2);
+        $per_female = round(($total_female / $total_gender) * 100, 2);
+
+        if ( $filter == 'day' ) {            
+          $title = 'Thống kê tỷ lệ giới tính theo ngày';
+          $subtitle =  'từ ngày ' . get('date_from') . ' - ' . get('date_to');
+          
+        }else
+        if ( $filter == 'month' ) {
+          $title = 'Thống kê tỷ lệ giới tính theo tháng';
+          $subtitle =  'từ tháng ' . get('date_from') . ' - ' . get('date_to');    
+          
+        }else
+        if ( $filter == 'quarter' ) {
+          $title = 'Thống kê tỷ lệ giới tính theo quý';
+          $subtitle =  'từ quý ' . get('date_from') . ' - ' . get('date_to') . ' năm ' . get('year');
+          
+        }else
+        if ( $filter == 'year' ) {
+          $title = 'Thống kê tỷ lệ giới tính theo năm';                                                                  
+          $subtitle =  'từ năm ' . get('date_from') . ' - ' . get('date_to');
+        }               
+        
+        $per = array(
+            0 => array('Nữ : ' . $total_female, $per_female),
+            1 => array('Nam : ' . $total_male, $per_male)
+        );
+
+        $per = json_encode($per);
+        
+    }else
+    if ($mode == 'age') {
+        $total_age = count($post);
+        $total_lv1 = 0;
+        $total_lv2 = 0;
+        $total_lv3 = 0;
+        
+        foreach ($post as $a) {
+            if ($a['age'] > 0 && $a['age'] < 18) {
+                $total_lv1 += 1;
+            }else
+            if ($a['age'] > 18 && $a['age'] < 35){
+                $total_lv2 += 1;
+            }else{
+                $total_lv3 += 1;
+            }
+        }
+         
+        $per_lv1 = round(($total_lv1 / $total_age) * 100, 2);
+        $per_lv2 = round(($total_lv2 / $total_age) * 100, 2);        
+        $per_lv3 = round(($total_lv3 / $total_age) * 100, 2);        
+
+        if ( $filter == 'day' ) {            
+          $title = 'Thống kê độ tuổi theo ngày';
+          $subtitle =  'từ ngày ' . get('date_from') . ' - ' . get('date_to');
+          
+        }else
+        if ( $filter == 'month' ) {
+          $title = 'Thống kê độ tuổi theo tháng';
+          $subtitle =  'từ tháng ' . get('date_from') . ' - ' . get('date_to');    
+          
+        }else
+        if ( $filter == 'quarter' ) {
+          $title = 'Thống kê độ tuổi theo quý';
+          $subtitle =  'từ quý ' . get('date_from') . ' - ' . get('date_to') . ' năm ' . get('year');
+          
+        }else
+        if ( $filter == 'year' ) {
+          $title = 'Thống kê độ tuổi theo năm';                                                                  
+          $subtitle =  'từ năm ' . get('date_from') . ' - ' . get('date_to');
+        }          
+        
+        $per = array(
+            0 => array('Tuổi dưới 18 : ' . $total_lv1, $per_lv1),
+            1 => array('Tuổi trên 18 và dưới 35 : ' . $total_lv2, $per_lv2),
+            2 => array('Tuổi trên 35 : ' . $total_lv3, $per_lv3)
+        );
+
+        $per = json_encode($per);        
+        
+    }else
+    if ($mode == 'children') {
+
+        $xAxis = array();
+        $xData = array();
+        
+        if (!empty($post)) {
+            foreach ($post as $a) {
+                
+            if ( $filter == 'day' ) {
+              array_push($xAxis, date('d/m/Y', strtotime($a['of_date'])));                                        
+              
+            }else
+            if ( $filter == 'month' ) {
+              array_push($xAxis, date('m/Y', strtotime($a['of_date'])));    
+              
+            }else
+            if ( $filter == 'quarter' ) {
+              array_push($xAxis, 'Quý '.$a['of_date']);    
+            }else
+            if ( $filter == 'year' ) {
+              array_push($xAxis, date('Y', strtotime($a['of_date'])));                                                                    
+            }                
+            
+            array_push($xData, (int)$a['total']);
+//                $date = date('d/m/Y', strtotime($a['of_date']));
+//                array_push($xAxis, $date);
+//                unset($date);
+            }
+        }
+
+        if ( $filter == 'day' ) {            
+          $title = 'Thống kê trẻ em theo ngày';
+          $subtitle =  'từ ngày ' . get('date_from') . ' - ' . get('date_to');
+          
+        }else
+        if ( $filter == 'month' ) {
+          $title = 'Thống kê trẻ em theo tháng';
+          $subtitle =  'từ tháng ' . get('date_from') . ' - ' . get('date_to');    
+          
+        }else
+        if ( $filter == 'quarter' ) {
+          $title = 'Thống kê trẻ em theo quý';
+          $subtitle =  'từ quý ' . get('date_from') . ' - ' . get('date_to') . ' năm ' . get('year');
+          
+        }else
+        if ( $filter == 'year' ) {
+          $title = 'Thống kê trẻ em theo năm';                                                                  
+          $subtitle =  'từ năm ' . get('date_from') . ' - ' . get('date_to');
+        }             
+        
+        $name = self::get('name');       
+        $xAxis = json_encode($xAxis);
+        $xData = json_encode($xData);        
+
+    }else
+    if ($mode == 'bpv') {
+        
+        $room_title = self::get('room_title');
+        $total_post = count($post);
+        $total_view = count($view);
+        $total_bpv = $total_post + $total_view;
+        
+        $per_post = round(($total_post / $total_bpv) * 100, 2);        
+        $per_view = round(($total_view / $total_bpv) * 100, 2);        
+
+        if ( $filter == 'day' ) {            
+          $title = 'Thống kê tỷ lệ đăt / xem theo ngày của ' . $room_title;
+          $subtitle =  'từ ngày ' . get('date_from') . ' - ' . get('date_to');
+          
+        }else
+        if ( $filter == 'month' ) {
+          $title = 'Thống kê tỷ lệ đăt / xem theo tháng của ' . $room_title;
+          $subtitle =  'từ tháng ' . get('date_from') . ' - ' . get('date_to');    
+          
+        }else
+        if ( $filter == 'quarter' ) {
+          $title = 'Thống kê tỷ lệ đăt / xem theo quý của ' . $room_title;
+          $subtitle =  'từ quý ' . get('date_from') . ' - ' . get('date_to') . ' năm ' . get('year');
+          
+        }else
+        if ( $filter == 'year' ) {
+          $title = 'TThống kê tỷ lệ đăt / xem theo năm của ' . $room_title;                                                                  
+          $subtitle =  'từ năm ' . get('date_from') . ' - ' . get('date_to');
+        }        
+        
+        $per = array(
+            0 => array('Tỷ lệ đặt : ' . $total_post, $per_post),
+            1 => array('Tỷ lệ xem : ' . $total_view, $per_view)
+        );
+
+        $per = json_encode($per);  
+        
+    }
+}
+?>
+
+<script type="text/javascript">
+        
+<?php if ($mode == 'form') : ?> 
+        lineChart('formChart', '<?php _e($title) ?>', '<?php _e($subtitle) ?>', <?php _e($xAxis) ?>, <?php _e($data) ?>, '<?php _e($name) ?>');           
+<?php endif; ?>
+    
+<?php if ($mode == 'gender') : ?>
+        pieChart('genderChart', '<?php _e($title) ?>', '<?php _e($subtitle) ?>', <?php _e($per) ?>);
+<?php endif; ?>    
+    
+<?php if($mode == 'age') : ?>
+        pieChart('ageChart', '<?php _e($title) ?>', '<?php _e($subtitle) ?>',<?php _e($per) ?>);
+<?php endif; ?>
+    
+<?php if($mode == 'children') : ?>
+        lineChart('childrenChart', '<?php _e($title) ?>', '<?php _e($subtitle) ?>', <?php _e($xAxis) ?>, <?php _e($xData) ?>, '<?php _e($name) ?>');
+<?php endif; ?>
+    
+<?php if($mode == 'bpv') : ?>
+        pieChart('bpvChart', '<?php _e($title) ?>', '<?php _e($subtitle) ?>', <?php _e($per) ?>);
+<?php endif; ?>
+    
+</script>       
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e('Thống kê') ?>
+                    
+                    <?php if ( $filter == 'day' ) : ?>
+                    
+                        <?php if( $mode == 'bpv' ) : ?>
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e($date_from) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=day&date_from='+this.value + '&date_to=' + $('#<?php _e($id2) ?>').get('value') + '&room_type=' + <?php _e(get('room_type')) ?> ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e($date_to) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=day&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value + '&room_type=' + <?php _e(get('room_type')) ?> ; } })" class="x-text x-date" autocomplete="off">                    
+                        
+                        <?php else : ?>                                                
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e($date_from) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=day&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e($date_to) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=day&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">
+                        <?php endif; ?>
+                        
+                    <?php endif; ?>
+                        
+                    <?php if ( $filter == 'month' ) : ?>                        
+                        
+                        <?php if( $mode == 'bpv' ) : ?>
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e(get('date_from', date('m/Y'))) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'm/Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=month&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') + '&room_type=' + <?php _e(get('room_type')) ?>  ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e(get('date_to', date('m/Y'))) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'm/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=month&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value + '&room_type=' + <?php _e(get('room_type')) ?>  ; } })" class="x-text x-date" autocomplete="off">                        
+                        
+                        <?php else : ?>
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e(get('date_from')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'm/Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=month&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e(get('date_to')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'm/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=month&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">                        
+                        <?php endif ; ?>
+
+                    <?php endif; ?>
+                        
+                    <?php if ($filter == 'quarter') : ?>   
+                        
+                        từ quý
+                        <?php if ( $mode == 'bpv' ) : ?>
+                        <select class="bor" name="date" id="<?php _e($id1) ?>" onchange=" location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&date_from=' + this.value + '&date_to=' + $('#<?php _e($id2) ?>').get('value') + '&year=' + <?php _e(get('year')) ?> + '&room_type=' + <?php _e(get('room_type')) ?> ; ">                        
+                        <?php else : ?>
+                        <select class="bor" name="date" id="<?php _e($id1) ?>" onchange=" location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&date_from=' + this.value + '&date_to=' + $('#<?php _e($id2) ?>').get('value') + '&year=' + <?php _e(get('year')) ?> ; ">                        
+                        <?php endif ; ?>                        
+                            <?php for ($i = 1; $i <= 4 ; $i++): ?>
+                            <option value="<?php _e($i) ?>" <?php _e(get('date_from') == $i ? 'selected' : '') ?>><?php _e('Quý ' . $i) ?></option>
+                            <?php endfor; ?>                            
+                        </select>  
+                            
+                        đến quý
+                        <?php if ( $mode == 'bpv' ) : ?>
+                        <select class="bor" name="date" id="<?php _e($id2) ?>" onchange=" location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&date_from=' + $('#<?php _e($id1) ?>').get('value') + '&date_to=' + this.value + '&year=' + <?php _e(get('year')) ?> + '&room_type=' + <?php _e(get('room_type')) ?> ; ">
+                        <?php else : ?>                        
+                        <select class="bor" name="date" id="<?php _e($id2) ?>" onchange=" location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&date_from=' + $('#<?php _e($id1) ?>').get('value') + '&date_to=' + this.value + '&year=' + <?php _e(get('year')) ?> ; ">
+                        <?php endif ; ?>                              
+                            <?php for ($i = 1; $i <= 4 ; $i++): ?>
+                            <option value="<?php _e($i) ?>" <?php _e(get('date_to') == $i ? 'selected' : '') ?>><?php _e('Quý ' . $i) ?></option>
+                            <?php endfor; ?>                            
+                        </select>  
+                            
+                        của năm
+                        <?php if ( $mode == 'bpv' ) : ?>
+                        <input id="<?php _e($id3) ?>" type="text" name="date" value="<?php _e(get('year')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&q_from='+$('#<?php _e($id1) ?>').get('value') +'&q_to='+$('#<?php _e($id2) ?>').get('value') + '&year=' + this.value + '&room_type=' + <?php _e(get('room_type')) ?> ; }})" class="x-text x-date" autocomplete="off">
+                        <?php else : ?>                        
+                        <input id="<?php _e($id3) ?>" type="text" name="date" value="<?php _e(get('year')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=quarter&q_from='+$('#<?php _e($id1) ?>').get('value') +'&q_to='+$('#<?php _e($id2) ?>').get('value') + '&year=' + this.value ; }})" class="x-text x-date" autocomplete="off">
+                        <?php endif ; ?>                          
+
+                    <?php endif; ?>       
+                        
+                    <?php if ($filter == 'year') : ?>   
+                        
+                        <?php if($mode == 'bpv') : ?>
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e(get('date_from')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=year&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') + '&room_type=' + <?php _e(get('room_type')) ?> ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e(get('date_to')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=year&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value + '&room_type=' + <?php _e(get('room_type')) ?> ; } })" class="x-text x-date" autocomplete="off">                        
+                        
+                        <?php else : ?>
+                        từ <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e(get('date_from')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y', onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=year&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; }})" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e(get('date_to')) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'Y',onChange: function(){ location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=year&date_from='+$('#<?php _e($id1) ?>').get('value') +'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">                        
+                        <?php endif ; ?>
+
+                    <?php endif; ?>    
+                        
+                    <?php if ($mode == 'bpv') : ?>                              
+                        theo
+                        <?php if ($filter == 'quarter'): ?>
+                        <select class="bor" name="room_type" id="<?php _e($id4) ?>" onchange="location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=<?php _e(get('filter')) ?>&date_from=' + $('#<?php _e($id1) ?>').get('value') + '&date_to=' + $('#<?php _e($id2) ?>').get('value') + '&year=' + <?php _e(get('year')) ?> + '&room_type=' + this.value ; ">
+                        <?php else: ?>
+                        <select class="bor" name="room_type" id="<?php _e($id4) ?>" onchange="location.hash = '<?php _e($link) ?>?mode=<?php _e($mode) ?>&filter=<?php _e(get('filter')) ?>&date_from=' + $('#<?php _e($id1) ?>').get('value') + '&date_to=' + $('#<?php _e($id2) ?>').get('value') + '&room_type=' + this.value ; ">
+                        <?php endif; ?>
+                        
+                            <option value="0" <?php _e((get('room_type') == 0) ? 'selected' : '') ?>>Tất cả loại phòng</option>
+                            <?php foreach ($room_type as $v) : ?>                            
+                            <option value="<?php _e($v['ID']) ?>" <?php _e((get('room_type') == $v['ID']) ? 'selected' : '') ?>>
+                                <?php _e($v['title']) ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>                       
+                    <?php endif; ?>    
+
+                </h2>
+            </td>            
+            <td align="right">
+                <?php
+                _e(tpl_button_options('Thống kê theo ', array(
+                            array('Ngày', baseUrl() . '/User#Hotel/Stats?mode=' . $mode . '&filter=day' . '&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)).(get('mode') == 'bpv' ? '&room_type=' . get('room_type') : '')),
+                            array('Tháng', baseUrl() . '/User#Hotel/Stats?mode=' . $mode . '&filter=month' . '&date_from=' . date('01/Y', time()) . '&date_to=' . date('m/Y', (time() + 86400 * 30 * 10)).(get('mode') == 'bpv' ? '&room_type=' . get('room_type') : '')),
+                            array('Quý', baseUrl() . '/User#Hotel/Stats?mode=' . $mode . '&filter=quarter' . '&date_from=1&date_to=4&year=' .date('Y', time()).(get('mode') == 'bpv' ? '&room_type=' . get('room_type') : '')) ,
+                            array('Năm', baseUrl() . '/User#Hotel/Stats?mode=' . $mode . '&filter=year' . '&date_from=' . date('Y', (time() - 525600*60)) . '&date_to=' . date('Y', time()).(get('mode') == 'bpv' ? '&room_type=' . get('room_type') : ''))
+                        )));
+                ?>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br>
+<br>
+<?php if ($mode == 'gender') : ?>
+    <div id="genderChart" style="min-width: 400px; height: 400px; padding: 10px"></div>
+<?php endif; ?>
+
+<?php if ($mode == 'form') : ?>
+    <div id="formChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<?php endif; ?>
+
+<?php if ($mode == 'age') : ?>    
+    <div id="ageChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<?php endif; ?>
+    
+<?php if ($mode == 'children') : ?>    
+    <div id="childrenChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<?php endif; ?>
+    
+<?php if ($mode == 'bpv') : ?>    
+    <div id="bpvChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<?php endif; ?>

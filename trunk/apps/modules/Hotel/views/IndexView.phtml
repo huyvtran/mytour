@@ -1,0 +1,429 @@
+<?php
+$post = self::get('post');
+$type_id = self::get('type_id');
+$colum = 4;
+$activity_types = self::get('activity_types');
+$facility_types = self::get('facility_types');
+$service_types = self::get('service_types');
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.view.hotel")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <a href="#Hotel/Index/Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                        Chỉnh Sửa
+                    </a>
+                    <?php _e(tpl_button_cancel('#Hotel')) ?>     
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="tab-container" style="overflow: true;margin-top:-2px">
+    <div class="tab-bar">
+        <a class="tab-link tab-link-first<?php if (!in_array(get('tab', ''), array('info-hotel', 'info-common', 'images'))) _e(' tab-link-active'); ?>" onclick="do_tab(this,1)"><?php _e('Thông tin chung') ?></a>
+
+        <a class="tab-link<?php if (get('tab', '') == 'info-common') _e(' tab-link-active'); ?>" onclick="do_tab(this,2)"><?php _e('Bổ sung') ?></a>
+
+        <a class="tab-link<?php if (get('tab', '') == 'images') _e(' tab-link-active'); ?>" onclick="do_tab(this,3)"><?php _e('Hình ảnh') ?></a>            
+
+        <span class="clear"></span>
+    </div>
+    <div class="form-message"></div>
+    <div class="tabs">
+        <!-- GENERAL -->
+        <div class="tab tab-active" >
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-info">
+                    <tr>
+                        <td rowspan="21" align="center" width="200" valign="top">
+                            <img src="<?php _e(baseUrl()) ?>/files/<?php if (!$post['img']): ?>photo/noavatar.gif<?php else : ?>/hotel/<?php _e($post['img']); ?><?php endif; ?>" style="max-width:120px" class="personnel-photo"/>
+                            <div style="padding:3px;font-weight:bold;font-size:12pt"><?php _e($post['code']) ?></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.title')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['title']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.type_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['type_title']); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.start')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['star']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone']) ?>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone1')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone1']) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone2')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone2']) ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.email')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['email']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.address')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['address']) ?>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.country_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['country_title']); ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.state_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['state_title']); ?>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="x-info-label">
+                            Quận / Huyện : 
+                        </td>
+                        <td class="x-info-content">
+                             <?php _e($post['district_title']); ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.website')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['website']) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.fax')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['fax']) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.checkin_time')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e(date('H:i', strtotime($post['checkin_time']))); ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.checkout_time')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e(date('H:i', strtotime($post['checkout_time']))); ?>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.status')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php ($post['is_active'] == 0) ? _e(translate('default.hotel.noactive')) : _e(translate('default.hotel.active')) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.floor')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['floor']) ?>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.desc')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['desc']) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="c1">Bản đồ :</td>
+                        <td class="c2" colspan="3">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p align="left">
+                                                    <table  bgcolor="#FFFFCC" width="300">
+                                                        <tr>
+                                                            <td><b>Kinh độ</b></td>
+                                                            <td><b>Vĩ độ</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="lat"></td>
+                                                            <td id="lng"></td>
+                                                        </tr>
+                                                    </table>
+                                                    </p>
+                                                    <div align="center" id="map" style="width: 400px; height: 300px"><br/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- ACTIVITIES -->
+                    <tr class="c1">
+                        <td>
+                            <?php _e(translate("default.hotel.activities")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+
+                                <?php
+                                $row_activities = ceil(count(self::get('activity_types')) / $colum);
+                                for ($i = 0; $i < $row_activities; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $activity_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="activities[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> disabled />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FACILITIES -->
+                    <tr>
+                        <td>
+                            <?php _e(translate("default.hotel.facilities")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+                                <?php
+                                $row_facilities = ceil(count($facility_types) / $colum);
+                                for ($i = 0; $i < $row_facilities; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $facility_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="facilities[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> disabled />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- SERVICES -->
+                    <tr>
+                        <td>
+                            <?php _e(translate("default.hotel.services")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+
+                                <?php
+                                $row_services = ceil(count($service_types) / $colum);
+                                for ($i = 0; $i < $row_services; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $service_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="services[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> disabled />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <!-- COMMON INFOMATION -->
+        <div class="tab<?php if (get('tab', '') == 'info-common') _e(' tab-active'); ?>" style="min-height:200px">
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-form">               
+                    <tr>
+                        <td class="c1"><?php _e('Có đưa đón sân bay') ?></td>
+                        <td><?php _e($post['airport_transfer'] == 1 ? 'Có' : 'Không') ?></td>
+
+                        <td class="c1"><?php _e('Phí đưa đón sân bay') ?></td>
+                        <td><?php _e(show_money($post['airport_transfer_fee']) . ' ' . self::get('airport_transfer_fee_currency_id')) ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Phí ăn sáng') ?></td>
+                        <td><?php _e(show_money($post['breakfast_charge']) . ' ' . self::get('breakfast_charge_currency_id')) ?></td>
+
+                        <td class="c1"><?php _e('Trả phòng') ?></td>
+                        <td><?php _e($post['check_out']) ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Khoảng cách từ trung tâm thành phố') ?></td>
+                        <td><?php _e($post['distance_from_city_center']) ?> KM</td>
+
+                        <td class="c1"><?php _e('Khoảng cách tới sân bay') ?></td>
+                        <td><?php _e($post['distance_to_airport']) ?> KM</td>
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Thời gian nhận phòng sớm nhất') ?></td>
+                        <td><?php _e($post['earliest_check_in']) ?></td>
+
+                        <td class="c1"><?php _e('Thang máy') ?></td>
+                        <td><?php _e($post['elevator'] == 1 ? 'Có' : 'Không') ?></td>
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Phí sử dụng Internet') ?></td>
+                        <td><?php _e(show_money($post['internet_usage_fee']) . ' ' . self::get('internet_usage_currency_id')) ?></td>
+
+                        <td class="c1"><?php _e('Phòng/Tầng không hút thuốc') ?></td>
+                        <td><?php _e($post['non_smoking'] == 1 ? 'Có' : 'Không') ?></td>
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Số quầy bar') ?></td>
+                        <td><?php _e($post['number_of_bars']) ?></td>
+
+                        <td class="c1"><?php _e('Số lượng nhà hàng') ?></td>
+                        <td><?php _e($post['number_of_restaurants']) ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Số lượng phòng') ?></td>
+                        <td><?php _e($post['number_of_rooms']) ?></td>
+
+                        <td class="c1"><?php _e('Có chỗ đậu xe') ?></td>
+                        <td><?php _e($post['parking'] == 1 ? 'Có' : 'Không') ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Phí đỗ xe (mỗi ngày)') ?></td>
+                        <td><?php _e(show_money($post['parking_fee']) . ' ' . self::get('parking_fee_currency_id')) ?></td>
+
+                        <td class="c1"><?php _e('Tiếp tân mở cửa đến') ?></td>
+                        <td><?php _e($post['reception_open_until']) ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Dịch vụ phòng (Có, Không, 24h)') ?></td>
+                        <td><?php
+                                if ($post['room_service'] == 2) {
+                                    _e('24h');
+                                } else
+                                if ($post['room_service'] == 1) {
+                                    _e('Có');
+                                } else {
+                                    _e('Không');
+                                }
+                                ?>
+                        </td>
+
+                        <td class="c1"><?php _e('Điện áp trong phòng') ?></td>
+                        <td><?php _e($post['room_voltage']) ?></td>                        
+                    </tr>
+                    <tr>
+                        <td class="c1"><?php _e('Năm xây dựng khách sạn') ?></td>
+                        <td><?php _e(show_date($post['year_hotel_built'])) ?></td>
+
+                        <td class="c1"><?php _e('Năm nâng cấp khách sạn') ?></td>
+                        <td><?php _e(show_date($post['year_hotel_last_renovated'])) ?></td>                        
+                    </tr>              
+                </table>  
+            </div>
+        </div>
+
+        <!-- IMAGES -->
+        <div class="tab<?php if (get('tab', '') == 'images') _e(' tab-active'); ?>" style="min-height:200px">            
+            <div class="x-form-container">
+                <?php $a = array(); ?>
+                <?php foreach (self::get('files') as $f) : ?>
+                    <?php show_thumb($f, baseUrl() . "/Hotel/Index/File?ID={$f['ID']}"); ?>                     
+                <?php endforeach; ?>                
+            </div>
+        </div>        
+
+    </div>
+
+</div>
+</div>
+
+<?php
+(empty($post['lat'])) ? $lat = 21.012226 : $lat = $post['lat'];
+(empty($post['lng'])) ? $lng = 105.847861 : $lng = $post['lng'];
+?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var lat = "<?php _e($lat) ?>";
+        var lng = "<?php _e($lng) ?>";
+        load_google_map_view(lat,lng);
+    });
+</script>

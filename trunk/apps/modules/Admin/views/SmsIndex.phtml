@@ -1,0 +1,111 @@
+<?php $id = getId(); ?>
+<form action="<?php _e(baseUrl()) ?>/crm/Act/delete" method="post" id="f<?php _e($id); ?>">
+    <div class="x-list-title">
+        <table width="100%" border="0" height="100%">
+            <tr>
+                <td align="left">
+                    <h2>
+                        Thống kê tin nhắn SMS
+                    </h2>
+                </td>
+                <td align="right">
+                    <div class="x-list-options">
+                        <?php _e(tpl_search_form(baseUrl() . "/Crm/Customer/Search", "#Admin/Sms/Search")); ?>
+
+                        <div class="x-options-container">
+                            <a class="x-button">Xem phân hệ <span class="x-tri">&#9660;</span></a>
+                            <div class="x-options">
+                                <a class="x-options-item" href="#Admin/Sms?mode=task">Công việc</a>
+                                <a class="x-options-item" href="#Admin/Sms?mode=project">Dự án</a>
+                                <a class="x-options-item" href="#Admin/Sms?mode=crm_customer">Crm công ty</a>
+                                <a class="x-options-item" href="#Admin/Sms?mode=crm_contact">Crm liên hệ</a>
+                                <a class="x-options-item" href="#Admin/Sms?mode=calendar">Lịch công ty</a>
+                                <a class="x-options-item" href="#Admin/Sms?mode=personnel">Nhân sự</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <?php $vars = self::get('vars'); ?>
+    <table width="100%" cellpadding="0" cellspacing="0" class="x-list" >
+        <tr>
+            <th class="k">
+                <?php show_order_link('ID', 'ID', '#Admin/Sms', $vars); ?>
+            </th>
+            <th width="112">
+                <?php show_order_link('Ngày', 'date', '#Admin/Sms', $vars); ?>
+            </th>
+            <th width="90">
+                <?php show_order_link('Tới', 'address', '#Admin/Sms', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link('Nội dung', 'content', '#Admin/Sms', $vars); ?>
+            </th>
+            <th width="80">
+                <?php show_order_link('Trạng thái', 'status', '#Admin/Sms', $vars); ?>
+            </th>
+            <th width="100">
+                <?php show_order_link('Phân hệ', 'mode', '#Admin/Sms', $vars); ?>
+            </th>
+            <th width="100">
+                <?php show_order_link('Người gửi', 'user_id', '#Admin/Sms', $vars); ?>
+            </th>
+        </tr>
+        <?php if ( count(self::get('posts')) == 0 ) : ?>
+            <tr>
+                <td class="page" colspan="7">
+                    <div class='x-page'>Chưa có bản ghi nào được tạo</div>
+                </td>
+            </tr>
+        <?php else : ?>
+            <?php foreach ( self::get('posts') as $k => $a ) : ?>
+                <tr>
+                    <td align="center" width="50">
+                        <?php _e($a['ID']); ?>
+                    </td>
+                    <td>
+                        <?php _e(show_date('d/mY H:i:s', $a['date_send'])); ?>
+                    </td>
+                    <td>
+                        <?php _e($a['address']); ?>
+                    </td>
+                    <td>
+                        <?php _e(get_quote($a['content'], 40)); ?>
+                    </td>
+
+                    <td align="center">
+                        <?php _e($a['result_send']); ?>
+                    </td>
+
+                    <td align="center">
+                        <?php
+                        $modes = array(
+                            task => 'Công việc',
+                            project => 'Dự án',
+                            calendar => 'Lịch',
+                            crm_customer => 'Liên hệ'
+                        );
+
+                        _e($modes[$a['mode']]);
+                        ?>
+                    </td>
+                    <td align="center">
+                        <?php _e(get_user_link($a['user_id'], $a['username'], $a['is_deleted'])); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td colspan="7" class="page">
+                    <div class="x-page">
+                        <?php self::e('page'); ?>
+                    </div>
+                </td>
+            </tr>
+        <?php endif; ?>
+
+    </table>
+</form>

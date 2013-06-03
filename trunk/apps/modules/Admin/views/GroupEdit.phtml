@@ -1,0 +1,75 @@
+<?php $post = self::get('post'); ?>
+<form method="post" action="<?php _e(actionUrl($this)) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>"/>
+    <div class="x-list-title">
+        <table height="100%" width="100%" border="0" cellpadding="0">
+            <tr><td>
+                    <h2><?php _e(translate('default.group.edit.title')) ?></h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="x-form-container">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">
+            <tr>
+                <td class="x-form-label" width="220">
+                    <?php _e(translate('default.group.field.title')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('title', $post['title'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('default.group.field.roles')) ?>:
+                </td>
+                <td class="x-form-input">
+                    <?php $roles = explode(',', $post['roles']); ?>
+                    <table width="100%" style="background:#fff" border="1" bordercolor="#cccccc" cellpadding="0">
+                        <?php
+                        $proles = self::getConfig('modules.roles');
+                        $row = ceil(count($proles) / 4);
+                        $colum = 4;
+
+                        for ( $i = 0; $i < $row; $i++ ) {
+                            ?>
+                            <tr>
+                                <?php
+                                for ( $j = 0; $j < $colum; $j++ ) {
+                                    $a = $proles[$i * $colum + $j];
+                                    ?>	<td valign="top" width="<?php _e(ceil(100/$colum))?>%">
+                                        <table width="100%" cellpadding="5">
+                                            <tr class="role-section">
+                                                <td align="center" height="20" width="10">
+                                                    <?php if ( $a[0] ): ?>
+                                                        <input type="checkbox" onclick="$(this).parent('table').slice(0,1).find('input[name*=roles]').set('checked',this.checked)"/>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?php _e($a[0]) ?></td>
+                                            </tr>
+                                            <?php foreach ( (array) $a[1] as $k ) { ?>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="roles[]" value="<?php _e($k) ?>" <?php in_array($k, $roles) ? _e(' checked') : '' ?><?php $post['inherit_roles'] == 'yes' ? _e(' disabled') : '' ?>/>
+                                                    </td>
+                                                    <td><?php _e(translate('default.role.' . $k)) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table></td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label"></td>
+                <td class="x-form-input">
+                    <?php _e(tpl_button_add()); ?>
+                    <?php _e(tpl_button_cancel('#Admin/Group')); ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

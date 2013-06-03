@@ -1,0 +1,26 @@
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+<div class="x-form-container" style="overflow: true;">
+<div class="form-message"></div>
+<table width="100%" border="0" cellpadding="5" class="x-form">    
+	<tr>
+            <td class="x-form-label">Hình thức đặt phòng :</td>
+            <td class="x-form-content">
+		<input name="title" type="text" style="width:250px;" class="x-text" value=""/>
+            </td>
+	</tr>
+        
+	<tr>	
+            <td class="x-form-label" valign="top"><?php _e(translate('default.desc').':') ?></td>
+            <td class="x-form-content">
+			<textarea name="desc" style="width:250px" class="x-text" rows="6"></textarea>
+            </td>
+	</tr>        
+	<tr>
+		<td align="center" colspan="2">
+			<?php _e(tpl_button_add()) ?>
+			<a onclick="remove_frame(this)" class="x-button x-fresh">Hủy bỏ</a>
+		</td>
+	</tr>
+</table>
+</div>
+</form>

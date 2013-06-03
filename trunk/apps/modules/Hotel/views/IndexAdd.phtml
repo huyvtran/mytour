@@ -1,0 +1,550 @@
+<?php
+$post = self::get('post');
+list($activity_types, $facility_types, $service_types)
+        = self::get(array('activity_types', 'facility_types', 'service_types'));
+$colum = 4;
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.add.hotel")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+        <div class="tab-bar">
+            <a class="tab-link tab-link-first<?php if (!in_array(get('tab', ''), array('info-hotel', 'info-common', 'images'))) _e(' tab-link-active'); ?>" onclick="do_tab(this,1)"><?php _e('Thông tin chung') ?></a>
+
+            <a class="tab-link<?php if (get('tab', '') == 'info-common') _e(' tab-link-active'); ?>" onclick="do_tab(this,2)"><?php _e('Bổ sung') ?></a>
+
+            <a class="tab-link<?php if (get('tab', '') == 'images') _e(' tab-link-active'); ?>" onclick="do_tab(this,3)"><?php _e('Hình ảnh') ?></a>            
+
+            <span class="clear"></span>
+        </div>        
+        <div class="form-message"></div>
+        <div class="tabs">
+
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.title')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e($post['title'])?>" name="title" class="x-text x-normal-text bor"/>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.type_id')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select name="type_id" class="x-select bor" style="width:258px">                   
+                                    <?php _e(select_options(self::get('type_id'), 'title')); ?>	
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.start')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select name="star" class="x-select bor">
+                                    <option value="0"  <?php $post['star'] == '0' ? _e('selected="selected"') : "" ?>></option>
+                                    <option value="1" <?php $post['star'] == '1' ? _e('selected="selected"') : "" ?>>1 sao</option>
+                                    <option value="2" <?php $post['star'] == '2' ? _e('selected="selected"') : "" ?>>2 sao</option>
+                                    <option value="3" <?php $post['star'] == '3' ? _e('selected="selected"') : "" ?>>3 sao</option>
+                                    <option value="4" <?php $post['star'] == '4' ? _e('selected="selected"') : "" ?>>4 sao</option>
+                                    <option value="5" <?php $post['star'] == '5' ? _e('selected="selected"') : "" ?>>5 sao</option>
+                                </select>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.phone')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e(self::get('phone', $post['phone']))?>" name="phone" class="x-text x-normal-text bor"/>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.phone1')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e(self::get('phone1', $post['phone1']))?>" name="phone1" class="x-text x-normal-text bor"/>
+                                
+                            </td>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.phone2')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e(self::get('phone2', $post['phone2']))?>" name="phone2" class="x-text x-normal-text bor"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.email')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e($post['email'])?>" name="email" class="x-text x-normal-text bor"/>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.address')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e($post['address'])?>" name="address" class="x-text x-normal-text bor"/>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.location_id')); ?>:
+                            </td>
+                            <td  class="x-form-input">
+                                <div>
+                                    <select name="country_id" onchange="hotel_load_state(this)" class="x-select bor" style="width:258px">
+                                        <?php _e(select_options(Plugins::getCountries(), 'title', isset($post['country_id']) ? $post['country_id'] : 0 )); ?>
+                                    </select><br>
+
+                                    <select dt="state" name="state_id" onchange="hotel_load_district(this)" class="x-select bor" style="width:130px">
+                                        <option>Tỉnh thành</option>
+                                    </select><br>
+
+                                    <select dt="district" style="min-width:280px" name="district_id" class="x-select bor">
+                                        <option>Quận huyện</option>
+                                    </select>                                  
+                                </div>
+                            </td>
+
+                        </tr>
+<!--                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.country_id')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select name="country_id" class="x-select">
+                                    <?php _e(select_options(Plugins::getCountries(), 'title', isset($posts['country_id']) ? $posts['country_id'] : 0 )); ?>
+                                </select>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.state_id')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select name="state_id" class="x-select">
+                                    <?php _e(select_options(Plugins::getDefaultStates(), 'title', isset($posts['state_id']) ? $posts['state_id'] : 0)); ?>
+                                </select>
+                            </td>
+                        </tr>-->
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.website')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e($post['website'])?>" name="website" class="x-text x-normal-text bor"/>
+                                
+                            </td>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.fax')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="text" value="<?php _e($post['fax'])?>" name="fax" class="x-text x-normal-text bor"/>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.checkin_time')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type='text' autocomplete='off' name='checkin_time' value='<?php _e(date('H:i', strtotime($post['checkin_time'])))?>' onclick='time_picker(this)' class='x-text x-time bor'/>
+                                
+                            </td>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.checkout_time')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type='text' autocomplete='off' name='checkout_time' value='<?php _e(date('H:i', strtotime($post['checkout_time'])))?>' onclick='time_picker(this)' class='x-text x-time bor'/>
+                                
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.floor')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="number" value="<?php _e($post['floor'])?>" name="floor" class="x-text x-number-text bor"/>
+                                
+                            </td>
+                            <td class="c1">
+                                Trạng Thái:
+                            </td>
+                            <td class="c2">
+                                Không kích hoạt
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.desc')); ?>:
+                            </td>
+                            <td class="c2">
+                                <textarea name="desc" style="width:250px" class="x-text bor" rows="6"></textarea>
+                            </td>
+                            <td class="c1">
+                                <?php _e(translate('default.image')); ?>:
+                            </td>
+                            <td>                               
+                                <?php _e(tpl_upload('img', 'hotel')) ?>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="c1">Bản đồ :</td>
+                            <td class="c2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+
+
+                                                        <p align="left">
+                                                        <table  bgcolor="#FFFFCC" width="300">
+                                                            <tr>
+                                                                <td><b>Kinh độ</b></td>
+                                                                <td><b>Vĩ độ</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="lat"></td>
+                                                                <td id="lng"></td>
+                                                            </tr>
+                                                        </table>
+                                                        </p>
+                                                        <div align="center" id="map" style="width: 400px; height: 300px"><br/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- ACTIVITIES -->
+                        <tr>
+                            <td colspan="4" class="section">
+                                <?php _e(translate("default.hotel.activities")) ?>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td colspan="4">
+                                <table width="100%">
+                                    <?php
+                                    if (isset($activity_types) && count($activity_types) > 0):
+                                        $row_activities = ceil(count($activity_types) / $colum);
+                                        for ($i = 0; $i < $row_activities; $i++):
+                                            ?>
+                                            <tr width="100%">
+                                                <?php
+                                                for ($j = 0; $j < $colum; $j++):
+                                                    $a = $activity_types[$i * $colum + $j];
+                                                    ?>
+                                                    <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                        <?php if (isset($a['ID'])): ?>
+                                                            <input type="checkbox" name="activities[]" value="<?php _e($a['ID']) ?>"/>
+                                                            <?php _e($a['title']); ?>
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                <?php endfor; ?>
+                                            </tr>
+                                            <?php
+                                        endfor;
+                                    endif;
+                                    ?> 
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- FACILITIES -->
+                        <tr>
+                            <td colspan="4" class="section">
+                                <?php _e(translate("default.hotel.facilities")) ?>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td colspan="4">
+                                <table width="100%">
+                                    <?php
+                                    $row_facilities = ceil(count($facility_types) / $colum);
+                                    for ($i = 0; $i < $row_facilities; $i++):
+                                        ?>
+                                        <tr width="100%">
+                                            <?php
+                                            for ($j = 0; $j < $colum; $j++):
+                                                $a = $facility_types[$i * $colum + $j];
+                                                ?>
+                                                <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                    <?php if (isset($a['ID'])): ?>
+                                                        <input type="checkbox" name="facilities[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?>/>
+                                                        <?php _e($a['title']); ?>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                            <?php endfor; ?>
+                                        </tr>
+                                    <?php endfor; ?> 
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- SERVICES -->
+                        <tr>
+                            <td colspan="4" class="section">
+                                <?php _e(translate("default.hotel.services")) ?>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td colspan="4">
+                                <table width="100%">
+                                    <?php
+                                    $row_services = ceil(count($service_types) / $colum);
+                                    for ($i = 0; $i < $row_services; $i++):
+                                        ?>
+                                        <tr width="100%">
+                                            <?php
+                                            for ($j = 0; $j < $colum; $j++):
+                                                $a = $service_types[$i * $colum + $j];
+                                                ?>
+                                                <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                    <?php if (isset($a['ID'])): ?>
+                                                        <input type="checkbox" name="services[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?>/>
+                                                        <?php _e($a['title']); ?>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                            <?php endfor; ?>
+                                        </tr>
+                                    <?php endfor; ?> 
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- COMMON INFOMATION -->
+            <div class="tab<?php if (get('tab', '') == 'info-common') _e(' tab-active'); ?>" style="min-height:200px">
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+                        <tr>
+                            <td><?php _e('Có đưa đón sân bay') ?></td>
+
+                            <td>
+                                <input type="radio" name='airport_transfer' value="1" checked="checked"><?php _e('Có') ?>  
+                                &nbsp; &nbsp;<input type="radio" name='airport_transfer' value="0" ><?php _e('Không') ?>                                     
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Phí đưa đón sân bay') ?></td>
+
+                            <td align="left">
+                                <?php _e(tpl_input_number('airport_transfer_fee', $post['breakfast_charge'])) ?>                                
+                                <?php _e(tpl_select('airport_transfer_fee_currency_id', 'ID', 'title', self::get('currencies'), null, true)) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Phí ăn sáng') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('breakfast_charge', $post['breakfast_charge'])) ?>                                
+                                <?php _e(tpl_select('breakfast_charge_currency_id', 'ID', 'title', self::get('currencies'), null, true)) ?>                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Trả phòng') ?></td>
+
+                            <td><?php _e(tpl_input_time('check_out', date('H:i', strtotime($post['checkin_time'])))); ?></td>
+
+                        </tr>
+                        <tr>
+                            <td><?php _e('Khoảng cách từ trung tâm thành phố') ?></td>
+
+                            <td><?php _e(tpl_input_number('distance_from_city_center', $post['distance_from_city_center'])) ?> KM</td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Khoảng cách tới sân bay') ?></td>
+
+                            <td><?php _e(tpl_input_number('distance_to_airport', $post['distance_to_airport'])) ?> KM</td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Thời gian nhận phòng sớm nhất') ?></td>
+
+                            <td><?php _e(tpl_input_time('earliest_check_in', date('H:i', strtotime($post['checkin_time'])))); ?><td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Thang máy') ?></td>
+
+                            <td>
+                                <input type="radio" name='elevator' value="1" checked="checked"><?php _e('Có') ?>  
+                                &nbsp; &nbsp;<input type="radio" name='elevator' value="0" ><?php _e('Không') ?>                                                                     
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Phí sử dụng Internet') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('internet_usage_fee', $post['breakfast_charge'])) ?>                                
+                                <?php _e(tpl_select('internet_usage_currency_id', 'ID', 'title', self::get('currencies'), null, true)) ?>                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Phòng/Tầng không hút thuốc') ?></td>
+
+                            <td>
+                                <input type="radio" name='non_smoking' value="1" checked="checked"><?php _e('Có') ?>  
+                                &nbsp; &nbsp;<input type="radio" name='non_smoking' value="0" ><?php _e('Không') ?>                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Số quầy bar') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('number_of_bars', $post['represent'])) ?>                                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Số lượng nhà hàng') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('number_of_restaurants', $post['represent'])) ?>                                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Số lượng phòng') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('number_of_rooms', $post['represent'])) ?>                                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Có chỗ đậu xe') ?></td>
+
+                            <td>
+                                <input type="radio" name='parking' value="1" checked="checked"><?php _e('Có') ?>  
+                                &nbsp; &nbsp;<input type="radio" name='parking' value="0" ><?php _e('Không') ?>                                  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Phí đỗ xe (mỗi ngày)') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('parking_fee', $post['breakfast_charge'])) ?>                                
+                                <?php _e(tpl_select('parking_fee_currency_id', 'ID', 'title', self::get('currencies'), null, true)) ?>                                                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Tiếp tân mở cửa đến') ?></td>
+
+                            <td><?php _e(tpl_input_time('reception_open_until', date('H:i', strtotime($post['checkin_time'])))); ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Dịch vụ phòng (Có, Không, 24h)') ?></td>
+
+                            <td>
+                                <input type="radio" name='room_service' value="1" checked="checked"><?php _e('Có') ?>  
+                                &nbsp; &nbsp;<input type="radio" name='room_service' value="0" ><?php _e('Không') ?>                                  
+                                &nbsp; &nbsp;<input type="radio" name='room_service' value="2" ><?php _e('24 Giờ') ?>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Điện áp trong phòng') ?></td>
+
+                            <td><?php _e(tpl_input_number('room_voltage')) ?></td>
+                        </tr>
+                        <?/*
+                        <tr>
+                            <td><?php _e('Thời gian tới sân bay (phút)') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_number('time_airport')) ?>                                                                                       
+                            </td>
+                        </tr>
+                         * 
+                         */?>
+                        <tr>
+                            <td><?php _e('Năm xây dựng khách sạn') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_date('year_hotel_built')) ?>                                                        
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php _e('Năm nâng cấp khách sạn') ?></td>
+
+                            <td>
+                                <?php _e(tpl_input_date('year_hotel_last_renovated')) ?>                                                                                        
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- IMAGES -->
+            <div class="tab<?php if (get('tab', '') == 'images') _e(' tab-active'); ?>" style="min-height:200px">            
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">               
+                        <tr>
+                            <?/*<a onclick="load_inframe('<?php _e(baseUrl()); ?>/Hotel/Index/Uploadmany')" class="x-button">Tải ảnh lên</a> */ ?>
+                            <div class="x-files" url="<?php _e(baseUrl());?>/Hotel/Index/Upload?ID=<?php _e(self::get('ID')); ?>"></div>
+                        </tr>                        
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <table>
+            <tr align="center">
+                <td width="15%"></td>
+                <td>
+                    <?php _e(tpl_button_add()) ?>
+                    <?php _e(tpl_button_cancel('#Hotel')) ?>
+                </td>
+            </tr>
+        </table>        
+    </div>
+</form>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){ load_google_map(21.012226,105.847861);});
+   
+</script>
+<script>
+    $('select[name=country_id]')
+    .set('value',1)
+    .each(function(){
+        this.onchange.call(this)
+    });
+</script>

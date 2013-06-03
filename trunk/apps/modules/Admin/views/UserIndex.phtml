@@ -1,0 +1,162 @@
+<?php
+$posts = self::get('users');
+$vars = self::get('vars');
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Danh sách người dùng</h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <?php _e(tpl_search_form(baseUrl() . "/Admin/User", "#Admin/User/Search")); ?>
+                    <div class="x-options-container">
+                        <a class="x-button">Tác vụ <span>&#9660;</span></a>
+                        <div class="x-options">
+                            <a href="#Admin/User/Password" class="x-options-item">
+                                Gửi lại mật khẩu
+                            </a>
+                            <a href="#Admin/User/Personnel" class="x-options-item">
+                                Tạo nhanh người dùng
+                            </a>
+                            <a href="#Admin/User/Deleted" class="x-options-item">
+                                Thành viên đã xóa
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#Admin/User/Add" class="x-button x-button-add">Tạo mới</a>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php $id = getId(); ?>
+<form id="<?php _e($id); ?>">
+    <table width="100%" class="x-list" >
+        <tr>
+            <th class="k">
+                TT
+            </th>
+            <th width="150">
+                <?php show_order_link('Tài khoản', 'username', '#Admin/User', $vars); ?>
+            </th>
+
+            <th width="150">
+                <?php show_order_link('Nhóm', 'group_id', '#Admin/User', $vars); ?>
+            </th>
+            <th width="150">
+                <?php show_order_link('Trạng thái', 'is_active', '#Admin/User', $vars); ?>
+            </th>
+          <!--  <th width="150">
+            <?php show_order_link('Phòng ban', 'deparment_id', '#Admin/User', $vars); ?>
+            </th> -->
+            <th width="100">
+                <?php show_order_link('Người tạo', 'created_by_id', '#Admin/User', $vars); ?>
+            </th> 
+            <th width="100">
+                <?php show_order_link('Người sửa', 'updated_by_id', '#Admin/User', $vars); ?>
+            </th>
+
+            <th width="100">
+                <?php show_order_link('Lần cuối', 'date_active', '#Admin/User', $vars); ?></th>
+            <th width="100">
+                <?php show_order_link('Ngày tạo', 'date_created', '#Admin/User', $vars); ?></th>
+
+            <th width="25" colspan="3">
+                Tác vụ
+            </th>
+            <th class="k">
+                <?php if (count($posts) > 0) : ?>
+            <div class="x-check-container">
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+                        
+                        <a onclick="module_ajax('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Active','<?php _e($id); ?>',this)" class="x-check-action">
+                            Kích hoạt thành viên đã chọn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <?php _e(tpl_checkbox('ID[]', '', true)) ?>
+        <?php endif; ?>
+        </th>
+        </tr>
+        <?php foreach ($posts as $k => $a) : ?>
+            <tr>
+                <td align="center">
+                    <?php _e($k + 1); ?>
+                </td>
+                <td align="center">
+                    <?php _e($a['username']); ?>
+                </td>
+                <td align="center">
+
+                    <a href="<?php _e(append_url("#Admin/User/Index/?group_id={$a['group_id']}", $vars)); ?>">
+                        <?php _e($a['group_title']); ?>
+                    </a>    
+                </td>
+                <td align="center">
+                    <?php
+                    ($a['is_active'] == 1) ? _e('Kích hoạt') : _e('Không kích hoạt');
+                    ?>
+                </td>
+
+    <!--  <td align="center" width="200">
+        <a href="<?php _e(append_url("#Admin/User/Index/?department_id={$a['department_id']}", $vars)); ?>">
+                <?php _e($a['department_title']); ?>
+        </a>    
+    </td> -->
+                <td align="center">
+                    <a href="#User/Info?ID=<?php _e($a['created_by_id']); ?>" class="userlink"<?php if ($a['is_admin'] == 'yes') _e(" style='color:red!important'"); ?>><?php _e($a['created_by_name']); ?></a>
+                </td>
+                <td align="center">
+                    <a href="#User/Info?ID=<?php _e($a['updated_by_id']); ?>" class="userlink"<?php if ($a['is_admin'] == 'yes') _e(" style='color:red!important'"); ?>><?php _e($a['updated_by_name']); ?></a>
+                </td>
+                <td align="center">
+                    <?php _e(show_date($a['date_active'])); ?>
+                </td>
+                <td align="center">
+                    <?php _e(show_date($a['date_created'])); ?>
+                </td>
+                <td class="k">
+                    <a href="#Admin/User/Active?ID=<?php _e($a['ID']); ?>" >Kích hoạt</a>
+                    
+                </td>
+                <td class="k">
+                    <a href="#Admin/User/Edit?ID=<?php _e($a['ID']); ?>" class="x-edit"></a>
+                </td>
+                <td class="k">
+                    <?php if ($a['is_admin'] == 'no') : ?>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/Admin/User/Delete?ID=<?php _e($a['ID']); ?>')" class="x-delete"></a>
+                    <?php else : ?>
+                        <a class="x-nodelete"></a>
+                    <?php endif; ?>
+                </td>
+                <td class="k">
+                    <?php _e(tpl_checkbox('ID[]', $a['ID'], $a['is_admin'] == 'yes')) ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        <tr>
+            <td colspan="13">
+                <div class="x-page">
+                    <?php self::e('page'); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

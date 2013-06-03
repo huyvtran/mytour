@@ -1,0 +1,73 @@
+<form>
+	<div class="x-list-title">
+	<table width="100%" border="0" height="100%">
+	<tr>
+		<td align="left">
+			<h2>Danh sách người dùng đã xóa</h2>
+		</td>
+		<td align="right">
+			<div class="x-list-options">
+			<a href="#Admin/User/Add" class="x-button x-button-add">Tạo mới</a>
+			</div>
+		</td>
+	</tr>
+	</table>
+	</div>
+
+	<table width="100%" class="x-list" >
+		<tr>
+			<th class="k">TT</th>
+			<th width="150">
+				<?php show_order_link('Tài khoản', 'username', '#Admin/User', $vars); ?>
+			</th>
+			<th>
+				<?php show_order_link('Hồ sơ nhân sự', 'name', '#Admin/User', $vars); ?>
+			</th>
+			<th width="150">
+				<?php show_order_link('Nhóm', 'group_id', '#Admin/User', $vars); ?>
+			</th>
+			<th width="150">
+				<?php show_order_link('Phòng ban', 'deparment_id', '#Admin/User', $vars); ?>
+			</th>
+			<th width="140"><?php show_order_link('Ngày tạo', 'date_created', '#Admin/User', $vars); ?></th>
+
+			<th width="25" colspan="2">Tác vụ</th>
+		</tr>
+		<?php $users = self::get('users'); ?>
+		<?php foreach ($users as $k => $a) : ?>
+			<tr>
+				<td align="center">
+					<?php _e($k + 1); ?>
+				</td>
+				<td align="center">
+					<s><?php _e($a['username']); ?></s>
+				</td>
+				<td>
+					<a href="#Personnel/Index/View?ID=<?php _e($a['personnel_id']);?>"><?php _e($a['personnel_name']); ?></a>
+				</td>
+				<td align="center">
+					<?php _e($a['group_title']); ?>
+				</td>
+				<td align="center">
+					<?php _e($a['department_title']); ?>
+				</td>
+				<td align="center">
+					<?php _e(show_date(DATE_FORMAT, $a['date_created'])); ?>
+				</td>
+				<td class="k">
+					<a class="x-noedit"></a>
+				</td>
+				<td class="k">
+					<a class="x-nodelete"></a>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		<tr>
+			<td colspan="8">
+				<div class="x-page">
+					<?php self::e('page'); ?>
+				</div>
+			</td>
+		</tr>
+	</table>
+</form>

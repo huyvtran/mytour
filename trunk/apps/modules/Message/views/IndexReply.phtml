@@ -1,0 +1,39 @@
+
+<?php
+$setting = self::get('setting');
+$message = self::get('post');
+$to_users = self::get('to_users');
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <?php _e(tpl_input_hidden('message_id', getInt('message_id'))) ?>
+    <div class="form-message"></div>
+    <div class="user-message-form">
+        <div class="row message-input">
+            <label for="subject">Tiêu đề:</label>
+            <input type="text" name="subject" value="<?php if (preg_match("/^RE:/i", $message['subject'])) _e($message['subject']); else _e("RE:{$message['subject']}"); ?>" class="user-message-title"/>
+        </div>
+        <div class="row message-input">
+            <label>Tới:</label> <?php _e(tpl_select_users('to[]', 'cc', $to_users)) ?>
+        </div>
+        <div class="row">
+            <?php _e(tpl_uploads('files[]', 'message')) ?>
+        </div>
+        <div class="row">
+            <?php
+            $content = "<br/><br/>
+                <div>Trích dẫn từ <b>{$message['from']}<{$message['from_username']}> </b> lúc <i>" . show_date('d/m/Y H:i:s', $message['date']) . "</i>:</div>
+                <blockquote>
+                    {$message['body']}
+                </blockquote>";
+            if ($setting['use_signature'] == '1') {
+                $content.= "<br/><div class='message-signature'>{$setting['signature']}</div>";
+            }
+            ?>
+            <?php _e(tpl_editor('body', $content)) ?>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn"><i class="icon-hand-up icon-white"></i> Gửi đi</button>
+            <a href="#Message"><div class="btn-white"><i class="icon-share-alt"></i> Hủy bỏ</div></a>
+        </div>
+    </div>
+</form>

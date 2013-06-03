@@ -1,0 +1,79 @@
+<div class="x-list-title">
+<table width="100%" border="0" height="100%">
+<tr>
+	<td align="left">
+		<h2>Danh mục tin tức</h2>
+	</td>
+	<td align="right">	
+		<div class="x-list-options">
+			<a onclick="load_inframe('<?php _e(baseUrl());?>/Admin/News/Add',{title: ' Thêm mục tin tức', auto_hidden: true })" class="x-button x-button-add">Tạo mới</a>
+		</div>
+	</td>
+</tr>
+</table>	
+</div>
+				
+<table width="100%" cellpadding="5" class="x-list">
+<tr>
+	<th width="25" align="center">TT</th>
+	<th>
+		Tên thư mục
+	</th>
+	<th>
+		Sắp xếp
+	</th>
+	<th width="100">
+		Ngày tạo
+	</th>
+	<th width="100">
+		Người tạo
+	</th>
+	<th width="100">
+		Ngày sửa
+	</th>
+	<th width="100">
+		Người sửa
+	</th>
+	<th width="25" colspan="2">Tác vụ</th>
+</tr>
+<?php foreach (self::get('posts') as $k => $a) : ?>
+<tr>
+	<td class="k">
+		<?php _e($k + 1); ?>
+	</td>
+	<td width="auto">
+		<a><?php _e($a['title']) ?></a>
+	</td>
+	<td width="60" align="center">
+		<?php _e($a['ord']) ?>
+	</td>
+	<td align='center'>
+		<?php _e(show_date(DATE_FORMAT, $a['date_created'])); ?>
+	</td>
+	<td align='center'>
+		<?php _e(get_user_link($a['created_by_id'], $a['created_by_name'], $a['created_is_deleted'])); ?>
+	</td>
+	<td align='center'>
+		<?php _e(show_date(DATE_FORMAT, $a['date_updated'])); ?>
+	</td>
+	<td align='center'>
+		<?php _e(get_user_link($a['updated_by_id'], $a['updated_by_name'], $a['updated_is_deleted'])); ?>
+	</td>
+	<td class="k">
+		<a onclick="load_inframe('<?php _e(baseUrl());?>/Admin/News/Edit?ID=<?php _e($a['ID']);?>',{title: ' Sửa loại dự án',auto_hidden: true })" class='x-edit'></a>
+	</td>
+	<td width="25" align='center'>
+	<a onclick="module_delete('<?php _e(baseUrl());?>/Admin/News/Delete?ID=<?php _e($a['ID']);?>')" class='x-delete'></a>
+	</td>
+</tr>
+<?php endforeach; ?>
+<?php if (count(self::get('posts')) == 0) : ?>
+<tr>
+<td colspan="8" class="page">
+	<div class="x-page">
+		Chưa có thư mục nào được tạo
+	</div>
+</td>
+</tr>
+<?php endif; ?>
+</table>

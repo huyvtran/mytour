@@ -1,0 +1,221 @@
+<?php
+$posts = array_reverse(self::get('posts'));
+$total = self::get('total');
+$page = self::get('current_page');
+$page_range = self::get('range_page');
+$rootPost = self::get('root');
+$last_post = $posts[count($posts) - 1];
+$root_id = self::get('root_id');
+$folders = self::get('folders');
+?>
+
+<div class="row">
+    <table width="100%" cellpadding="5">
+        <tr>
+            <td>
+                <h3><?php _e($rootPost['subject']) ?></h3>
+                <?php foreach (self::get('inFolders') as $f): ?>
+                    <a href="#Message?parent_id=<?php _e($f['ID']) ?>"><b><?php _e($f['title']) ?></b></a>
+                    ( <a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Tear?ID=<?php _e($rootPost['ID']) ?>&folder_id=<?php _e($f['ID']) ?>')" title="Xóa tin nhắn khỏi thư mục này"> gỡ </a> )
+                <?php endforeach; ?>
+            </td>
+            <td width="400" align="right">
+                <?php if ($rootPost['user_id'] != '0'): ?>
+                    <div class="btn btn-white" onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($last_post['ID']) ?>')">
+                        <i class="icon-hand-right"></i> Trả lời</div>
+                <?php else: ?>
+                    <div class="btn btn-white btn-disabled">
+                        <i class="icon-hand-right"></i> Trả lời</div>
+                <?php endif; ?>
+                <?php if ($rootPost['user_id'] != '0'): ?>
+                    <div class="btn btn-white" onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($last_post['ID']) ?>&mode=all')">
+                        <i class="icon-comment"></i> Trả lời tất cả</div>
+                <?php else: ?>
+                    <div class="btn btn-white btn-disabled">
+                        <i class="icon-comment"></i> Trả lời tất cả</div>
+                <?php endif; ?>
+                <?php if ($rootPost['is_deleted'] == '0'): ?>
+                    <div class="btn btn-white" onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Delete?ID=<?php _e($root_id) ?>&go=Message')">
+                        <i class="icon-trash"></i> Xóa</div>
+                <?php elseif ($rootPost['is_deleted'] == '1'): ?>
+                    <div class="btn btn-white" onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Delete?ID=<?php _e($root_id) ?>&mode=complete&go=Message/Index/Trash')">
+                        <i class="icon-fire"></i> Xóa hẳn</div>
+                    <div class="btn btn-white" onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Revert?ID=<?php _e($root_id) ?>&go=Message/Index/Trash')">
+                        <i class="icon-share-alt"></i> Hoàn tác</div>
+                <?php endif; ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <div class="col10">
+        <?php
+        $remain_total = $total - $page_range * $page;
+        ?>
+        <?php if ($remain_total > 0): ?>
+            <!--VIEW MORE-->
+            <div id="message<?php _e(getInt('ID')); ?>_<?php _e($page); ?>">
+                <div onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Viewmore?ID=<?php _e(getInt('ID')); ?>&p=<?php _e($page + 1); ?>',null,'#message<?php _e(getInt('ID')) ?>_<?php _e($page) ?>','htm')" class="message-viewmore">Xem tiếp <b><?php _e($remain_total) ?></b> cuộc hội thoại khác</div>
+            </div>
+        <?php endif; ?>
+        <?php foreach ($posts as $k => $a): ?>
+            <?php if ($a['is_read'] != '1' || $k == count($posts) - 1): ?>
+                <div class="user-message-row">
+                    <div class="user-message-row-bar line-height2">
+                        <div class="row">
+                            <?php if (empty($a['from_photo']) || !file_exists("files/photo/{$a['from_photo']}")): ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/static/message-noavatar.png"/>
+                            <?php else: ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/photo/<?php _e($a['from_photo']) ?>"/>
+                            <?php endif; ?>
+                            <?php _e(get_user_link($a['from_id'], $a['from_name'])); ?>
+                            <br/>
+                            <div id="tipc<?php _e($a['ID']) ?>" style="position:reative;display:inline-block" onmouseover="$(this).find('.tip').css({display:'inline-block'});if(!this.loaded) ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Quickto?ID=<?php _e($a['ID']); ?>',function(){ $('#tipc<?php _e($a['ID']) ?>').k(0).loaded = true },'#tip<?php _e($a['ID']) ?>','htm',true)" onmouseout="$(this).find('.tip').css({display:'none'})">
+                                tới <?php _e($a['to_list']); ?> người, lúc: <span class="message-date"><?php _e(show_smart_time($a['date'], '')); ?></span>
+                                <div class="tip" id="tip<?php _e($a['ID']) ?>">
+                                    Loading...
+                                </div>
+                            </div><br/>
+                        </div>
+                        <div class="reply-mini">
+                            <?php if ($posts[0]['user_id'] != '0'): ?>
+                                <a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($a['ID']) ?>')">
+                                    <i class="icon-hand-right"></i> Trả lời</a>
+                                &nbsp;&nbsp;<a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($a['ID']) ?>&mode=all')">
+                                    <i class="icon-comment"></i> Trả lời tất cả</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="user-message-row-content">
+                        <?php _e($a['body']); ?>
+                    </div>
+                    <?php if (count($a['files']) > 0): ?>
+                        <div class="user-message-row-files">
+                            <?php foreach ($a['files'] as $f) : ?>
+                                <?php show_thumb($f, baseUrl() . "/Message/Index/File?ID={$f['ID']}"); ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <?php
+                $id = getId();
+                ?>
+                <div onclick="$('#<?php _e($id) ?>').slideDown(40);$(this).slideUp(40)" class="user-message-row user-message-row-read">
+                    <div class="user-message-row-bar line-height2">
+                        <div class="row">
+                            <?php if (empty($a['from_photo']) || !file_exists("files/photo/{$a['from_photo']}")): ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/static/message-noavatar.png"/>
+                            <?php else: ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/photo/<?php _e($a['from_photo']) ?>"/>
+                            <?php endif; ?>
+                            <b> <?php _e($a['from_name']); ?></b>
+                            <br/> <?php _e(mb_substr(html_escape(strip_tags($a['body'])), 0, 255, 'utf8')); ?>
+                        </div>
+                    </div>
+                </div>
+                <div id="<?php _e($id) ?>" class="user-message-row" style="display:none">
+                    <div class="user-message-row-bar line-height2">
+                        <div class="row">
+                            <?php if (empty($a['from_photo']) || !file_exists("files/photo/{$a['from_photo']}")): ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/static/message-noavatar.png"/>
+                            <?php else: ?>
+                                <img class="message-from-photo" src="<?php _e(baseUrl()) ?>/files/photo/<?php _e($a['from_photo']) ?>"/>
+                            <?php endif; ?>
+                            <?php _e(get_user_link($a['from_id'], $a['from_name'])); ?>
+                            <br/>
+                            <div id="tipc<?php _e($a['ID']) ?>" style="position:reative;display:inline-block" onmouseover="$(this).find('.tip').css({display:'inline-block'});if(!this.loaded) ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Quickto?ID=<?php _e($a['ID']); ?>',function(){ $('#tipc<?php _e($a['ID']) ?>').k(0).loaded = true },'#tip<?php _e($a['ID']) ?>','htm',true)" onmouseout="$(this).find('.tip').css({display:'none'})">
+                                tới <?php _e($a['to_list']); ?> người, lúc: <span class="message-date"><?php _e(show_smart_time($a['date'], '')); ?></span>
+                                <div class="tip" id="tip<?php _e($a['ID']) ?>">
+                                    Loading...
+                                </div>
+                            </div><br/>
+                        </div>
+
+                        <div class="reply-mini">
+                            <?php if ($posts[0]['user_id'] != '0'): ?>
+                                <a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($a['ID']) ?>')">
+                                    <i class="icon-hand-right"></i> Trả lời</a>
+                                &nbsp;&nbsp;<a onclick="ajax_load('<?php _e(baseUrl()) ?>/Message/Index/Reply?message_id=<?php _e($a['ID']) ?>&mode=all')">
+                                    <i class="icon-comment"></i> Trả lời tất cả</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="user-message-row-content">
+                        <?php _e($a['body']); ?>
+                    </div>
+                    <?php if (count($a['files']) > 0): ?>
+                        <div class="user-message-row-files">
+                            <?php foreach ($a['files'] as $f) : ?>
+                                <?php show_thumb($f, baseUrl() . "/Message/Index/File?ID={$f['ID']}"); ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <div class="col2">
+        <div class="pad-horizotal">
+            <div class="pad-vertical text-center">
+                <a class="message-action-folder">Thêm vào
+                    <div class="l">
+                        <form method="post" action="<?php _e(baseUrl()) ?>/Message/Index/Append?ID=<?php _e($root_id) ?>" onsubmit="return ajax_form(this,null,$('#<?php _e($id); ?>_form').query() )">
+                            <table cellpading="5">
+                                <?php foreach ($folders as $f): ?>
+                                    <tr>
+                                        <td>
+                                            <?php _e(tpl_checkbox('folder_ids[]', $f['ID'])) ?>
+                                        </td>
+                                        <td>
+                                            <?php _e($f['title']); ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <br/><button>áp dụng</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </a> |
+                <a class="message-action-folder">Chuyển đến
+                    <div class="l">
+                        <form method="post" action="<?php _e(baseUrl()) ?>/Message/Index/Move?ID=<?php _e($root_id) ?>" onsubmit="return ajax_form(this,null,$('#<?php _e($id); ?>_form').query() )">
+                            <table cellpading="5">
+                                <?php foreach ($folders as $f): ?>
+                                    <tr>
+                                        <td>
+                                            <?php _e(tpl_checkbox('folder_ids[]', $f['ID'])) ?>
+                                        </td>
+                                        <td>
+                                            <?php _e($f['title']); ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <br/><button>áp dụng</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <?php $members = self::get('members'); ?>
+                <b>Có <u><?php _e(count($members)); ?></u> người tham gia chủ đề này:</b><br/>
+                <div style="max-height:300px" class="scroll">
+                    <?php foreach ($members as $a): ?>
+                        <?php _e(get_user_link_online($a)); ?><br/>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

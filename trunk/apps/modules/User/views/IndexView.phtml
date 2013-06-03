@@ -1,0 +1,39 @@
+<div class="view_control"><a href="<?php _e(ctrUrl($this));?>"
+	title="Danh sách" class="b_home"></a> <a
+	href="<?php _e(ctrUrl($this));?>/Add" title="Thêm mới" class="b_add"></a>
+<a href="<?php _e(ctrUrl($this));?>/Delete?ID=<?php _e(get('ID'))?>"
+	onclick="return Ajax.Delete(this.href)" title="Xóa dữ liệu"
+	class="b_delete"></a></div>
+
+<div class='list_top'>
+<div class='quickview'><?php if (self::get('pre')) {
+	$pre = self::get('pre')?> <a href="<?php _e(ctrUrl($this));?>/View?ID=<?php _e($pre['ID'])?>"><?php _e(icon('pre_view.png')) ?></a>
+	<?php } else { ?> <a class="frog"><?php _e(icon('pre_view.png')) ?></a> <?php } ?>
+
+	<?php if (self::get('next')) {
+	$next = self::get('next')?> <a href="<?php _e(ctrUrl($this));?>/View?ID=<?php _e($next['ID'])?>"><?php _e(icon('next_view.png')) ?></a>
+		<?php } else { ?> <a class="frog"><?php _e(icon('next_view.png')) ?></a> <?php } ?>
+
+</div>
+</div>
+
+		<?php self::e('FORM_ERROR', '<div class="form_error">', '</div>') ?>
+
+<ul class='tab-view'>
+	<li id='a_main' class='first active'>THÔNG TIN NGƯỜI DÙNG</li>
+</ul>
+
+<table class='tb-item-view' width='100%' style='background: #F9F9F9'
+	cellpadding='5'>
+	<tr>
+		<td style='border: 1px solid #bbb' id="tab_all" valign='top'><?php $post = self::get('post'); ?>
+		<h3 class="view-title"><?php _e($post['title']); ?></h3>
+		<div class="view-desc"></div>
+		<div class="a_main"><?php self::e('form_view'); ?></div>
+		<br />
+		</td>
+	</tr>
+</table>
+<script
+	type='text/javascript'
+	src='<?php _e(BASE_URL)?>/style/admin/js/view.js'></script>

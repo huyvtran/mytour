@@ -1,0 +1,27 @@
+<?php
+
+$hotel_id = get_hotel_id();
+list($order_id, $number_date_add, $type, $room_type, $order)
+        = self::get(array('order_id', 'number_date_add', 'type', 'room_type', 'order'));
+$date_end = $order['date_end'];
+
+if ($type == 'NO_AUTO') {
+    for ($i = 1; $i <= $number_date_add; $i = $i + 1) {
+        $strtotimedate = strtotime($date_end) + $i * 86400;
+        _e('Giá phòng ngày : ' . date('d-m-Y', $strtotimedate) . ' là :  ');
+        _e('<input type="text" name="input_add_date[]" size="20px" />  ' . $room_type['symbol'] . '<br>');
+    }
+} elseif ($type == 'AUTO') {
+    for ($i = 1; $i <= $number_date_add; $i = $i + 1) {
+        $strtotimedate = strtotime($date_end) + $i * 86400;
+        $arrayPriceDates = price_of_day(date('Y-m-d', $strtotimedate), $room_type['ID'], $hotel_id);
+
+        if ($arrayPriceDates['is_plan_price'] == 0) {
+            _e('Giá phòng của ngày ' . date('d-m-Y', $strtotimedate) . ' là : Chưa có KH giá <br>');
+        } else {
+            _e('Giá phòng của ngày ' . date('d-m-Y', $strtotimedate) . ' là : ');
+            _e($arrayPriceDates['price_end'] . '  ' . $room_type['symbol'] . '/ 1 phòng <br>');
+        }
+    }
+}
+?>

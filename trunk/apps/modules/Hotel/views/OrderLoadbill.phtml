@@ -1,0 +1,39 @@
+<?php
+
+$hotel_id = get_hotel_id();
+list($date_start, $date_end, $order, $room_type, $array_save,$is_apply_campaign)
+        = self::get(array('date_start', 'date_end', 'order', 'room_type', 'array_save','is_apply_campaign'));
+
+$type_change = self::get('type_change');
+
+if ($type_change == 'PEDDING_NO_AUTO') {
+    for ($i = strtotime($date_start); $i <= strtotime($date_end); $i = $i + 86400) {
+        $date_i = date('Y-m-d', $i);
+        if (in_array($date_i, $array_save)) {
+            $price_save = order_price_dates($date_i, $order['ID']);
+            _e('Giá phòng ngày ' . show_date($date_i) . ' là : ');
+            _e(number_format($price_save, 2, '.', ','). '  ' . $room_type['symbol'] . '/ phòng (save) <br>');
+        } else {
+            $arrayPriceDates = price_of_day($date_i, $order['room_type_id'], $hotel_id,$is_apply_campaign);
+            if ($arrayPriceDates['is_plan_price'] == 0) {
+                _e('Giá phòng ngày ' . show_date($date_i) . ' là : Chưa có KH giá <br>');
+            } else {
+                _e('Giá phòng ngày ' . show_date($date_i) . ' là : ');
+                _e(number_format($arrayPriceDates['price_end'], 2, '.', ',') . '  ' . $room_type['symbol'] . '/ phòng (update)<br>');
+            }
+        }
+    }
+} elseif ($type_change == 'PEDDING_AUTO') {
+    for ($i = strtotime($date_start); $i <= strtotime($date_end); $i = $i + 86400) {
+
+        $date_i = date('Y-m-d', $i);
+        $arrayPriceDates = price_of_day($date_i, $order['room_type_id'], $hotel_id,$is_apply_campaign);
+        if ($arrayPriceDates['is_plan_price'] == 0) {
+            _e('Giá phòng của ngày ' . date('d-m-Y', $i) . ' là : Chưa có KH giá <br>');
+        } else {
+            _e('Giá phòng của ngày ' . date('d-m-Y', $i) . ' là : ');
+            _e(show_money($arrayPriceDates['price_end']) . '  ' . $room_type['symbol'] . '/ phòng <br>');
+        }
+    }
+}
+?>

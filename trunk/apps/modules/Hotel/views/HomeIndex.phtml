@@ -1,0 +1,180 @@
+<?php
+list($post, $address, $stats_form, $stats_age, $book, $view)
+        = self::get(array('post', 'address', 'stats_form', 'stats_age', 'book', 'view'));
+
+// statistic the number of forms 
+if (!empty($stats_form)) {
+
+    $xAxis = array();
+    $data = array();
+
+    foreach ($stats_form as $p) {
+        array_push($xAxis, date('d/m', strtotime($p['of_date'])));
+        array_push($data, (int) $p['total']);
+    }
+
+    $title = '';
+    $subtitle = '';
+    $name = $post['title'];
+    $xAxis = json_encode($xAxis);
+    $data = json_encode($data);
+} else {
+    $notify = 'Không có dữ liệu';
+}
+
+// statistic age
+if (!empty($stats_age)) {
+
+    $total_age = count($stats_age);
+    $total_lv1 = 0;
+    $total_lv2 = 0;
+    $total_lv3 = 0;
+
+    foreach ($stats_age as $a) {
+        if ($a['age'] > 0 && $a['age'] < 18) {
+            $total_lv1 += 1;
+        } else
+        if ($a['age'] > 18 && $a['age'] < 35) {
+            $total_lv2 += 1;
+        } else {
+            $total_lv3 += 1;
+        }
+    }
+
+    $per_lv1 = round(($total_lv1 / $total_age) * 100, 2);
+    $per_lv2 = round(($total_lv2 / $total_age) * 100, 2);
+    $per_lv3 = round(($total_lv3 / $total_age) * 100, 2);
+    
+    $per = array(
+        0 => array('Dưới 18', $per_lv1),
+        1 => array('Trên 18 và dưới 35', $per_lv2),
+        2 => array('Trên 35', $per_lv3)
+    );
+
+    $title = '';
+    $subtitle = '';
+    $per = json_encode($per);
+    
+} else {
+    $notify = 'Không có dữ liệu';
+}
+
+// statistic bpv
+if (!empty($book) || !empty($view)) {
+    
+    $total_book = count($book);
+    $total_view = count($view);
+    $total_bpv = $total_book + $total_view;
+     
+    $per_book = round(($total_book / $total_bpv) * 100, 2);        
+    $per_view = round(($total_view / $total_bpv) * 100, 2);      
+    
+    $per_bpv = array(
+        0 => array('Tỷ lệ đặt', $per_book),
+        1 => array('Tỷ lệ xem', $per_view)
+    );
+
+    $title = '';
+    $subtitle = '';        
+    $per_bpv = json_encode($per_bpv);          
+        
+}else{
+    $notify = 'Không có dữ liệu';
+}
+
+?>
+
+<script type="text/javascript">
+<?php if (!empty($stats_form)) : ?>
+        lineChart('formChart', 
+        '<?php _e($title) ?>', 
+        '<?php _e($subtitle) ?>', 
+         <?php _e($xAxis) ?>, 
+         <?php _e($data) ?>, 
+        '<?php _e($name) ?>');               
+<?php endif; ?>
+    
+<?php if (!empty($stats_age)) : ?>    
+        pieChart2('ageChart', 
+        '<?php _e($title) ?>', 
+         <?php _e($per) ?>);    
+<?php endif; ?>
+    
+<?php if (!empty($book) || !empty($view)) : ?>    
+        pieChart2('bpvChart', 
+        '<?php _e($title) ?>', 
+         <?php _e($per_bpv) ?>);    
+<?php endif; ?>    
+</script>
+
+<div class="content-info">
+    <h2>Chi tiết khách sạn</h2>
+    <img src="files/hotel/<?php _e($post['img']) ?>"/>
+    <ul class="info-details">
+        <li>Địa chỉ : 
+            <b class="info-data">
+                <?php _e(self::get('address')) ?>
+            </b>
+        </li>
+        <li>Số sao : 
+            <b class="info-data star">
+                <?php _e(str_repeat('&#10030;', (int) $post['star'])); ?>
+                <?php _e(str_repeat('&#10025;', 5 - (int) $post['star'])); ?>                
+            </b>
+        </li>
+        <li>Số phòng : 
+            <b class="info-data">
+                <?php _e($post['number_of_rooms']) ?>
+            </b>
+        </li>
+    </ul>
+    <div class="info-notify">
+        <h3>Thông báo mới</h3>
+        <ul>
+            <li><a href="">&DoubleRightArrow; Thông báo 1</a></li>
+            <li><a href="">&DoubleRightArrow; Thông báo 2</a></li>
+            <li><a href="">&DoubleRightArrow; Thông báo 3</a></li>
+            <li><a href="">&DoubleRightArrow; Thông báo 4</a></li>
+        </ul>                
+        
+    </div>    
+</div>
+
+<div class="content-stats">
+    <ul class="stats">
+        <li>
+            <div class="stats-details">
+                <h3>Thống kê độ tuổi</h3>
+                <?php if (!empty($stats_age)) : ?>                
+                <div id="ageChart" style="min-width: 270px; height: 270px; margin: 0 auto"></div>  
+                <?php else: ?>
+                    <?php _e($notify); ?>
+                <?php endif; ?>                
+            </div>
+        </li>    
+        <li>
+            <div class="stats-details">
+                <h3>Thống kê tỷ lệ đặt / xem</h3>
+                <?php if (!empty($book) || !empty($view)): ?>
+                 <div id="bpvChart" style="min-width: 270px; height: 270px; margin: 0 auto"></div>  
+                 <?php else: ?>
+                    <?php _e($notify); ?>                 
+                 <?php endif; ?>
+            </div>
+        </li>
+    </ul>
+    <ul class="stats lv2">    
+        <li>
+            <div class="stats-details">
+                <h3>Thống kê số lượng đơn</h3>
+                <?php if (!empty($stats_form)) : ?>
+                    <div id="formChart" style="min-width: 300px; height: 300px; margin: 0 auto"></div> 
+                <?php else: ?>
+                    <?php _e($notify); ?>
+                <?php endif; ?>
+            </div>
+        </li>      
+    </ul>
+</div>
+
+<div style="clear:both;height:1px"></div>

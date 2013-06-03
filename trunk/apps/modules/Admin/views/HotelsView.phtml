@@ -1,0 +1,282 @@
+<?php
+$post = self::get('post');
+$type_id = self::get('type_id');
+$colum = 4;
+$activity_types = self::get('activity_types');
+$facility_types = self::get('facility_types');
+$service_types = self::get('service_types');
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.view.hotel")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="tab-container" style="overflow: true;margin-top:-2px">
+    <div class="tabs">
+        <!-- GENERAL -->
+        <div class="tab tab-active" >
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-info">
+                    <tr >
+                        <td class="x-info-top" colspan="5" >
+                            <span class="tl">
+                            </span>
+                            <span class="tr">
+                                <?php
+                                _e(translate("default.view.date_info", show_date($post['date_created']), get_user_link($post['created_by_id'], $post['created_by_name']), show_date($post['date_updated']), get_user_link($post['updated_by_id'], $post['updated_by_name'])));
+                                ?>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="21" align="center" width="200" valign="top">
+                            <img src="<?php _e(baseUrl()) ?>/files/<?php if (!$post['img']): ?>photo/noavatar.gif<?php else : ?>/hotel/<?php _e($post['img']); ?><?php endif; ?>" style="max-width:120px" class="personnel-photo"/>
+                            <div style="padding:3px;font-weight:bold;font-size:12pt"><?php _e($post['code']) ?></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.title')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['title']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.type_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['type_title']); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.start')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['star']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone']) ?>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone1')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone1']) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.phone2')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['phone2']) ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.email')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['email']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.address')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['address']) ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.country_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['country_title']); ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.state_id')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['state_title']); ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.website')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['website']) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.fax')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['fax']) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.checkin_time')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e(date('H:i', strtotime($post['checkin_time']))); ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.checkout_time')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e(date('H:i', strtotime($post['checkout_time']))); ?>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.desc')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['desc']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.floor')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['floor']) ?>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.status')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php ($post['is_active'] == 0) ? _e(translate('default.hotel.noactive')) : _e(translate('default.hotel.active')) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.admin.field.hotel.fullname')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['fullname']) ?>
+                        </td>
+
+                    </tr>
+                    <!-- ACTIVITIES -->
+                    <tr class="c1">
+                        <td>
+                            <?php _e(translate("default.hotel.activities")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+
+                                <?php
+                                $row_activities = ceil(count(self::get('activity_types')) / $colum);
+                                for ($i = 0; $i < $row_activities; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $activity_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="activities[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> readonly="readonly" />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FACILITIES -->
+                    <tr>
+                        <td>
+                            <?php _e(translate("default.hotel.facilities")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+                                <?php
+                                $row_facilities = ceil(count($facility_types) / $colum);
+                                for ($i = 0; $i < $row_facilities; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $facility_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="facilities[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> readonly="readonly" />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- SERVICES -->
+                    <tr>
+                        <td>
+                            <?php _e(translate("default.hotel.services")) ?>
+                        </td>
+                        <td colspan="3"> 
+                            <table cellpadding="10" width="100%">
+
+                                <?php
+                                $row_services = ceil(count($service_types) / $colum);
+                                for ($i = 0; $i < $row_services; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $service_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="services[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> readonly="readonly" />
+                                                    <?php _e($a['title']); ?>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            </table>
+                        </td>
+                    </tr>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

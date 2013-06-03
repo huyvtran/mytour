@@ -1,0 +1,85 @@
+<?php $vars = self::get('vars'); ?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate('default.group.list.title')) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <a href="#Admin/Group/Add" class="x-button x-button-add">
+                        <?php _e(translate('default.button.add')) ?>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form>
+    <table width="100%" class="x-list">
+        <tr>
+            <th class="k">
+                <?php _e(translate('default.list.index')) ?>
+            </th>
+            <th width="150">
+                <?php show_order_link(translate('default.group.field.title'), 'title', '#Admin/Group', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link(translate('default.group.field.number_member'), 'number_member', '#Admin/Group', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link(translate('default.group.field.date_created'), 'date_created', '#Admin/Group', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link(translate('default.group.field.created_by_name'), 'created_by_id', '#Admin/Group', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link(translate('default.group.field.date_updated'), 'date_updated', '#Admin/Group', $vars); ?>
+            </th>
+            <th>
+                <?php show_order_link(translate('default.group.field.updated_by_name'), 'updated_by_id', '#Admin/Group', $vars); ?>
+            </th>
+            <th width="250">
+                <?php show_order_link(translate('default.group.field.desc'), 'desc', '#Admin/Group', $vars); ?>
+            </th>
+            <th colspan="2">
+                <?php _e(translate('default.list.action')) ?>
+            </th>
+        </tr>
+        <?php $posts = self::get('posts'); ?>
+        <?php foreach ( $posts as $k => $a ) : ?>
+            <tr>
+                <td align="center">
+                    <?php _e($k + 1); ?>
+                </td>
+                <td>
+                    <?php _e($a['title']) ?>
+                </td>
+                <td align="center">
+                    <?php _e($a['number_member']) ?>
+                </td>
+                <td align="center">
+                    <?php _e(show_date($a['date_created'])); ?>
+                </td>
+                <td align="center">
+                    <?php _e(get_user_link($a['created_by_id'], $a['created_by_name'], $a['created_is_deleted'])); ?>
+                </td>
+                <td align="center">
+                    <?php _e(show_date($a['date_updated'])); ?>
+                </td>
+                <td align="center">
+                    <?php _e(get_user_link($a['updated_by_id'], $a['updated_by_name'], $a['updated_is_deleted'])); ?>
+                </td>
+                <td>
+                    <?php _e($a['desc']); ?>
+                </td>
+                <td class="k">
+                    <a href="#Admin/Group/Edit?ID=<?php _e($a['ID']); ?>" class="x-edit"></a>
+                </td>
+                <td class="k">
+                    <a onclick="module_delete('<?php _e(baseUrl()); ?>/Admin/Group/Delete?ID=<?php _e($a['ID']); ?>')" class="x-delete"></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</form>

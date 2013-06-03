@@ -1,0 +1,163 @@
+<?php $configs = self::get('configs'); ?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <div class="x-list-title">
+        <table width="100%" border="0" height="100%">
+            <tr>
+                <td align="left">
+                    <h2>Cấu hình chung</h2>
+                </td>
+                <td align="right"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="x-form-container">
+        <div class="form-message"><?php self::e('message'); ?></div>
+        <table class="x-form" width="100%" border="0" cellpadding="0">
+            <tr>
+                <td colspan="2">
+                    <h2 class="group-title"><span>Cơ bản</span></h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Logo:
+                </td>
+                <td class="x-form-input x-white">
+                    <img class="logo" src="<?php _e(baseUrl()) ?>/files/configs/logo.png"/>
+                    <div class="x-file" maxsize="50000" filename="logo" filetypes="*.gif;*.png;*.jpeg,*.jpg" url="Admin/Layout/Logo" callback="admin_reload_logo">
+                        Tải logo mới
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Tiêu đề:
+                </td>
+                <td class="x-form-input">
+                    <input type="text" class="x-text" style="width:300px" name="title" value="<?php _e($configs['title']); ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Sologan:
+                </td>
+                <td class="x-form-input">
+                    <input type="text" class="x-text" style="width:300px" name="desc" value="<?php _e($configs['desc']); ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2 class="group-title"><span>Máy chủ email</span></h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Host:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('email_host',$configs['email_host']));?>
+                </td>
+            </tr>
+           <tr>
+                <td class="x-form-label">
+                    Port:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_number('email_port',$configs['email_port']));?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Email:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_email('email_account',$configs['email_account']));?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Password:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_password('email_password',$configs['email_password']));?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Tên gửi đi:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('email_name',$configs['email_name']));?>
+                </td>
+            </tr>
+             <tr>
+                <td colspan="2">
+                    <h2 class="group-title"><span>Nâng cao</span></h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Upload:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(is_writable(ROOT . DIRECTORY_SEPARATOR . 'files') ? 'Được phép' : 'Không cho phép'); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Cache:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(is_writable(ROOT . DIRECTORY_SEPARATOR . 'cache') ? 'Được phép' : 'Không cho phép'); ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="x-form-label">
+                    <span title="Khoảng thời gian cập nhật thông báo">Độ trễ thông báo [?]:</span>
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_number('time_notice', $configs['time_notice'])); ?> <i>giây</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <span title="Khoảng thời gian cập nhật chat">Độ trễ chat [?]:</span>
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_number('time_chat', $configs['time_chat'])); ?> <i>giây</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <span title="Mã truy cập để sử dụng các dịch vụ từ máy chủ DOS (SMS, ...)">Mã bảo mật dịch vụ [?]:</span>
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('security_code', $configs['security_code'])); ?>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2">
+                    <h2 class="group-title"><span>Cấu hình khách sạn</span></h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    <span title="Khoảng thời gian book phòng">Độ trễ book phòng:</span>
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_number('book_latency', $configs['book_latency'])); ?> <i>phút</i>
+                </td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td>
+                    <?php _e(tpl_button_add()); ?>
+                    <?php _e(tpl_button_reset()); ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

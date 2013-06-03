@@ -1,0 +1,75 @@
+<?php
+list($posts, $vars, $page) = self::get(array('posts', 'vars', 'page'));
+$link = '#Hotel/CancelPolicy';
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2>Danh sách các Chính sách hủy</h2></td>
+            <td align="right">
+                <!--<a onclick="load_inframe('<?php _e(baseUrl()); ?>/Hotel/CancelPolicy/PolicyDefault',{title: 'Chính sách hủy mặc định', auto_hidden: true })" class="x-button x-button-add">Cấu hình</a>-->
+                <a href="#Hotel/CancelPolicy/Add" class="x-button x-button-add"><?php _e(translate('default.add')) ?></a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" > 
+    <table cellpadding="0" class="x-list" width="100%">
+        <?php if (isset($posts) && count($posts) > 0): ?>
+            <tr>
+                <th class="k"><?php _e(translate('default.list.index')) ?></th>
+
+                <th witdth="30%"> 
+                    <?php show_order_link('Tên chính sách hủy', 'title', $link, $vars); ?>
+                </th>
+                <th colspan="2" witdh="25"><?php _e(translate('default.list.action')); ?></th>
+
+                <th class="k">
+            <div class="x-check-container">                
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>                
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </th>
+            </tr>
+            <?php
+            foreach ($posts as $k => $a): ?>
+                <tr>
+                    <td align="center"><?php _e($k + 1) ?> </td> 
+                    <td> <?php _e($a['title']) ?></td>
+                    <td width='30' align='center'>
+                         <a href="#Hotel/CancelPolicy/Edit?ID=<?php _e($a['ID']) ?>" class="x-edit"></a>
+                    </td>
+                    <td class="k" align='center'>
+                        <a onclick='module_delete("<?php _e(baseUrl()); ?>/Hotel/CancelPolicy/Delete?ID[]=<?php _e($a['ID']); ?>")' class='x-delete'></a>
+                    </td>
+                    <td align="center">
+                        <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox"/>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td colspan="10" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>

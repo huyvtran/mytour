@@ -1,0 +1,58 @@
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+<div class="x-form-container">
+<div class="form-message"></div>
+<table width="100%" border="0" cellpadding="5" class="x-form">
+	<tr>
+		<td class="x-form-label">
+			Câu hỏi:
+		</td>
+		<td class="x-form-content">
+			<input name="title" type="text" style="width:600px;" class="x-text" value=""/>
+		</td>
+	</tr>
+	<tr>
+		<td class="x-form-label">
+			Là menu:
+		</td>
+		<td class="x-form-content">
+			<input type="hidden" name="is_menu" value="no"/>
+			<input type="checkbox" name="is_menu" value="yes"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="x-form-label">
+			Trong mục:
+		</td>
+		<td class="x-form-content">
+			<select name="parent_id" class="x-select" style="width:258px">
+			<option value='0'></option>
+			<?php _e(select_options(self::get('posts'), 'title', 0)); ?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="x-form-label">
+			Thứ tự:
+		</td>
+		<td class="x-form-content">
+			<input name="ord" type="text" style="width:30px;" class="x-text" value="1"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="x-form-label" valign="top">
+			Nội dung:
+		</td>
+		<td class="x-form-content">
+            <?php _e(tpl_editor('content',$post['content']) )?>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<input type="submit" class="x-button x-save" value="Cập nhật"/>
+			<a href="#Admin/Faq" class="x-button x-fresh">Hủy bỏ</a>
+		</td>
+	</tr>
+</table>
+</div>
+</form>

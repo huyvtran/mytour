@@ -1,0 +1,94 @@
+<?php 
+
+//$post = self::get('post');
+list($post, $page, $vars) = self::get(array('post', 'page', 'vars'));
+$id = getId();
+$link = '#Config/Partners';
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Danh sách đối tác</h2>
+            </td>
+            <td align="right">
+                <?php _e(tpl_search_form(baseUrl() . '/Config/Partners?s='.self::get('s'), null, 'Tiêu đề')); ?>
+                <a onclick="load_inframe('<?php _e(baseUrl()); ?>/Config/Partners/Add',{title: 'Thêm mới đối tác', auto_hidden: true })" class="x-button x-button-add">Tạo mới</a>                
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" >
+    <table cellpadding="0" class="x-list" width="100%">
+        <?php if (isset($post) && count($post) > 0): ?>
+            <tr>
+                <th class="k"><?php _e(translate('default.list.index')) ?></th>
+
+                <th><?php show_order_link('Đối tác', 'title', $link, $vars) ?></th>
+
+                <th>
+                    <?php show_order_link('Mô tả', 'desc', $link, $vars)?>
+                </th> 
+                <th colspan="2"><?php _e('Tác vụ') ?></th>
+                <th class="k">
+            <div class="x-check-container">
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            </th>
+            </tr>
+            <?php
+            $stt = 0;
+            foreach ($post as $k => $a): 
+                ?>
+                <tr>
+                    <td align="center" class="k"><?php _e($k + 1) ?> </td>
+                    <td align="center">   
+                        <?php _e($a['title']) ?>
+                    </td>
+
+                    <td align='center' >
+                        <?php _e($a['desc']) ?>
+                    </td>
+
+                    <td align="center">
+                        <a onclick="load_inframe('<?php _e(baseUrl()); ?>/Config/Partners/Edit?ID=<?php _e($a['ID']) ?>',{title: 'Sửa Feedback', auto_hidden: true })" class="x-edit"></a>
+                    </td>
+
+                    <td class="k" align='center'>
+                        <a onclick='module_delete("<?php _e(baseUrl()); ?>/Config/Partners/Delete?ID[]=<?php _e($a['ID']); ?>")' class='x-delete'></a>
+                    </td>
+
+                    <td align="center">
+                        <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox"/>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td></td>
+            <td colspan="8" class="page">
+                <div class="x-page">
+                    <?php _e($page); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>
+

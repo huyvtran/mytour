@@ -1,0 +1,9 @@
+<?php
+$room_type = self::get('room_type');
+if($room_type['has_extrabed'] == 0){
+    die('Không có dịch vụ thêm giường !');
+}else{
+?>
+<input type="checkbox" name="has_extrabed" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Giá thêm giường : <?php _e($room_type['extrabed_price'].' '. $room_type['currency_title']. ' / 1 phòng / 1 đêm')?>
+<?php } ?>
+

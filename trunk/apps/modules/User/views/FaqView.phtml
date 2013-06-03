@@ -1,0 +1,7 @@
+<?php foreach (self::get('posts') as $k => $a) : ?>
+<div class="faqs"
+<?php// if($k > 0) _e(' style="border-top:1px solid #ccc;padding:5px;'.($k%2 == 1 ?'background:#eee"':'"')); else _e( ' style="padding:5px"');?>>
+<h2 class="h" style="font-size: 10pt; color: #3B5998"><?php _e($a['title']) ?></h2>
+<div style="padding-left: 15px"><?php _e($a['content']) ?></div>
+</div>
+<?php endforeach; ?>

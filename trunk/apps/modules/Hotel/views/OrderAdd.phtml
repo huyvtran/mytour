@@ -1,0 +1,197 @@
+<?php
+$post = self::get('post');
+$hotel = self::get('hotel');
+$status = self::get('status');
+$order_type_id = self::get('order_type_id');
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.field.orders.add")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form id="<?php _e($id); ?>" method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+        <div class="form-message"></div>
+        <div class="tabs">
+
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.hotel_id')); ?>:
+                            </td>
+                            <td class="c2">
+                                <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>">
+                                    <?php _e($hotel['title']) ?>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.room_type_id')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select onchange="load_bill_each_day('#<?php _e($id) ?>'),load_has_extrabed('#<?php _e($id) ?>')" name="room_type_id" class="x-select" style="width:258px">                   
+                                    <?php _e(select_options(self::get('room_type_id'), 'title')); ?>	
+                                </select>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.amount')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_number('amount', $post['amount'])) ?>
+                            </td>
+                        </tr>
+                          
+                        <tr>
+                            <td class="c1">Thêm giường :</td>
+                            <td class="c2" id="result_extrabed">
+                            </td>
+                        </tr>
+                        
+                        
+
+                        <tr>
+                            <td class="c1">Ngày đặt:</td>
+                            <td class="c2">
+                                <input type="text" class="x-text x-date" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){    load_bill_each_day('#<?php _e($id) ?>')   } })" value="" name="date_start" autocomplete="off"/>
+                                đến ngày <input type="text" class="x-text x-date" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){    load_bill_each_day('#<?php _e($id) ?>')   } })" value="" name="date_end" autocomplete="off"/>
+                            </td>
+                            <td class="c1">Áp dụng KM:</td>
+                            <td class="c2">
+                                <select onchange="load_bill_each_day('#<?php _e($id) ?>')"  name="is_apply_campaign"  class="x-select" style="width:258px">
+                                    <option></option>
+                                    <option value="yes">Áp dụng KM </option>
+                                    <option value="no">Không áp dụng KM </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.customer_name')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_normal('customer_name', $post['customer_name'])) ?>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.customer_email')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_normal('customer_email', $post['customer_email'])) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                Khu vực :
+                            </td>
+                            <td  class="x-form-input">
+                                <div>
+                                    <select name="location_id" onchange="hotel_load_state(this)" class="x-select" style="width:258px">
+                                        <?php _e(select_options(Plugins::getCountries(), 'title', isset($post['location_id']) ? $post['location_id'] : 0 )); ?>
+                                    </select><br>
+
+                                    <select dt="state" name="state_id" onchange="hotel_load_district(this)" class="x-select" style="width:130px">
+                                        <option>Tỉnh thành</option>
+                                    </select><br>
+
+                                    <select dt="district" style="min-width:280px" name="district_id" class="x-select">
+                                        <option>Quận huyện</option>
+                                    </select>                                  
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.customer_address')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_normal('customer_address', $post['customer_address'])) ?>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.status')); ?>:
+                            </td>
+                            <td class="c2">
+                                <select name="status" class="x-select" style="width:130px;">
+                                    <option></option>
+                                    <?php foreach ($status as $key => $value): ?>
+                                        <option value="<?php _e($key) ?>"><?php _e($value) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                      
+                        <tr>
+<!--                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.has_extrabed')); ?>:
+                            </td>
+                            <td class="c2">
+                                <input type="checkbox" name="has_extrabed" value="<?php _e($post['has_extrabed']) ?>" />
+                            </td>-->
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.customer_phone')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_normal('customer_phone', $post['customer_phone'])) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">Hình thức đặt phòng:</td>
+                            <td class="c2">
+                                <?php _e(tpl_select('order_type_id', 'ID', 'title', $order_type_id, null, true)) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.orders.desc')); ?>:
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_textarea('desc')) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1">Giá phòng theo ngày: </td>    
+                            <td class="bill-list">
+                            </td>    
+                        </tr>
+
+                        <tr>
+                            <td width="15%"></td>
+                            <td>
+                                <?php _e(tpl_button_add()) ?>
+                                <?php _e(tpl_button_cancel('#Hotel/Order')) ?>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $('select[name=location_id]')
+    .set('value',1)
+    .each(function(){
+        this.onchange.call(this)
+    });
+</script>

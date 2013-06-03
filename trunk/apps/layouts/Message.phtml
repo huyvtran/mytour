@@ -1,0 +1,57 @@
+<?php
+$unread = self::get('unread');
+$unreadNotice = self::get('unreadNotice');
+?>
+<div class="row">
+    <div class="col2">
+        <div class="user-message-panel">
+            <a href="#Message/Index/Setting">
+                <div class="btn btn-white">
+                    <i class="icon-wrench" title="Cài đặt cho hộp tin nhắn của bạn"></i> Cài đặt
+                </div>
+            </a>
+            <a href="#Message/Index/Add">
+                <div class="btn">
+                    <i class="icon-plus icon-white" title="Soạn tin nhắn mới"></i> Soạn tin
+                </div>
+            </a>
+            <ul class="user-message-inbox">
+                <li>
+                    <a href="#Message"<?php if ( self::getAction() == 'index' && is_null(self::get('tab_active')) ) _e(' class="active"') ?>>
+                        <i class="icon-circle-arrow-right"></i> Tin nhắn đến<?php if ( (int) $unread > 0 ) _e(" (<b>{$unread}</b>)"); ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="#Message/Index/Outbox"<?php if ( self::getAction() == 'outbox' ) _e(' class="active"') ?>>
+                        <i class="icon-circle-arrow-left"></i> Tin nhắn đã gửi</a>
+                </li>
+                <li>
+                    <a href="#Message/Index/Trash"<?php if ( self::getAction() == 'trash' ) _e(' class="active"') ?>>
+                        <i class="icon-trash"></i> Thùng rác</a>
+                </li>
+                <li>
+                    <span><i class="icon-folder-open"></i> Khác</span>
+                </li>
+            </ul>
+
+            <ul class="user-message-folder">
+                <li>
+                    <a href="#Message?type=app"<?php if ( self::get('tab_active') == 'app' ) _e(' style="color:red;font-weight:bold"') ?>>
+                        Thông báo <?php if ( (int) $unreadNotice > 0 ) _e(" (<b>{$unreadNotice}</b>)"); ?> </a>
+                </li>
+                <?php foreach ( self::get('folders') as $f ): ?>
+                    <li>
+                        <a href="#Message?parent_id=<?php _e($f['ID']) ?>"<?php if ( self::get('tab_active') == $f['ID'] ) _e(' style="color:red;font-weight:bold"') ?>>
+                            <?php _e($f['title']) ?><?php if ( (int) $f['unread'] > 0 ) _e(" (<b>{$f['unread']}</b>)"); ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <div class="col10">
+        <div class="user-message-content">
+            <?php _e(self::getContent()); ?>
+        </div>
+    </div>
+</div>

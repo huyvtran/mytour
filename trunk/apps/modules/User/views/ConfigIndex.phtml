@@ -1,0 +1,148 @@
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+<?php $user = self::get("user"); ?>
+<div class="tab-bar">
+	<a class="tab-link tab-link-first tab-link-active" onclick="do_tab(this,1)">Thông tin chung</a>
+	<a class="tab-link" onclick="do_tab(this,2)">Cá nhân</a>
+	<a class="tab-link" onclick="do_tab(this,3)">Liên hệ</a>
+	<span class="clear"></span>
+</div>
+<div class="tabs">
+	<div class="tab tab-active">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="150">Status:</td>
+				<td class="x-form-input">
+					<input type="text" name="title" style="width:300px" class="x-text" value="<?php _e($user['title'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label" width="150">Sinh nhật:</td>
+				<td class="x-form-input">
+					<input type="text" name="birthday" onclick="date_picker(this,{noTime:true})" class="x-text x-date" value="<?php _e(show_date(DATE_FORMAT,$user['birthday']))?>"/>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="x-form-label" valign="top">Giới thiệu:</td>
+				<td class="x-form-input">
+					<textarea name="profiles" style="height:150px;width:300px" ><?php _e($user['profiles']) ?></textarea>
+				</td>
+			</tr>
+            <tr>
+				<td class="x-form-label">Tầng:</td>
+				<td class="x-form-input">
+					<select name="level_id" class="x-select">
+                        <?php _e(select_options(Plugins::getOptions('personnel_lunch_levels'), 'title', $user['level_id'])); ?>
+                    </select>
+				</td>
+			</tr>
+            <tr>
+				<td class="x-form-label">Dãy:</td>
+				<td class="x-form-input">
+					<select name="row_id" class="x-select">
+                        <?php _e(select_options(Plugins::getOptions('personnel_lunch_rows'), 'title', $user['row_id'])); ?>
+                    </select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<?php _e(tpl_button_add('Cập nhật')); ?>
+					<a class="x-button x-fresh" onclick="remove_frame(this)">Hủy bỏ</button>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="tab">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="150">Cao đẳng / Đại học:</td>
+				<td class="x-form-input">
+					<input type="text" name="university" style="width:300px" class="x-text" value="<?php _e($user['university'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Sở thích:</td>
+				<td class="x-form-input">
+					<input type="text" name="fav" style="width:300px" class="x-text" value="<?php _e($user['fav'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Thể thao:</td>
+				<td class="x-form-input">
+					<input type="text" name="sport" style="width:300px" class="x-text" value="<?php _e($user['sport'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Âm nhạc:</td>
+				<td class="x-form-input">
+					<input type="text" name="music" style="width:300px" class="x-text" value="<?php _e($user['music'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Phim ảnh:</td>
+				<td class="x-form-input">
+					<input type="text" name="film" style="width:300px" class="x-text" value="<?php _e($user['film'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<?php _e(tpl_button_add('Cập nhật')); ?>
+					<a class="x-button x-fresh" onclick="remove_frame(this)">Hủy bỏ</button>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="tab">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="150">Thư điện tử:</td>
+				<td class="x-form-input">
+					<?php _e($user['email'])?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Yahoo:</td>
+				<td class="x-form-input">
+					<input type="text" name="yahoo" style="width:300px" class="x-text" value="<?php _e($user['yahoo'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Điện thoại:</td>
+				<td class="x-form-input">
+					<input type="text" name="phone" style="width:300px" class="x-text" value="<?php _e($user['phone'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Địa chỉ:</td>
+				<td class="x-form-input">
+					<input type="text" name="address" style="width:300px" class="x-text" value="<?php _e($user['address'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Thành phố / thị xã:</td>
+				<td class="x-form-input">
+					<input type="text" name="city" style="width:300px" class="x-text" value="<?php _e($user['city'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Trang web:</td>
+				<td class="x-form-input">
+					<input type="text" name="web" style="width:300px" class="x-text" value="<?php _e($user['web'])?>"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<?php _e(tpl_button_add('Cập nhật')); ?>
+					<a class="x-button x-fresh" onclick="remove_frame(this)">Hủy bỏ</button>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+</div>
+</form>

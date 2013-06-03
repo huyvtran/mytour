@@ -1,0 +1,106 @@
+
+<?php
+$posts = self::get('posts');
+$page = self::get('page');
+$id = getId();
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)" class="text-center">
+    <div class="user-message-search-bar">
+        <div class="row">
+            <div class="col4 text-left">
+                <b>Thùng rác</b>
+            </div>
+            <div class="col8">
+                <table cellpadding="1" align="center">
+                    <tr>
+                        <td>
+                            <input name="s" placeholder="Tìm kiếm..." type="text" class="user-message-search" />
+                        </td>
+                        <td>
+                            <button type="submit" class="btn-white user-message-search-btn">
+                                <i class="icon-search"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="user-message-list" id="<?php _e($id) ?>_p">
+
+    <div class="user-message-list-panel">
+        <div class="row">
+            <div class="col05 text-center">
+                <div class="bx">
+                    <?php if (count($posts) > 0): ?>
+                        <input type="checkbox" onclick="$('#<?php _e($id) ?> input[type=checkbox]').set('checked',this.checked);" />
+                    <?php else: ?>
+                        <input type="checkbox" disabled />
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="col5 user-message-btns text-left">
+                <div id="<?php _e($id) ?>_btns" class="user-message-act-none">
+                    <a onclick="load_frame('<?php _e(baseUrl()) ?>/Message/Index/Delete?mode=complete&redirect=Message/Index/Trash',{ dataForm:'#<?php _e($id); ?>_form'})">xóa hẳn</a>
+                    | <a onclick="load_frame('<?php _e(baseUrl()) ?>/Message/Index/Revert',{ dataForm:'#<?php _e($id); ?>_form'})">hoàn tác</a>
+                </div>
+            </div>
+            <div class="col05">&nbsp</div>
+            <div class="col6 text-right">
+                <div class="pag"><?php _e($page); ?></div>
+            </div>
+        </div>
+    </div>
+    <form id="<?php _e($id) ?>_form">
+        <div class="user-message-list-table" id="<?php _e($id) ?>">
+            <?php foreach ($posts as $a): ?>
+                <?php
+                $view_url = "onclick=\"location.hash = '#Message/Index/View?ID={$a['ID']}'\"";
+                ?>
+                <div class="row<?php if (!$a['is_read']) _e(' unread') ?>">
+                    <div class="col05 text-center">
+                        <div class="bx">
+                            <input type="checkbox" name="ID[]" value="<?php _e($a['ID']) ?>" />
+                        </div>
+                    </div>
+                    <div class="col2 text-left">
+                        <h5 class="bx"<?php _e($view_url) ?>>
+                            <?php _e($a['from']); ?> <?php if ((int) $a['num'] > 1): ?>(<?php _e($a['num']); ?>)<?php endif; ?>
+                        </h5>
+                    </div>
+                    <div class="col2"<?php _e($view_url) ?>>
+                        <h5 class="bx">
+                            <?php _e($a['subject']); ?> </h5>
+                    </div>
+                    <div class="col5">
+                        <h5 class="bx"<?php _e($view_url) ?>><?php _e($a['body']); ?></h5>
+                    </div>
+                    <div class="col2 text-center">
+                        <h5 class="bx"<?php _e($view_url) ?>><?php _e(show_date('d/m/Y H:i:s', $a['date'])); ?></h5>
+                    </div>
+                    <div class="col05 text-center">
+                        <h5 class="bx">
+                            <?php _e($a['has_file'] == 1 ? '@' : '') ?>
+                        </h5>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </form>
+</div>
+<script>
+    (function(){
+        $('#<?php _e($id) ?>_p input[type=checkbox]').onClick(function(){
+            if( $("#<?php _e($id); ?> input:checked").size() > 0 ){
+                $('#<?php _e($id) ?>_btns')
+                .css({ opacity: 1 })
+                .removeClass('user-message-act-none');
+            }else{
+                $('#<?php _e($id) ?>_btns')
+                .css({ opacity: 0.5 })
+                .addClass('user-message-act-none');
+            }
+        });
+    })(Owl)
+</script>

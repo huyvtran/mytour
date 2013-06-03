@@ -1,0 +1,127 @@
+<h3 class="task_section">Công việc đang thực hiện</h3>
+<table width="100%" class="tb-list">
+<tr>
+	<th width="10"></th>
+	<th align="left">Công việc</th>
+	<th align="left">Dự án</th>
+	<th align="left">Người giao</th>
+	<th align="left">Tiến độ</th>
+	<th align="left">Thời hạn</th>
+</tr>
+<?php foreach (self::get("my_tasks") as $task) : ?>
+<?php if (!in_array($task['status_text'], array('INITIAL', 'COMPLETE')))
+		continue;
+?>
+<tr>
+<td>&nbsp;</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#Task/Index/View?ID=<?php _e($task['ID']);?>"><?php _e($task['title']); ?></a>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#Project/Info?ID=<?php _e($task['project_id']);?>"><?php _e($task['project_title']); ?>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#User/Info?ID=<?php _e($task['owner_id']);?>"><?php _e($task['owner_name']); ?>
+</td>
+<td width="250">
+	<div class="progress-bg">
+		<div class="progress-status" style="width:<?php _e( max(0,min(100,$task['status'])) );?>%"></div>
+		<span class="progress-title"><?php _e(max(0, min(100, $task['status']))); ?>%</span>
+	</div>
+</td>
+<td>
+	<?php if (strtotime($task['date_end']) < time()) : ?>
+	<div class="date_over"><?php _e($task['date_end']); ?></div>
+	<?php else : ?>
+	<?php _e($task['date_end']); ?>
+	<?php endif; ?>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+<!--TASK FOR FUTURE-->
+<h3 class="task_section">Công việc sắp tiến hành</h3>
+<table width="100%" class="tb-list">
+<tr>
+	<th width="10"></th>
+	<th align="left">Công việc</th>
+	<th align="left">Dự án</th>
+	<th align="left">Người giao</th>
+	<th align="left">Tiến độ</th>
+	<th align="left">Thời hạn</th>
+</tr>
+<?php foreach (self::get("my_tasks") as $task) : ?>
+<?php if ($task['status_text'] != 'INITIAL')
+		continue;
+?>
+<tr>
+<td>&nbsp;</td>
+<td>
+	<?php _e($task['title']); ?>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#Project/Info?ID=<?php _e($task['project_id']);?>"><?php _e($task['project_title']); ?>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#User/Info?ID=<?php _e($task['owner_id']);?>"><?php _e($task['owner_name']); ?>
+</td>
+<td width="250">
+	<div class="progress-bg">
+		<div class="progress-status" style="width:<?php _e( max(0,min(100,$task['status'])) );?>%"></div>
+		<span class="progress-title"><?php _e(max(0, min(100, $task['status']))); ?>%</span>
+	</div>
+</td>
+<td>
+	<?php if (strtotime($task['date_end']) < time()) : ?>
+	<div class="date_over"><?php _e($task['date_end']); ?></div>
+	<?php else : ?>
+	<?php _e($task['date_end']); ?>
+	<?php endif; ?>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+<!-- TASK COMPLETE-->
+<h3 class="task_section">Công việc đã kết thúc</h3>
+<table width="100%" class="tb-list">
+<tr>
+	<th width="10"></th>
+	<th align="left">Công việc</th>
+	<th align="left">Dự án</th>
+	<th align="left">Người giao</th>
+	<th align="left">Tiến độ</th>
+	<th align="left">Thời hạn</th>
+</tr>
+<?php foreach (self::get("my_tasks") as $task) : ?>
+<?php if ($task['status_text'] != 'COMPLETE')
+		continue;
+?>
+<tr>
+<td>&nbsp;</td>
+<td>
+	<?php _e($task['title']); ?>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#Project/Info?ID=<?php _e($task['project_id']);?>"><?php _e($task['project_title']); ?>
+</td>
+<td>
+	<a href="<?php _e(BASE_URL);?>/#User/Info?ID=<?php _e($task['owner_id']);?>"><?php _e($task['owner_name']); ?>
+</td>
+<td width="250">
+	<div class="progress-bg">
+		<div class="progress-status" style="width:<?php _e( max(0,min(100,$task['status'])) );?>%"></div>
+		<span class="progress-title"><?php _e(max(0, min(100, $task['status']))); ?>%</span>
+	</div>
+</td>
+<td>
+	<?php if (strtotime($task['date_end']) < time()) : ?>
+	<div class="date_over"><?php _e($task['date_end']); ?></div>
+	<?php else : ?>
+	<?php _e($task['date_end']); ?>
+	<?php endif; ?>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>

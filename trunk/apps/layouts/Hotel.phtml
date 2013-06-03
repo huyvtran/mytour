@@ -1,0 +1,205 @@
+<?php
+$hotel_id = get_hotel_id();
+$room_type = self::$Model->fetchAll(
+        "SELECT * 
+                FROM `hotel_room_types` as `a`
+                WHERE `a`.`hotel_id` = '{$hotel_id}' 
+                ORDER BY `a`.`ID` ASC
+                ");
+if (!empty($room_type)) {
+    $room_type_id_first = $room_type[0]['ID'];
+}
+?>
+<table class="home-table" width="100%" height="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="home-side-container" valign="top">
+            <div id="side" class="home-side">
+                <?php
+                $hotel = get_hotel();
+                ?>                               
+                <ul class="home-menu" id="theMenu">
+                    <?php
+                    (self::getControllerName() == 'HotelHomeController') ? $active_home = 1 : $active_home = 0;
+                    (self::getControllerName() == 'HotelFeedbackController') ? $active_feed = 1 : $active_feed = 0;
+                    (self::getControllerName() == 'HotelRoomController' || self::getControllerName() == 'HotelSurchargeController'
+                            ) ? $active_room = 1 : $active_room = '';
+                    (self::getControllerName() == 'HotelRulepriceController' || self::getControllerName() == 'HotelCampaignController'
+                            || self::getControllerName() == 'HotelCancelpolicyController') ? $active_rule_price = 1 : $active_rule_price = 0;
+                    (self::getControllerName() == 'HotelOrderController') ? $active_order = 1 : $active_order = 0;
+                    (self::getControllerName() == 'HotelCloseController') ? $active_close = 1 : $active_close = 0;
+                    (self::getControllerName() == 'HotelStatsController') ? $active_stats = 1 : $active_stats = 0;
+                    (self::getControllerName() == 'HotelPartnersController' || self::getControllerName() == 'HotelCommissionController'
+                            || self::getControllerName() == 'HotelAllotmentController') ? $active_partner = 1 : $active_partner = 0;
+
+                    function getActive($active) {
+                        return $active == 1 ? "home-task-menu" : "home-task1-menu";
+                    }
+                    ?>
+                    <li class="home-link-hotel">
+                        <?php if ($hotel): ?>
+                            <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>"><?php _e($hotel['title']) ?></a>
+                        <?php endif; ?>                        
+
+                    </li>
+                    <li style="position: static;">
+                        <span class="head"><a href="#Hotel/Home" style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_home)) ?>">Trang chủ</a></span>
+                    </li>
+                    <li style="position: static;">
+                        <span class="head">
+                            <a href="#Hotel/Room" style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_room)) ?>">
+                                Quản lý thông tin phòng
+                            </a></span>
+                        <ul class="<?php _e($selected = ($active_room == 1) ? "sub_menu visible" : "sub_menu hidden") ?>">
+                            <li><a href="#Hotel/Room"><?php _e(translate('default.admin.hotel.room.list')) ?></a></li>                        
+                            <li><a href="#Hotel/Surcharge">Phụ phí</a></li>
+                        </ul>    
+                    </li>                  
+
+                    <li style="position: static;">
+                        <span class="head">
+                            <a href="#Hotel/RulePrice" style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_rule_price)) ?>">
+                                <?php _e(translate('default.admin.hotel.rule.price')) ?>
+                            </a></span>
+                        <ul class="<?php _e($selected = ($active_rule_price == 1) ? "sub_menu visible" : "sub_menu hidden") ?>">
+                            <li><a href="#Hotel/RulePrice">Ràng buộc giá</a></li>
+                            <li><a href="#Hotel/Campaign">Chiến dịch khuyến mãi</a></li>
+                            <li><a href="#Hotel/CancelPolicy">Chính sách hủy phòng</a></li>   
+                        </ul>    
+                    </li>
+
+                    <li style="position: static;">
+                        <span class="head">
+                            <a href="#Hotel/Order" style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_order)) ?>">
+                                Quản lý đơn đặt phòng
+                            </a></span>
+                    </li>
+
+                    <li style="position: static;">
+                        <span class="head ">
+                            <a href="<?php _e('#Hotel/Partners') ?>" 
+                               style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_partner)) ?>">
+                                   <?php _e('Quản lý đối tác') ?>
+                            </a></span>
+                        <ul class="<?php _e($selected = ($active_partner == 1) ? "sub_menu visible" : "sub_menu hidden") ?>">
+                            <li><a href="#Hotel/Commission">Commission</a></li>
+                            <li><a href="<?php _e('#Hotel/Allotment?room_type_id=' . $room_type_id_first . '&date_from=' . date('d/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '') ?>">Allotment</a></li>
+                        </ul>
+                    </li>
+
+                    <li style="position: static;">
+                        <span class="head">
+                            <a href="<?php _e('#Hotel/Close?room_type_id=' . $room_type_id_first . '&date_from=' . date('d/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '') ?>" 
+                               style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_close)) ?>">
+                                   <?php _e('Đóng dịch vụ') ?>
+                            </a></span>
+                    </li>
+
+                    <li style="position: static;">
+                        <span class="head">
+                            <a href="<?php _e('#Hotel/Feedback?date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '') ?>" style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_feed)) ?>">
+                                Phản hồi khách hàng
+                            </a></span>  
+                    </li>
+
+                    <li style="position: static;">
+                        <span class="head ">
+                            <a href="<?php _e('#Hotel/Stats?mode=form&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>" 
+                               style="border:1px solid #d5d7d8" class="<?php _e(getActive($active_stats)) ?>">
+                                   <?php _e('Thống kê') ?>
+                            </a></span>
+                        <ul class="<?php _e($selected = ($active_stats == 1) ? "sub_menu visible" : "sub_menu hidden") ?>">
+                            <li><a href="<?php _e('#Hotel/Stats?mode=form&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>">Theo số lượng đơn</a></li>
+                            <li><a href="<?php _e('#Hotel/Stats?mode=gender&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>">Theo giới tính</a></li>
+                            <li><a href="<?php _e('#Hotel/Stats?mode=age&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>">Theo độ tuổi</a></li>
+                            <li><a href="<?php _e('#Hotel/Stats?mode=children&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>">Theo trẻ em</a></li>
+                            <li><a href="<?php _e('#Hotel/Stats?mode=bpv&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400)) . '') ?>">Theo tỷ lệ đặt/xem</a></li>
+                        </ul>
+                    </li>
+
+                    <?php
+//                    _e(tpl_menu_side(array(
+//                                array(
+//                                    title => translate('default.admin.hotel.room.list'),
+//                                    url => '#Hotel/Room',
+//                                    active => $active_room
+//                                ),
+//                                array(
+//                                    title => translate('default.admin.hotel.rule.price'),
+//                                    url => '#Hotel/RulePrice',
+//                                    active => $active_rule_price
+//                                ),
+//                                array(
+//                                    title => 'Chiến dịch khuyến mãi',
+//                                    url => '#Hotel/Campaign',
+//                                    active => $active_campaign
+//                                ),
+//                                array(
+//                                    title => translate('default.admin.hotel.order'),
+//                                    url => '#Hotel/Order',
+//                                    active => $active_order
+//                                ),
+//                                array(
+//                                    title => 'Chính sách hủy phòng',
+//                                    url => '#Hotel/CancelPolicy',
+//                                    active => $active_cancel
+//                                ),
+//                                array(
+//                                    title => 'Phụ phí',
+//                                    url => '#Hotel/Surcharge',
+//                                    active => $active_surcharge
+//                                ),
+//                                array(
+//                                    title => 'Đóng dịch vụ',
+//                                    url => '#Hotel/Close?room_type_id=' . $room_type_id_first . '&date_from=' . date('d/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    active => $active_close
+//                                ),
+//                                array(
+//                                    title => 'Feedback',
+//                                    url => '#Hotel/Feedback?date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    active => $active_feedback
+//                                ),
+//                                array(
+//                                    title => 'Thống kê',
+//                                    url => '#Hotel/Stats?mode=form&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    active => $active_stats
+//                                )
+//                            )));
+//                    if (self::getControllerName() == 'HotelStatsController') {
+//                        _e(tpl_menu_side(array(
+//                                    array(
+//                                        title => '... Theo số lượng đơn',
+//                                        url => '#Hotel/Stats?mode=form&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    ),
+//                                    array(
+//                                        title => '... Theo giới tính',
+//                                        url => '#Hotel/Stats?mode=gender&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    ),
+//                                    array(
+//                                        title => '... Theo độ tuổi',
+//                                        url => '#Hotel/Stats?mode=age&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    ),
+//                                    array(
+//                                        title => '... Theo trẻ em',
+//                                        url => '#Hotel/Stats?mode=children&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '',
+//                                    ),
+//                                    array(
+//                                        title => '... Theo tỷ lệ đặt / xem',
+//                                        url => '#Hotel/Stats?mode=bpv&filter=day&date_from=' . date('01/m/Y', time()) . '&date_to=' . date('d/m/Y', (time() + 86400 * 14)) . '&room_type=0',
+//                                    ),
+//                                )));
+//                    }
+                    ?>
+<!--                    <li class="sub-link <?php (self::getControllerName() == 'HotelPartnersController') ? _e('sub-link-current') : '' ?>"><a href="#Hotel/Partners">Đối tác</a></li>-->
+
+                </ul>
+
+                <div class="clear"></div>
+            </div>
+        </td>
+        <td class="content" valign="top">
+            <div id="content" style="padding:0 5px">
+                <?php self::showContent(); ?>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <title>Ðăng nhập</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" type="image/gif" href="<?php _e(baseUrl()) ?>/themes/fav.gif">
+    <?php _e(htmlLink('/style/css/login.css')); ?>
+    <?php _e(htmlLink('/style/css/lightbox.css')); ?>
+    <?php _e(htmlScript('/style/owl.js')); ?>
+    <?php _e(htmlScript('/style/plugins/ui.js')); ?>
+    <?php _e(htmlScript('/style/plugins/lightbox.js')); ?>
+    <?php _e(htmlScript('/style/modules/login.js')); ?>
+</head>
+<body>
+    <div class="wrap">
+        <div class="bg-login">
+            <center>
+            <div class="login">
+                <div class="inner_login">
+                    <h2>ĐĂNG NHẬP</h2>
+                    <form action="" method="post">
+                        <?php if ( isset($_SESSION['login_direct']) ) : ?>
+                            <input type="hidden" name="r" value="<?php _e($_SESSION['login_direct']); ?>"/>
+                        <?php endif; ?>
+                        <?php if ( self::get('post_error') ) : ?>
+                            <div style="color:#ff0000"><?php self::e('post_error'); ?></div>
+                        <?php endif; ?>
+                        <?php if ( (int) $_SESSION['warning_login'] > 2 ) : ?>
+                            <center><img src="<?php _e(baseUrl()); ?>/login/index/captcha"/>
+                            <?php endif; ?>
+                            <table border="0" cellpadding="1" width="350">
+                                <?php if ( (int) $_SESSION['warning_login'] > 2 ) : ?>
+                                    <tr>
+                                        <td width="74" style="padding-right:10px;text-align:right"><span>Mã bảo mật:</span></td>
+                                        <td>	<input class="x-text" type="text" style="width:230px" name="captcha"/>
+                                        <td></tr>
+                                <?php endif; ?>
+
+                                <tr>
+                                    <td width="74" style="padding-right:10px;text-align:right"><span>Tài khoản :</span></td>
+                                    <td><input class="x-text" style="width:230px" type="text" name="username" size="20"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:10px;text-align:right"><span>Mật khẩu :</span></td>
+                                    <td><input class="x-text" style="width:230px" type="password" name="userpwd" size="20" class="in-pass"/></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="3">
+                                        <label for="persistent"><input type="checkbox" name="persistent" value="1"/>
+                                            Duy trì đăng nhập</label>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="image" src="<?php _e(baseUrl()); ?>/style/css/login/login-bt.png"/>
+                                        <span><a href="<?php _e(baseUrl()); ?>/Register">Đăng ký tài khoản</a></span>
+                                    </td>
+                                </tr>
+                            </table>
+                    </form>
+                </div>
+            </div>
+            </center>
+        </div>
+    </div>
+</body>

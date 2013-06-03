@@ -1,0 +1,101 @@
+<?php
+$hotel = self::get('hotel');
+$room_types = self::get('room_types');
+$partners = self::get('partners');
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Thêm Allotment</h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+
+        <div class="form-message"></div>
+        <div class="tabs">
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+                        <tr>
+                            <td class="c1">Ngày bắt đầu: </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_date('date_start')); ?>
+                            </td>
+                            <td class="c1">
+                                Khách sạn : 
+                            </td>
+                            <td class="c2">
+                                <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>"> <?php _e($hotel['title']); ?></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">Ngày kết thúc: </td>
+                            <td class="c2">
+                                <?php _e(tpl_input_date('date_end')); ?>
+                            </td>
+                            <td class="c1">
+                                Loại phòng : 
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_select('room_type_id', 'ID', 'title', $room_types)) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">Số phòng Allotment:</td>
+                            <td class="c2">
+                                <?php _e(tpl_input_number('number')) ?>
+                            </td>
+                            <td class="c1">Đối tác :</td>
+                            <td class="c2">
+                                <?php _e(tpl_select('partner_id', 'ID', 'title', $partners)) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.days')) ?>:
+                            </td>
+                            <td class="c2" nowrap="nowrap">
+                                <?php
+                                $n = array('0', '1', '2', '3', '4', '5', '6', '7');
+                                ?>
+                                <?php for ($i = 0; $i < 7; $i++): ?>
+                                    <input name="days[]" type="checkbox" value="<?php _e($i % 7) ?>"<?php _e(in_array($i, $n) ? ' checked' : '' ) ?> />
+                                    <?php _e(translate('default.work.day' . ($i))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php endfor; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.desc') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <?php _e(tpl_textarea('desc')) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%"></td>
+                            <td>
+                                <?php _e(tpl_button_add()) ?>
+                                <?php _e(tpl_button_cancel('#Hotel/Allotment?room_type_id='.$room_types[0]['ID'].'&date_from='.date('d/m/Y', time()).'&date_to='.date('d/m/Y', (time()+ 86400*14)).'')) ?>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

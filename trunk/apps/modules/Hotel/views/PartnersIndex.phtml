@@ -1,0 +1,65 @@
+<?php
+list($posts, $vars, $page) = self::get(array('posts', 'vars', 'page'));
+$link = '#Hotel/Partners';
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2>Danh sách đối tác</h2></td>
+            <td align="right">
+                <?php
+                _e(tpl_search_form(baseUrl() . '/Hotel/Partners/Index?s=' . self::get('s'), null, 'Tên đối tác'));
+                ?>                
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" >
+    <table cellpadding="0" class="x-list" width="100%">
+        <?php if (isset($posts) && count($posts) > 0): ?>
+            <tr>
+                <th class="k"><?php _e(translate('default.list.index')) ?></th>
+
+                <th witdth="30%">
+                    <?php show_order_link('Đại lý', 'title', $link, $vars); ?>
+                </th>
+
+                <th witdth="30%">
+                    <?php show_order_link('Khách sạn', 'hotel', $link, $vars); ?>
+                </th>
+
+                <th>
+                    <?php show_order_link('Mô tả', 'desc', $link, $vars); ?>
+                </th>              
+            </tr>
+            <?php
+            foreach ($posts as $k => $a):
+                ?>
+                <tr>
+                    <td align="center"><?php _e($k + 1) ?> </td>
+                    <td align="center" witdth="30%">
+                        <a href="#Hotel/Partners/View?ID=<?php _e($a['ID']) ?>" >
+                            <?php _e($a['title']) ?>
+                        </a>
+                    </td>
+                    <td align="center"> 
+                        <?php _e($a['hotel_name']) ?>
+                    </td>
+                    <td align="center">
+                        <?php _e($a['desc']) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td colspan="10" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>

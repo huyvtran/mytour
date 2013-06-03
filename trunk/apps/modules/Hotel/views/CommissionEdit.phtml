@@ -1,0 +1,53 @@
+<?php
+$partners = self::get('partners');
+$post = self::get('post');
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2>Sửa Commission</h2></td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(get('ID')) ?>" />
+    <div class="x-form-container" style="overflow: true;">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">    
+            
+            <tr>
+                <td class="c1"><?php _e('Chọn đối tác') ?></td>    
+                <td class="c2"><?php _e(tpl_select('partner_id', 'ID', 'title', $partners, $post['partner_id'], true)) ?></td>
+            </tr>
+            
+            <tr>
+                <td class="c1"><?php _e('Hoa hồng') ?></td>
+                <td class="c2"><?php _e(tpl_input_number('percent', $post['percent'])) ?> %</td>
+            </tr>
+            
+            <tr>
+                <td class="c1"><?php _e('Ngày bắt đầu') ?></td>
+                <td class="c2"><?php _e(tpl_input_date('date_start', $post['date_start'])) ?></td>
+            </tr>
+            
+            <tr>
+                <td class="c1"><?php _e('Ngày kết thúc') ?></td>
+                <td class="c2"><?php _e(tpl_input_date('date_end', $post['date_end'])) ?></td>
+            </tr>
+            
+            <tr>
+                <td class="c1"><?php _e('Mô tả') ?></td>
+                <td class="c2"><?php _e(tpl_textarea('desc', $post['desc'])) ?></td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td align="center" colspan="2">
+                    <?php _e(tpl_button_add()) ?>
+                     <?php _e(tpl_button_cancel('#Hotel/Commission')) ?>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</form>

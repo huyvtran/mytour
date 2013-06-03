@@ -1,0 +1,41 @@
+<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="side" valign="top">
+            <div id="side">
+                <ul class='links'>
+                    <?php
+                    _e(tpl_menu_side(array(
+                                array(
+                                    title => 'Bảng lương công ty',
+                                    url => '#Salary/Index/Company',
+                                    active => self::getAction() == 'company',
+                                    role => self::hasRole('SALARY_VIEW_ALL_ROLE')
+                                ),
+                                array(
+                                    title => 'Bảng lương của tôi',
+                                    url => '#Salary/Index/Person',
+                                    active => self::getAction() == 'person',
+                                    role => self::hasRole('SALARY_VIEW_ROLE')
+                                )
+                            )));
+                    ?>
+                    <?php if ( self::hasRole('SALARY_VIEW_ALL_ROLE') && self::getAction() == 'company' ): ?>
+                        <li class="sub-big-link">
+                            <div><a>Phòng ban</a></div>
+                        </li>
+                        <li	class="sub-link" style="background:none;padding:5px">
+                            <div style="margin-left:-10px;height:300px;overflow: auto" class="scroll">
+                                <?php _e(get_department_menu_with_cache('salary_department_menu', '#Salary/Index/Company')) ?>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </td>
+        <td class="content" valign="top">
+            <div id="content">
+                <?php self::showContent(); ?>
+            </div>
+        </td>
+    </tr>
+</table>

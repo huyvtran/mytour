@@ -1,0 +1,150 @@
+<?php
+list($posts, $vars, $page, $date_from, $date_to) = self::get(array('posts', 'vars', 'page', 'date_from', 'date_to'));
+$link = '#Hotel/Allotment';
+$room_types = self ::get('room_types');
+$room_type_id = self::get('room_type_id');
+$id = getId();
+$id1 = getId();
+$id2 = getId();
+$id3 = getId();
+?>
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" > 
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2>Danh sách các Allotment</h2></td>
+            <td align="left"> Từ ngày
+                <input id="<?php _e($id1) ?>" type="text" name="date_from" value="<?php _e($date_from) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?room_type_id='+ $('#<?php _e($id3) ?>').get('value') +'&date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; } })" class="x-text x-date" autocomplete="off">
+                        đến <input id="<?php _e($id2) ?>" type="text" name="date_to" value="<?php _e($date_to) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?room_type_id='+ $('#<?php _e($id3) ?>').get('value') +'&date_from='+$('#<?php _e($id1) ?>').get('value')+'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">                                
+            </td>
+            <td align="right">
+                <select class="bor" name="room_type_id" id="<?php _e($id3)?>">
+                    <?php foreach ($room_types as $key => $value): ?>
+                        <?php
+                        if ($value['ID'] == get('room_type_id')) {
+                            $selected = 'selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        ?>
+                        <option value="<?php _e($value['ID']) ?>" <?php _e($selected) ?> >
+                        <?php _e($value['title']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <a onclick="module_ajax('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/EditNumber','<?php _e($id); ?>',this)" class="x-button" >
+                    Cập nhật
+                </a>
+                <a href="#Hotel/Allotment/Add" class="x-button x-button-add"><?php _e(translate('default.add')) ?></a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+    <table cellpadding="0" class="x-list" width="100%">
+        <?php if (isset($posts) && count($posts) > 0): ?>
+            <tr>
+                <th class="k"><?php _e(translate('default.list.index')) ?></th>
+
+                <th witdth="30%"> 
+                    <?php show_order_link('Ngày', 'date', $link, $vars); ?>
+                </th>
+
+                <th> 
+                    <?php show_order_link('Số lượng', 'number', $link, $vars); ?>
+                </th>
+
+                <th> 
+                    <?php show_order_link('Loại phòng', 'room_type_id', $link, $vars); ?>
+                </th>
+                <th> 
+                    <?php show_order_link('Đối tác', 'partner_id', $link, $vars); ?>
+                </th>
+
+                <th colspan="2" witdh="25"><?php _e(translate('default.list.action')); ?></th>
+
+                <th class="k">
+            <div class="x-check-container">                
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>                
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+                        <a onclick="module_ajax('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/EditNumber','<?php _e($id); ?>',this)" class="x-check-action">
+                            Sửa bản ghi đã chọn
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            </th>
+            </tr>
+            <?php
+            foreach ($posts as $k => $a):
+                ?>
+                <tr id="tr-alotment-<?php _e($a['ID']) ?>">
+                    <td align="center"><?php _e($k + 1) ?> </td> 
+                    <td witdth="30%" align="center"> <?php _e(show_date($a['date'])) ?></td>
+                    <td align="center"> 
+                        <input class="bor" name='number[<?php _e($a['ID']) ?>]' type="text" value=" <?php _e($a['number']) ?>" style="width:50px" id="numberallotment-<?php _e($a['ID']) ?>" class="number_allotment"/>
+                    </td>
+                    <td align="center"> 
+                        <?php _e($a['room_type_title']) ?>
+                    </td>
+                    <td align="center">
+                        <a href="<?php _e(append_url("#Hotel/Allotment?partner_id={$a['partner_id']}", $vars)); ?>">
+                            <?php _e($a['partner_title']) ?> 
+                        </a>                        
+                    </td> 
+                    <td width='30' align='center'>
+                        <a onclick="load_inframe('<?php _e(baseUrl()); ?>/Hotel/Allotment/Edit?ID=<?php _e($a['ID']) ?>',{title: 'Sửa Allotment', auto_hidden: true })" class="x-edit"></a>
+                    </td>
+                    <td class="k" align='center'>
+                        <a onclick='module_delete("<?php _e(baseUrl()); ?>/Hotel/Allotment/Delete?ID[]=<?php _e($a['ID']); ?>")' class='x-delete'></a>
+                    </td>
+                    <td align="center">
+                        <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox" id="checkboxallotment-<?php _e($a['ID']) ?>"/>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td colspan="10" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('select[name="room_type_id"]').change(function(){
+            var room_type_id = jQuery(this).val();
+            if(room_type_id != 0){
+                window.location = baseURL+"/User#Hotel/Allotment?room_type_id="+ room_type_id + '&date_from=<?php _e($date_from) ?>&date_to=<?php _e($date_to) ?>' ;
+            }else{
+                window.location = baseURL+"/User#Hotel/Allotment" + '?date_from=<?php _e($date_from) ?>&date_to=<?php _e($date_to) ?>' ;
+            }
+        })
+        jQuery('.number_allotment').focus(function(){
+            var str_ID = jQuery(this).attr('id');
+            var ss = str_ID.split("-");
+            var ID = ss[1];
+            jQuery('#checkboxallotment-'+ ID).attr('checked',true);
+            jQuery('#tr-alotment-' + ID).addClass('x-check-row');
+        })
+    })
+</script>

@@ -1,0 +1,201 @@
+<?php
+$hotel = self::get('hotel');
+$room_types = self::get('room_types');
+$currencies = self::get('currencies');
+$date_removes = self::get('date_removes');
+$post = self::get('post');
+$colum = 2;
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Chi tiết khuyến mãi</h2>
+            </td>
+             <td align="right">
+                <div class="x-list-options">
+                    <a href="#Hotel/Campaign//Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                         Chỉnh Sửa
+                    </a>
+                    <?php _e(tpl_button_cancel('#Hotel/Campaign')) ?>   
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+        <div class="form-message"></div>
+
+        <div class="x-form-container">
+            <table width="100%" cellpadding="4" class="x-form">
+                <tr>
+                    <td class="x-info-label">
+                        Tên khuyến mãi :
+                    </td>
+                    <td class="x-info-content">
+                        <?php _e($post['title']) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="x-info-label">Kiểu khuyến mãi:</td>
+
+                    <td class="x-info-content">
+                        <?php
+                        if ($post['type'] == 'NORMAL') {
+                            _e('Khuyến mãi thường');
+                        } elseif ($post['type'] == 'EARLY') {
+                            _e('KM Đặt Phòng Sớm');
+                        } elseif ($post['type'] == 'LAST') {
+                            _e('KM Đặt Phòng Phút Cuối');
+                        }
+                        ?>
+                    </td> 
+                </tr>
+                <?php if ($post['type'] == 'EARLY'): ?>
+                    <tr>
+                        <td class="x-info-label">Số ngày đặt phòng trước : </td>
+                        <td class="x-info-content"><?php _e($post['inteval_day']) ?></td> 
+                    </tr>
+                <?php endif; ?>
+                <?php if ($post['type'] == 'LAST'): ?>
+                    <tr>
+                        <td class="x-info-label">Số ngày trước khi đến : </td>
+                        <td class="x-info-content"><?php _e($post['inteval_day']) ?></td> 
+                    </tr>
+                <?php endif; ?>
+
+                <tr>
+                    <td class="x-info-label">Ngày BĐ cho đặt KM:</td>
+                    <td class="x-info-content">
+                        <?php _e(show_date($post['date_start_book'])); ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="x-info-label">Ngày kết thúc cho đặt KM: </span>
+                        <?php _e(show_date($post['date_end_book'])); ?>
+                    </td>
+
+                    <td class="x-info-label"></td>
+                    <td class="x-info-content"></td>
+                </tr>
+                <tr>
+                    <td class="x-info-label">Ngày bắt đầu áp dụng KM:</td>
+                    <td class="x-info-content">
+                        <?php _e(show_date($post['date_start'])); ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="x-info-label">Ngày kết thúc áp dụng KM: </span>
+                        <?php _e(show_date($post['date_end'])); ?>
+                    </td>
+
+                    <td class="x-info-label"></td>
+                    <td class="x-info-content"></td>
+                </tr>
+
+                <tr>
+                    <td class="x-form-label">
+                        <?php _e(translate('default.hotel.field.days')) ?>:
+                    </td>
+                    <td class="x-form-content" nowrap="nowrap">
+                        <?php
+                        $n = explode(',', $post['days']);
+                        ?>
+                        <?php for ($i = 1; $i < 7; $i++): ?>
+                            <input name="days[]" type="checkbox" value="<?php _e($i % 7) ?>"<?php _e(in_array($i, $n) ? ' checked' : '' ) ?> disabled/>
+                            <?php _e(translate('default.work.day' . ($i))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php endfor; ?>
+                        <input name="days[]" type="checkbox" value="0"<?php _e(in_array(0, $n) ? ' checked' : '' ) ?> disabled />
+                        <?php _e(translate('default.work.day' . (0))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                </tr>
+
+                <tr id="<?php _e($id) ?>">
+                    <td class="x-info-label">
+                        <?php _e(translate('default.hotel.field.value') . ':') ?>
+                    </td>
+                    <td class="x-info-content">
+                        <?php
+                        if ($post['currency_id'] == 0) {
+                            $currency_title = '%';
+                        } else {
+                            foreach ($currencies as $value) {
+                                if ($value['ID'] == $post['currency_id']) {
+                                    $currency_title = $value['title'];
+                                    break;
+                                }
+                            }
+                        }
+                        ?>
+                        <?php _e($post['sign'] . $post['value'] . ' ' . $currency_title) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="x-info-label">Ngày không áp dụng :</td>
+                    <td class="x-info-content">
+                        <?php if (count($date_removes) > 0): ?>
+                            <table>
+                                <?php foreach ($date_removes as $value): ?>
+                                    <tr>
+                                        <td> <span class="c1">Từ ngày : </span> <?php _e(show_date($value['date_remove_start'])) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span class="c1">Đến ngày : </span><?php _e(show_date($value['date_remove_end'])) ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="x-info-label">Mức ưu tiên : </td>
+                    <td class="x-info-content"><?php _e($post['priority']) ?></td>
+                </tr>
+
+                <tr>
+                    <td class="x-info-label" >
+                        <?php _e(translate("default.hotel.rule.room_types")) ?>: 
+                    </td>
+                    <td colspan="3">
+                        <table cellpadding="10" width ="80%">
+                            <?php
+                            if (isset($room_types) && count($room_types) > 0):
+                                $row_rooms = ceil(count($room_types) / $colum);
+                                for ($i = 0; $i < $row_rooms; $i++):
+                                    ?>
+                                    <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $room_types[$i * $colum + $j];
+                                            ?>
+                                            <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                    <input type="checkbox" name="room_types[]" value="<?php _e($a['ID']) ?>" <?php _e($a['checked']); ?> disabled />
+                                                    <?php _e($a['title']); ?></br>
+                                                <?php endif; ?>
+                                            </td>
+
+                                        <?php endfor; ?>
+                                    </tr>
+                                    <?php
+                                endfor;
+                            endif;
+                            ?>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="x-info-label"> <?php _e(translate('default.image')); ?>:</td>
+                    <td>
+                        <?php if ($post['img']): ?>
+                            <img  src="<?php _e(baseUrl()) ?>/files/campaigns/<?php _e($post['img']) ?>" style="max-width:150px"/>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="x-info-label">Mô tả : </td>
+                    <td class="x-info-content"><?php _e($post['desc']) ?></td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,59 @@
+<?php $post = self::get("post"); ?>
+<table width="100%" cellpadding="0" class="post-container" border="0">
+<tr>
+	<td class="post-content-container" valign="top">
+		<div id="post-content">
+			<div class="post-header">
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td valign="top" width="10" align="center"><a class="big-icon-task"></a></td>
+						<td valign="top" class="post-title">
+							<h3><?php _e($post['title']); ?></h3>
+							<div class="post-desc">Trạng thái: <?php _e(get_task_status($post['status_text'])); ?></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="post-content">
+				<?php if ($post['desc']) : ?>
+					<fieldset>
+						<legend>Mô tả</legend>
+						<?php _e($post['desc']); ?>
+					</fieldset>
+				<?php endif; ?>
+				<div class="section">
+				<h3 class="section-title">Chi tiết công việc</h3>
+				<div class="section-title">
+						
+				</div>
+				</div>
+			</div>	
+		
+		
+		
+		
+		
+		
+		</div>
+	</td>
+	<td class="post-side-container" valign="top">
+		<div id="post-side">
+			<div class="box">
+				<div class="box-title">Tác vụ</div>
+				<div class="box-content">
+					<a class="link-action icon-edit" href="#Task/Index/Edit?ID=<?php _e($post['ID']);?>">Sửa công việc</a>
+					<a class="link-action icon-delete">Xóa công việc</a>
+					<a class="link-action icon-create">Nhân bản công việc</a>
+				</div>
+			</div>	
+			<div class="box">
+				<div class="box-title">Lịch sử</div>
+				<div class="box-content">
+					<a class="link-action icon-time" title="Vào lúc: <?php _e(date(TIME_FORMAT,strtotime($post['date_create'])) ); ?>">Tạo lúc: <?php _e(date(DATE_FORMAT, strtotime($post['date_create']))); ?></a>
+					<a class="link-action icon-author">Người tạo: <a href="<? _e(BASE_URL);?>/#User/View/ID=<?php _e($post['owner_id']); ?>"><b><?php _e($post['owner_name']); ?></b><a/></a>
+				</div>
+			</div>
+		</div>
+	</td>
+</tr>
+</table>

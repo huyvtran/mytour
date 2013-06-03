@@ -1,0 +1,119 @@
+<?php $a = self::get('settings'); ?>
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+	<div class="x-form-container" style="width:500px">
+	<div class="form-message"></div>
+	<table border="0" cellpadding="0" class="x-form">
+		<tr>
+			<td class="x-form-label">Kích thước trang:</td>
+			<td>Hiển thị <select class="x-select" name="page">
+				<option value="10"<?php $a['page']==10?_e(' selected'):''?>>10</option>
+				<option value="20"<?php $a['page']==20?_e(' selected'):''?>>20</option>
+				<option value="30"<?php $a['page']==30?_e(' selected'):''?>>30</option>
+				<option value="40"<?php $a['page']==40?_e(' selected'):''?>>40</option>
+				<option value="50"<?php $a['page']==50?_e(' selected'):''?>>50</option>
+				<option value="100"<?php $a['page']==100?_e(' selected'):''?>>100</option>
+				</select> hàng trên mỗi trang dữ liệu.
+			</td>
+		</tr>
+		<tr>
+			<td class="x-form-label">Âm thanh thông báo:</td>
+			<td>
+				<select class="x-select" name="notice_voice">
+				<option value="yahoo"<?php $a['notice_voice']=='yahoo'?_e(' selected'):''?>>Yahoo</option>
+				<option value="beep"<?php $a['notice_voice']=='beep'?_e(' selected'):''?>>Beep</option>
+				<option value="ring"<?php $a['notice_voice']=='ring'?_e(' selected'):''?>>Chuông</option>
+				<option value="silent"<?php $a['notice_voice']=='silent'?_e(' selected'):''?>>Không dùng</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="x-form-label">Dùng hình nền:</td>
+			<td>
+				<input type="hidden" value="no" name="bg_accept"/>
+				<input type="checkbox" value="yes" name="bg_accept"<?php $a['bg_accept']=='yes'?_e(' checked'):''?>/> chấp nhận
+			</td>
+		</tr>
+		<tr>
+			<td class="x-form-label">Hình nền:</td>
+			<td>
+				<div class="x-file" filename="bg_img" url="<?php _e(baseUrl());?>/User/Setting/Bg">Tải hình nền</div>
+				<div id="userbg">
+				<?php if ($a['bg_img']) : ?>
+				<a href="<?php _e(baseUrl())?>/files/images/<?php _e($a['bg_img']);?>" target="_blank"><img style="max-width:200px;max-height:200px" src="<?php _e(baseUrl())?>/files/images/<?php _e($a['bg_img']);?>"/></a>
+				<?php endif; ?>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="x-form-label">Vị trí hình nền:</td>
+			<td>
+				<?php $ps = array('top left', 'top right', 'top center', 'bottom left', 'bottom right', 'bottom center', 'center center') ?>
+				<select class="x-select" name="bg_pos">
+				<?php foreach ($ps as $p) : ?>
+				<option value="<?php _e($p);?>"<?php $a['bg_pos']== $p ? _e(' selected'):'';?>><?php _e($p); ?></option>
+				<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="x-form-label">Lặp hình nền:</td>
+			<td>
+				<?php $ps = array('no-repeat', 'repeat', 'repeat-x', 'repeat-y') ?>
+				<select class="x-select" name="bg_repeat">
+				<?php foreach ($ps as $p) : ?>
+				<option value="<?php _e($p);?>"<?php $a['bg_repeat'] == $p ? _e(' selected') : ''?>><?php _e($p); ?></option>
+				<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<!--<tr>
+			<td class="x-form-label" valign="top">Sử dụng phím tắt:</td>
+			<td>
+				<input type="radio" name="shortkey" value="no"<?php $a['shortkey']!='yes'?_e(' checked'):''?>/> Không dùng <br/>
+				<input type="radio" name="shortkey" value="yes"<?php $a['shortkey']=='yes'?_e(' checked'):''?>/> Có dùng
+				<br/><a onclick="load_html('#shortkey_view',{css_content:{width:'450px'},title: 'Danh sách phím tắt' })">Tìm hiểu thêm</a>
+				<div style="display:none"><div id="shortkey_view">
+				<div style="padding:5px">
+					<h3 style="color:red">Phím tắt hệ thống</h3>
+					Phím tắt giúp bạn tiết kiệm thời gian bằng cách cho phép bạn không phải rời tay mình khỏi bàn phím để sử dụng chuột.Bạn sẽ cần Bàn phím loại 101/102-Key hoặc Natural PS/2 để sử dụng phím tắt. Có thể tắt hoặc bật chức năng từ mục cài đặt trên thanh tác vụ cá nhân.
+				</div>
+					<table width="100%" cellpadding="5" border="1" bordercolor="#bbbbbb">
+						<tr>
+							<th style='background:#ddd'>Phím tắt</th>
+							<th style='background:#ddd'>Định nghĩa</th>
+							<th style='background:#ddd'>Tác vụ</th>
+						</tr>
+						<tr>
+							<td align="center"><i>Ctrl+T</i></td>
+							<td align="center">Công việc mới</td>
+							<td>Chuyển đến form tạo công việc mới</td>
+						</tr>
+						<tr>
+							<td align="center"><i>Ctrl+L</i></td>
+							<td align="center">Lịch cá nhân mới</td>
+							<td>Chuyển đến form tạo lịch cá nhân mới</td>
+						</tr>
+						<tr>
+							<td align="center"><i>Ctrl+D</i></td>
+							<td align="center">Công văn mới</td>
+							<td>Chuyển đến form tạo công văn mới</td>
+						</tr>
+						<tr>
+							<td align="center"><i>Ctrl+N</i></td>
+							<td align="center">Xem thông báo</td>
+							<td>Di chuyển bảng thông báo trở lại màn hình</td>
+						</tr>
+					</table>
+				</div></div>
+			</td>
+		</tr>-->
+		<tr>
+			<td class="x-form-label"></td>
+			<td>
+				<?php _e(tpl_button_add('Cập nhật')); ?>
+				<a class="x-button x-fresh" onclick="remove_frame(this)">Hủy bỏ</a>
+			</td>
+		</tr>
+	</table>
+</div>
+</form>

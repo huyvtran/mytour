@@ -1,0 +1,20 @@
+<?php
+$current_hotel = get_hotel();
+$hotels = self::get('posts');
+?>
+<h2>Chọn khách sạn quản lý</h2>
+<div style="padding:10px">
+    Hãy tạo mới hoặc chọn một khách sạn đã có để quản lý
+</div>
+<form action="<?php _e(actionUrl()) ?>" method="post" onsubmit="return ajax_form(this)"/>
+<?php foreach ($hotels as $a): ?>
+    <div class="hotel-box">
+        <img src="files/hotel/<?php _e($a['img']) ?>" class="hotel-logo"/><br/>
+        <input type="radio" name="hotel_id" value="<?php _e($a['ID']) ?>"<?php if ($current_hotel['ID'] == $a['ID']) _e(' checked'); ?>/>
+        <?php _e($a['title']) ?>
+    </div>
+<?php endforeach; ?>
+<div class="clear"></div>
+<br/>
+<input type="submit" value="Cập nhật"/>
+</form>

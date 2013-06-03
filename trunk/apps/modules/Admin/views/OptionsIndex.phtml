@@ -1,0 +1,94 @@
+<?php
+
+function ___show_admin_option( $m ) {
+    $b = $m['title'];
+    $title = is_array($b) ? $b[0] : $b;
+    $s = '';
+    if ( !isset($m['posts']['items']) ) {
+        foreach ( $m['posts'] as $a ) {
+            $s .="<tr>
+                <td style='background: #fff' valign='middle'>
+                    <div style='position: relative'>"
+                    . get_quote($a['title'], 30)
+                    . "<span style='display: inline-block; position: absolute; right: 3px; font-size: 9px'>
+                            <a onclick=\"load_inframe('" . baseUrl() . "/Admin/Options/Edit?m={$m['module']}&ID={$a['ID']}',{title: 'Sửa " . mblower($title) . "'})\">sửa</a>
+                            - <a onclick=\"module_delete('" . baseUrl() . "/Admin/Options/Delete?m={$m['module']}&ID={$a['ID']}')\">xóa</a>
+                        </span></div>
+                </td>
+            </tr>";
+        }
+    } else {
+        foreach ( $m['posts']['other_items'] as $a ) {
+            $s .="<tr>
+                <td style='background: #fff' valign='middle'>
+                    <div style='position: relative'>"
+                    . get_quote($a['title'], 30)
+                    . "<span style='display: inline-block; position: absolute; right: 3px; font-size: 9px'>
+                            <a onclick=\"load_inframe('" . baseUrl() . "/Admin/Options/Edit?m={$m['module']}&ID={$a['ID']}',{title: 'Sửa " . mblower($title) . "'})\">sửa</a>
+                            - <a onclick=\"module_delete('" . baseUrl() . "/Admin/Options/Delete?m={$m['module']}&ID={$a['ID']}')\">xóa</a>
+                        </span></div>
+                </td>
+            </tr>";
+        }
+        foreach ( $m['posts']['items'] as $items ) {
+            $s .="<tr><td><b>{$items['title']}</b></td></tr>";
+            foreach($items['posts'] as $a ){
+                $s .="<tr>
+                    <td style='background: #fff' valign='middle'>
+                        <div style='position: relative'>&nbsp;&nbsp;&nbsp;+ "
+                        . get_quote($a['title'], 30)
+                        . "<span style='display: inline-block; position: absolute; right: 3px; font-size: 9px'>
+                                <a onclick='load_inframe(\"" . baseUrl() . "/Admin/Options/Edit?m={$m['module']}&ID={$a['ID']}',{title: 'Sửa " . mblower($title) . "'})\">sửa</a>
+                                - <a onclick=\"module_delete('" . baseUrl() . "/Admin/Options/Delete?m={$m['module']}&ID={$a['ID']}')\">xóa</a>
+                            </span></div>
+                    </td>
+                </tr>";
+            }
+        }
+    }
+    return $s;
+
+}
+?>
+
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tbody>
+            <tr>
+                <td align="left">
+                    <h2>Quản lý danh sách mục</h2>
+                </td>
+                <td align="right">
+                    <div class="x-options-container">
+                        <a class="x-button">Phân hệ <span>&#9660;</span></a>
+                        <div class="x-options">
+                                <?php $modules = self::get('modules'); ?>
+                                <?php foreach ( $modules as $k => $v ): ?>
+                                <a href="#Admin/Options?tab=<?php _e($k) ?>" class="x-options-item">
+                                <?php _e(translate('admin.options.item.' . $k) . ' (' . (count($v)) . ')') ?>
+                                </a>
+                                <?php endforeach; ?>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="x-form-container" style="padding: 8px">
+<?php foreach ( self::get('options') as $a ) : ?>
+    <?php $title = is_array($a['title']) ? $a['title'][0] : $a['title']; ?>
+        <div style="width:205px; float: left; margin: 2px">
+            <div style="background:#637AAE;padding:7px 5px;color:#fff;border:1px solid #ccc;border-bottom:none">
+                <a onclick="load_inframe('<?php _e(baseUrl()); ?>/Admin/Options/Add?m=<?php _e($a['module']); ?>',{ title: 'Thêm <?php _e(mblower($title)) ?>' })"><span
+                        style="color: #fff" title="Thêm mới">[+]</span></a> <?php _e($title); ?>
+            </div>
+            <div class="scroll" style="height:250px;overflow:auto;">
+                <table border="1" cellpadding="5" cellspacing="0" style="width:205px" bordercolor="#D8DFEA">
+    <?php _e(___show_admin_option($a)) ?>
+                </table>
+            </div>
+        </div>
+<?php endforeach; ?>
+    <div class="clear"></div>
+</div>

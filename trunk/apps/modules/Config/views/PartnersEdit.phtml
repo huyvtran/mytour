@@ -1,0 +1,33 @@
+<?php
+
+$post = self::get('post');
+
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">   
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>" />
+    <div class="x-form-container" style="overflow: true;">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">    
+            <tr>
+                <td class="x-form-label"><?php _e('Tên đối tác :') ?></td>
+                <td class="x-form-content">
+                    <?php _e(tpl_input_small('title', $post['title'])) ?>
+                </td>
+            </tr>
+
+            <tr>	
+                <td class="x-form-label" valign="top"><?php _e('Mô tả :') ?></td>
+                <td class="x-form-content">
+                    <?php _e(tpl_textarea('desc', $post['desc'])) ?>                    
+                </td>
+            </tr>                     
+
+            <tr>
+                <td align="center" colspan="2">
+                    <?php _e(tpl_button_add()) ?>
+                    <a onclick="remove_frame(this)" class="x-button x-fresh">Hủy bỏ</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

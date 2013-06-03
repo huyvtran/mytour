@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>Ðăng ký</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" type="image/gif" href="<?php _e(baseUrl()) ?>/themes/fav.gif">
+    <?php _e(htmlLink('/style/css/login.css')); ?>
+    <?php _e(htmlScript('/style/owl.js')); ?>
+</head>
+<body>
+    <div class="wrap">
+        <center>
+            <div style="border:1px solid #aaa;display:inline-block;padding:10px;margin:100px auto">
+                <h1>Đăng ký tài khoản quản lý khách sạn</h1>
+                <?php if ( self::get('errors') ) { ?>
+                    <div style="color:#ff0000"><?php _e(self::get('errors')); ?></div>
+                <?php } ?>
+                <?php $posts = self::get('posts'); ?>
+                <form  method="post" action="" id="form-register">
+                    <table cellspacing="3" cellpadding="3" align="center">
+                        <tr>
+                            <td><b>Tên truy cập:</b></td>
+                            <td>
+                                <input class="x-text" type="text" style="width:230px" name="username" value="<?php isset($posts['username']) ? _e($posts['username']) : _e(''); ?>"/>
+                            <td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Mật khẩu:</b></td>
+                            <td><input class="x-text" type="password" style="width:230px" name="password"/><td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Nhập lại mật khẩu:</b></td>
+                            <td><input class="x-text" type="password" style="width:230px" name="re_password"/><td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Họ và tên:</b></td>
+                            <td>
+                                <input class="x-text" type="text" style="width:200px" name="firstname" placeholder="Họ" value="<?php isset($posts['firstname']) ? _e($posts['firstname']) : _e(''); ?>"/>
+                                <input class="x-text" type="text" style="width:130px" name="lastname" placeholder="Tên" value="<?php isset($posts['lastname']) ? _e($posts['lastname']) : _e(''); ?>"/>
+                            <td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Email:</b></td>
+                            <td>
+                                <input class="x-text" type="text" style="width:230px" name="email" value="<?php isset($posts['email']) ? _e($posts['email']) : _e(''); ?>"/>
+                            <td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Quốc gia:</b></td>
+                            <td>
+                                <select name="location_id" class="x-select">
+                                    <?php _e(select_options(Plugins::getCountries(), 'title', isset($posts['location_id']) ? $posts['location_id'] : 0 )); ?>
+                                </select>
+                            <td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Thành Phố:</b></td>
+                            <td>
+                                <select name="city" class="x-select">
+                                    <?php _e(select_options(Plugins::getDefaultStates(), 'title', isset($posts['city']) ? $posts['city'] : 0)); ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2">
+                                <input type="submit" value="Đăng ký"/>
+                                <input type="reset" id="reset_form">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+    </div>
+</center>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<?php
+list($posts, $vars, $page) = self::get(array('posts', 'vars', 'page'));
+$link = '#Hotel/Surcharge';
+$date_from = self::get('date_from');
+$date_to = self::get('date_to');
+$id = getId();
+$id1 = getId();
+$id2 = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2><?php _e('Danh sách phụ phí') ?></h2></td>
+            <td align="left"> 
+                <? /* Từ ngày
+                  <input id="<?php _e($id1) ?>" type="text" name="date" value="<?php _e($date_from) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?date_from='+this.value +'&date_to='+$('#<?php _e($id2) ?>').get('value') ; } })" class="x-text x-date" autocomplete="off">
+                  đến <input id="<?php _e($id2) ?>" type="text" name="date" value="<?php _e($date_to) ?>" style="padding-top:5px;padding-bottom:5px" onclick="date_picker(this,{format: 'd/m/Y',onChange: function(){ location.hash = '<?php _e($link) ?>?date_from='+$('#<?php _e($id1) ?>').get('value')+'&date_to='+this.value ; } })" class="x-text x-date" autocomplete="off">
+                 * 
+                 */ ?>
+            </td>            
+            <td align="right">
+                <?php
+                _e(tpl_search_form(baseUrl() . '/Hotel/Surcharge?s=' . self::get('s'), null, 'Tiêu đề'));
+                ?>
+                <a href="#Hotel/Surcharge/Add" class="x-button x-button-add">
+                    <?php _e(translate('default.add')) ?>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" >
+    <table cellpadding="0" class="x-list" width="100%">
+        <tr>
+            <th>TT</th>
+            <th><?php show_order_link('Tên phụ phí', 'title', $link, $vars) ?></th>
+            <th><?php show_order_link('Ngày bắt đầu', 'date_start', $link, $vars) ?></th>
+            <th><?php show_order_link('Ngày kết thúc', 'date_end', $link, $vars) ?></th>
+            <th><?php show_order_link('Giá tiền', 'money', $link, $vars) ?></th>            
+            <th colspan="2">Tác vụ</th>
+            <th class="k">
+        <div class="x-check-container">
+            <div class="x-check">
+                <input rows="tr" type="checkbox" class="x-checkbox"/>
+            </div>
+            <div class="x-check-options">
+                <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                <a class="x-check-item" rows="tr">
+                    <?php _e(translate('default.action.check_all')) ?>
+                </a>
+                <div class="x-check-actions">
+                    <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                    <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                        <?php _e(translate('default.action.remove')) ?>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        </th>            
+        </tr>
+        <?php foreach ($posts as $post => $a): ?>
+            <tr>
+                <td align="center"><?php _e($post + 1) ?></td>
+                <td align="center">
+                    <a href="#Hotel/Surcharge/View?ID=<?php _e($a['ID']) ?>"><?php _e($a['surcharge_title']) ?></a>
+                </td>
+                <td align="center"><?php _e(show_date('d/m/Y', $a['date_start'])) ?></td>
+                <td align="center"><?php _e(show_date('d/m/Y', $a['date_end'])) ?></td>                
+                <td align="center"><?php _e(show_money($a['money']) . ' ' . $a['currency_name']) ?></td>                
+                <td width='30' align='center'>                                        
+                    <a href="#Hotel/Surcharge/Edit?ID=<?php _e($a['ID']) ?>" class="x-edit"></a>                    
+                </td>
+                <td class="k" align='center'>
+                    <a onclick='module_delete("<?php _e(baseUrl()); ?>/Hotel/Surcharge/Delete?ID[]=<?php _e($a['ID']); ?>")' class='x-delete'></a>
+                </td>
+                <td align="center">
+                    <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox"/>
+                </td>                
+            </tr>
+        <?php endforeach; ?>
+        <tr>
+            <td colspan="8" class="page">
+                <div class="x-page">
+                    <?php _e($page); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>
+

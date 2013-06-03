@@ -1,0 +1,28 @@
+<form method="post" action="<?php _e(actionUrl())?>"
+	onsubmit="return ajax_form(this,true)">
+<div class="x-list-title">
+<table height="100%" width="100%" border="0" cellpadding="0">
+	<tr>
+		<td>
+		<h2>Tìm kiếm tài khoản</h2>
+		</td>
+	</tr>
+</table>
+</div>
+<div class="x-form-container">
+<table border="0" cellpadding="0" class="x-form">
+	<tr>
+		<td class="x-form-label x-form-label-special">Từ khóa tìm kiếm:
+		</td>
+		<td class="x-form-input"><input type="text" name="s"
+			class="x-text x-normal-text" value="" /></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td><?php echo tpl_button_add('Tìm kiếm'); ?> <?php echo tpl_button_back('Quay lại danh sách tài khoản', '#Admin/User'); ?>
+		</td>
+	</tr>
+</table>
+</div>
+</form>

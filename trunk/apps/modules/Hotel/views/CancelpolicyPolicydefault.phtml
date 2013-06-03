@@ -1,0 +1,118 @@
+<form method="post" action="<?php _e(actionUrl())?>" onsubmit="return ajax_form(this)">
+<div class="x-form-container" style="overflow: true;">
+<div class="form-message"></div>
+<?php 
+$currencies = self::get('currencies');
+$post = self::get('post');
+?>
+<table width="100%" border="0" cellpadding="5" class="x-form">    
+	<tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>1. &nbsp;
+                                            <select name="type_1" style="width:150px">
+                                                <option></option>
+                                                <option value="no_show" <?php if ($post['type_1'] == 'no_show') { _e('selected="selected"');} ?>>No Show</option>
+                                                <option value="any_days"<?php if ($post['type_1'] == 'any_days') { _e('selected="selected"');} ?>>Any Days</option>
+                                                <option value="no_cancellations" <?php if ($post['type_1'] == 'no_cancellations') {_e('selected="selected"');} ?>>No Cancellations</option>
+                                            </select>
+                                            <input name="value_1" type="text" style="width:100px" value="<?php _e($post['value1']) ?>"/>
+
+                                            <select name="unit_1">
+                                                <option></option>
+                                                <option value="-1" <?php if ($post['unit_1'] == '-1') {_e('selected="selected"');} ?> >Ðêm</option>
+                                                <option value="0" <?php if ($post['unit_1'] == '0') {_e('selected="selected"');} ?> > %</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>" <?php if ($post['unit_1'] == $value['ID']) { _e('selected');} ?> ><?php _e($value['title']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            
+
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin : </b>&nbsp;&nbsp;<?php _e(tpl_input_number('prior_checkin_1', $post['prior_checkin_1'])) ?>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <input type="hidden"  name="disabled_1" value="1"/>
+                                            <input name="is_apply" type="checkbox" checked="checked" disabled="disabled"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <?php
+                                        if ($post['disabled_1'] == 0) {
+                                            $disabled = ' disabled="disabled"';
+                                            $checked = '';
+                                        } else {
+                                            $disabled = '';
+                                            $checked = 'checked="checked"';
+                                        }
+                                        ?>
+                                        <td>2. &nbsp;
+                                            <input type="hidden" name="IDD[]" value="<?php _e($post['disabled_2']) ?>" />
+                                            <select name="type_2" style="width:150px" <?php _e($disabled) ?> >
+                                                <option></option>
+                                                <option value="within">Within</option>
+                                            </select>
+                                            <input name="value_2" type="text" style="width:100px"  value="<?php _e($post['value_2']) ?>" <?php _e($disabled) ?> />
+                                            <select name="unit_2"   <?php _e($disabled) ?>>
+                                                <option></option>
+                                                <option value="-1" <?php if ($post['unit_2'] == '-1') {_e('selected="selected"'); } ?>>Ðêm</option>
+                                                <option value="0"  <?php if ($post['unit_2'] == '0') {_e('selected="selected"');} ?>>%</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>" <?php if ($post['unit_2'] == $value['ID']) { _e('selected="selected"');} ?>><?php _e($value['title']) ?></option>
+                                            <?php endforeach; ?>
+                                            </select>
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin : </b>&nbsp;&nbsp;
+                                            <input type="number"  name="prior_checkin_2" class="x-text x-number-text" value="<?php _e($post['prior_checkin_2']) ?>" <?php _e($disabled) ?>/>
+                                            &nbsp;&nbsp;&nbsp;<input name="is_apply_2"  type="checkbox" <?php _e($checked) ?>  onchange="$(this).parent(1).find('input[name*=ID]').set('value',this.checked ? 1 : 0);$(this).parent(1).find('select[name*=type],input[name*=value],select[name*=unit],input[name*=prior_checkin]').attr('disabled',this.checked ? null : 'disabled')"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+                                    
+
+                                    <tr>
+                                        <?php
+                                        if ($post['disabled_3'] == 0) {
+                                            $disabled2 = ' disabled="disabled"';
+                                            $checked2 = '';
+                                        } else {
+                                            $disabled2 = '';
+                                            $checked2 = 'checked="checked"';
+                                        }
+                                        ?>
+                                        <td>3. &nbsp;
+                                            <input type="hidden" name="IDD[]" value="<?php _e($post['disabled']) ?>"  />
+
+                                            <select name="type_3" style="width:150px" <?php _e($disabled2) ?>>
+                                                <option></option>
+                                                <option value="within">Within</option>
+                                            </select>
+
+                                            <input name="value_3" type="text" style="width:100px" value="<?php _e($post['value_3']) ?>" <?php _e($disabled2) ?>  />
+
+                                            <select name="unit_3" <?php _e($disabled2) ?>> >
+                                                <option></option>
+                                                <option value="-1" <?php if ($post['unit_3'] == '-1') { _e('selected="selected"');} ?> >Ðêm</option>
+                                                <option value="0"   <?php if ($post['unit_3'] == '0') { _e('selected="selected"'); } ?> >%</option>
+                                                <?php foreach ($currencies as $key => $value): ?>
+                                                    <option value="<?php _e($value['ID']) ?>" <?php if ($post['unit_3'] == $value['ID']) { _e('selected="selected"');  } ?> ><?php _e($value['title']) ?></option>
+                                            <?php endforeach; ?>
+                                            </select>
+
+                                            &nbsp;&nbsp;&nbsp;<b> Số ngày trước khi checkin : </b>&nbsp;&nbsp;
+                                            <input type="number"  name="prior_checkin_3" class="x-text x-number-text" <?php _e($disabled2) ?> value="<?php _e($post['prior_checkin_3']) ?>"/>
+
+                                            &nbsp;&nbsp;&nbsp;<input name="is_apply_3" type="checkbox" <?php _e($checked2) ?> onchange="$(this).parent(1).find('input[name*=ID]').set('value',this.checked ? 1 : 0);$(this).parent(1).find('select[name*=type],input[name*=value],select[name*=unit],input[name*=prior_checkin]').attr('disabled',this.checked ? null : 'disabled')"/>&nbsp; Áp dụng
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td align="center" colspan="2">
+                                <?php _e(tpl_button_add()) ?>
+                                <a onclick="remove_frame(this)" class="x-button x-fresh">Hủy bỏ</a>
+                            </td>
+                        </tr>
+</table>
+</div>
+</form>

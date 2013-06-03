@@ -1,0 +1,166 @@
+<?php $user = self::get("user"); ?>
+<h2 class="profile-title">
+<?php _e($user['username']) ?>
+</h2>
+<h4 class="profile-status">
+<?php _e($user['title']) ?>
+</h4>
+<table border="0" cellpadding="5">
+<tr>
+	<td align="center" valign="top">
+		<?php if ($user['photo']) : ?>
+		<img class="profile-photo" src="<?php _e(baseUrl())?>/files/photo/<?php _e($user['photo'])?>"/>
+		<?php else : ?>
+		<img class="profile-photo" src="<?php _e(baseUrl())?>/style/images/home-nophoto.png"/>
+		<?php endif; ?>		
+		<div style="clear:both;text-align:left;font-size:9px;text-transform:uppercase;font-weight:bold">
+			<a>Mail</a> | 
+			<a>Nhắn tin</a> | 
+			<a>Chát </a>
+		</div>
+</td>
+<td valign="top">
+<div class="tab-bar">
+	<a class="tab-link tab-link-first tab-link-active" onclick="do_tab(this,1)">Thông tin chung</a>
+	<a class="tab-link" onclick="do_tab(this,2)">Cá nhân</a>
+	<a class="tab-link" onclick="do_tab(this,3)">Liên hệ</a>
+	<a class="tab-link" onclick="do_tab(this,4)">Hoạt động</a>
+	<span class="clear"></span>
+</div>
+<div class="tabs" style="width:450px">
+	<div class="tab tab-active">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="80">Sinh nhật:</td>
+				<td>
+					<?php _e(show_date(DATE_FORMAT, $user['birthday'])) ?>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="x-form-label" valign="top">Giới thiệu:</td>
+				<td>
+					<?php _e(nl2br($user['profiles'])) ?>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="tab">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="80">Học:</td>
+				<td class="x-form-input">
+					<?php _e($user['university']) ?>
+				</td>
+			</tr>		
+			<tr>
+				<td class="x-form-label">Sở thích:</td>
+				<td class="x-form-input">
+					<?php _e($user['fav']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Thể thao:</td>
+				<td class="x-form-input">
+					<?php _e($user['sport']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Âm nhạc:</td>
+				<td class="x-form-input">
+					<?php _e($user['music']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Phim ảnh:</td>
+				<td class="x-form-input">
+					<?php _e($user['film']) ?>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="tab">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" width="80">Họ tên:</td>
+				<td class="x-form-input">
+					<?php _e($user['fullname']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label" width="80">Thư điện tử:</td>
+				<td class="x-form-input">
+					<?php _e($user['email']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Yahoo:</td>
+				<td class="x-form-input">
+					<?php _e($user['yahoo']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Điện thoại:</td>
+				<td class="x-form-input">
+					<?php _e($user['phone']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Địa chỉ:</td>
+				<td class="x-form-input">
+					<?php _e($user['address']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Đến từ:</td>
+				<td class="x-form-input">
+					<?php _e($user['city']) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label">Trang web:</td>
+				<td class="x-form-input">
+					<?php if ($user['web']) : ?>
+					<a href="<?php if( !preg_match("#^http(s)?\:\/\/#is",$user['web'])) _e('http://')?><?php _e($user['web'])?>" target="_blank"><?php _e($user['web']) ?></a>
+					<?php endif; ?>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	
+	<!-- SOM ACTIVE -->
+	<div class="tab">
+		<div class="x-form-container">
+		<table border="0" cellpadding="0" class="x-form">
+			<tr>
+				<td class="x-form-label" style="text-align:left!important" width="120">
+					Đăng nhập gần nhất:</td>
+				<td class="x-form-input">
+					<span class="time"><?php _e(show_date('H:i:s', $user['date_login'])); ?></span>
+					<?php _e(show_date(DATE_FORMAT, $user['date_login'])); ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="x-form-label" colspan="2" valign="top" style="text-align:left!important">
+					Đang thực hiện (<?php _e(count(self::get('tasks'))); ?>):
+				</td>
+			</tr>
+			<tr>	
+				<td colspan="2">
+					<?php foreach (self::get('tasks') as $a) : ?>
+					<div><a href="#Task/Index/View?ID=<?php _e($a['ID'])?>">
+						&#187; <?php _e($a['title']) ?></a></div>
+					<?php endforeach; ?>
+				</td>				
+			</tr>
+		</table>
+		</div>
+	</div>	
+</div>
+</td></tr></table>

@@ -1,0 +1,92 @@
+<?php
+
+list($post_comm, $post_allot) = self::get(array('post_comm', 'post_allot'));
+
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2>Chi tiết đối tác</h2></td>
+        </tr>
+    </table>
+</div>
+
+<div class="tab-container" style="overflow: true;margin-top:-2px">
+    <div class="tab-bar">
+        <a class="tab-link tab-link-first<?php if (!in_array(get('tab', ''), array('commission', 'allotment'))) _e(' tab-link-active'); ?>" onclick="do_tab(this,1)"><?php _e('Commission') ?></a>
+
+        <a class="tab-link<?php if (get('tab', '') == 'commission') _e(' tab-link-active'); ?>" onclick="do_tab(this,2)"><?php _e('Allotment') ?></a>
+
+        <span class="clear"></span>
+    </div>
+    <div class="form-message"></div>
+    <div class="tabs">
+
+        <!-- Commission -->
+        <div class="tab tab-active" >
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-list">                     
+                    <?php if(count($post_comm) > 0): ?>
+                    <th><?php _e('TT') ?></th>
+                    <th><?php _e('Đối tác') ?></th>
+                    <th><?php _e('Hoa hồng') ?></th>
+                    <th><?php _e('Khách sạn') ?></th>
+                    <th><?php _e('Ngày bắt đầu') ?></th>
+                    <th><?php _e('Ngày kết thúc') ?></th>
+                    <th><?php _e('Mô tả') ?></th>
+                      <?php foreach ($post_comm as $k => $a) :?>
+                    <tr>
+                        <td align="center"><?php _e($k+1) ?></td>
+                        <td align="center"><?php _e($a['partner_name']) ?></td>
+                        <td align="center"><?php _e($a['percent']. ' %') ?></td>
+                        <td align="center"><?php _e($a['hotel_name']) ?></td>
+                        <td align="center"><?php _e(date('d/m/Y', strtotime($a['date_start']))) ?></td>
+                        <td align="center"><?php _e(date('d/m/Y', strtotime($a['date_end']))) ?></td>
+                        <td align="center"><?php _e($a['desc']) ?></td>
+                    </tr>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                    <tr>
+                       <td colspan="10" class="page">
+                         <div class="x-page">
+                           <?php self::e("page_comm"); ?>
+                         </div>
+                       </td>
+                    </tr>                    
+                </table>
+            </div>
+        </div>
+
+        <!-- Allotment -->
+        <div class="tab<?php if (get('tab', '') == 'allotment') _e(' tab-active'); ?>" style="min-height:200px">
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-list">                     
+                    <?php if(count($post_allot) > 0): ?>
+                    <th><?php _e('TT') ?></th>
+                    <th><?php _e('Ngày') ?></th>
+                    <th><?php _e('Số lượng') ?></th>
+                    <th><?php _e('Loại phòng') ?></th>
+                    <th><?php _e('Đối tác') ?></th>
+                      <?php foreach ($post_allot as $g => $b) :?>
+                    <tr>
+                        <td align="center"><?php _e($g+1) ?></td>
+                        <td align="center"><?php _e(date('d/m/Y', strtotime($b['date']))) ?></td>
+                        <td align="center"><?php _e($b['number']) ?></td>
+                        <td align="center"><?php _e($b['room_type']) ?></td>
+                        <td align="center"><?php _e($b['partner_name']) ?></td>
+                    </tr>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                    <tr>
+                       <td colspan="10" class="page">
+                         <div class="x-page">
+                           <?php self::e("page_allot"); ?>
+                         </div>
+                       </td>
+                    </tr>                    
+                </table>                
+            </div>
+        </div>
+
+    </div>
+</div>

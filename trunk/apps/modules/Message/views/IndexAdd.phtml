@@ -1,0 +1,32 @@
+<?php
+$post = self::get('post');
+$settings = self::get('settings');
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>"/>
+    <div class="form-message"></div>
+    <div class="user-message-form">
+        <div class="row message-input">
+            <label for="subject">Tiêu đề:</label> <input type="text" name="subject" class="user-message-title"/>
+        </div>
+        <div class="row message-input">
+            <label>Tới:</label> <?php _e(tpl_select_users('to[]')) ?>
+        </div>
+        <div class="row">
+            <?php _e(tpl_uploads('files[]', 'message')) ?>
+        </div>
+        <div class="row">
+            <?php
+            $content = '';
+            if ($settings['use_signature'] == '1') {
+                $content = "<div class='message-signature'>{$settings['signature']}</div>";
+            }
+            ?>
+            <?php _e(tpl_editor('body', '<br/>' . $content)); ?>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn"><i class="icon-hand-up icon-white"></i> Gửi đi</button>
+            <a href="#Message"><div class="btn-white"><i class="icon-share-alt"></i> Hủy bỏ</div></a>
+        </div>
+    </div>
+</form>

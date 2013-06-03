@@ -1,0 +1,123 @@
+<?php
+$id = getId();
+$posts = self::get('posts');
+$vars = self::get('vars');
+$link = '#Personnel';
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2> Danh sách bản in mẫu	</h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <div class="x-options-container">
+                        <a class="x-button">Phân hệ <span>&#9660;</span></a>
+                        <div class="x-options">
+                            <?php foreach ( self::get('modules') as $k => $ar ): ?>
+                                <div class="x-options-item"><b><?php _e($k) ?></b></div>
+                                <?php foreach ( $ar as $j => $v ): ?>
+                                    <a href="#Admin/Template?module=<?php _e($j) ?>" class="x-options-item">
+                                        -- <?php _e($v) ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <a href="#Admin/Template/Key" class="x-button">
+                        Từ khóa
+                    </a>
+                    <a onclick="load_frame('<?php _e(baseUrl()) ?>/Admin/Template/Add')" class="x-button x-button-add">
+                        <?php _e(translate('default.button.add')) ?>
+                    </a>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</div>
+<form id="<?php _e($id); ?>">
+    <table width="100%" cellpadding="5" class="x-list">
+        <?php if ( count($posts) > 0 ) : ?>
+            <tr>
+                <th class="k">
+                    <?php _e(translate('default.list.index')) ?>
+                </th>
+                <th>
+                    <?php show_order_link('Tiêu đề', 'title', $link, $vars); ?>
+                </th>
+                <th width="100">
+                    <?php show_order_link('Phân hệ', 'module', $link, $vars); ?>
+                </th>
+                <th width="200">
+                    <?php show_order_link('File', 'file', $link, $vars); ?>
+                </th>
+                <th width="100">
+                    <?php show_order_link('Dung lượng', 'size', $link, $vars); ?>
+                </th>
+                <th colspan="2">
+                    <?php _e(translate('default.list.action')) ?>
+                </th>
+                <th class="k">
+            <div class="x-check-container">
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </th>
+            </tr>
+            <?php foreach ( $posts as $k => $a ) : ?>
+                <tr>
+                    <td align="center">
+                        <?php _e($k + 1); ?></td>
+                    <td align="center">
+                        <a href="<?php _e(baseUrl()) ?>/Admin/Template/View?ID=<?php _e($a['ID']); ?>">
+                            <?php _e($a['title']); ?></a>
+                    </td>
+                    <td align="center">
+                        <?php foreach ( self::get('modules') as $k => $ar ): ?>
+                            <?php foreach ( $ar as $j => $v ): ?>
+                                <?php _e($j == $a['module'] ? $v : '') ?>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </td>
+                    <td align="center">
+                        <?php _e($a['filename']); ?>
+                    </td>
+                    <td align="center">
+                        <?php _e(smart_file_size($a['size'])); ?>
+                    </td>
+                    <td class="k">
+                        <a onclick="load_frame('<?php _e(baseUrl()) ?>/Admin/Template/Edit?ID=<?php _e($a['ID']) ?>')"  class="x-edit"></a>
+                    </td>
+                    <td class="k">
+                        <a  onclick="module_delete('<?php _e(baseUrl()); ?>/Admin/Template/Delete?ID[]=<?php _e($a['ID']) ?>')" class="x-delete"></a>
+                    </td>
+                    <td class="k">
+                        <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox"/>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td colspan="8" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

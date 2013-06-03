@@ -1,0 +1,56 @@
+<?php $post = self::get('post'); ?>
+<form method="post" action="<?php _e(actionUrl($this)) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e($post['ID']) ?>"/>
+    <div class="x-list-title">
+        <table height="100%" width="100%" border="0" cellpadding="0">
+            <tr><td>
+                    <h2>Tạo mới template xuất file</h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="x-form-container">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">
+            <tr>
+                <td class="x-form-label">
+                    Tiêu đề:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_input_normal('title', $post['title'])); ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    Phân hệ:
+                </td>
+                <td class="x-form-input">
+                    <select name="module" class="x-select">
+                        <?php foreach ( self::get('modules') as $k => $a ): ?>
+                            <option value="" class="opt-cat"><?php _e($k) ?></option>
+                            <?php foreach ( $a as $j => $v ): ?>
+                                <option value="<?php _e($j) ?>"<?php _e($j==$post['module']?' selected':'')?>>--<?php _e($v) ?></option>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="x-form-label">
+                    File mẫu:
+                </td>
+                <td class="x-form-input">
+                    <?php _e(tpl_upload()) ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="x-form-label"></td>
+                <td class="x-form-input">
+                    <?php _e(tpl_button_add()); ?>
+                    <?php _e(tpl_button_cancel('#Admin/Template')); ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

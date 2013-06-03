@@ -1,0 +1,39 @@
+<?php
+$parents = self::get('parents');
+?>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="m" value="<?php _e(get('m', 0)); ?>"/>
+    <table cellpadding="5">
+        <?php if ( !is_array($parents) ): ?>
+            <tr>
+                <td>
+                    <input name="title" type="text" placeholder="Tiêu đề" style="width:250px;" class="x-text" value=""/>
+                </td>
+                <td>
+                    <input type="submit" class="x-button x-save" value="Cập nhật"/>
+                </td>
+            </tr>
+        <?php else: ?>
+            <tr>
+                <td>
+                    <input name="title" type="text" placeholder="Tiêu đề" style="width:250px;" class="x-text" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Thuộc: <select name="parent_id">
+                        <option></option>
+                        <?php foreach ( $parents as $a ): ?>
+                            <option value="<?php _e($a['ID']) ?>"><?php _e($a['title']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="x-button x-save" value="Cập nhật"/>
+                </td>
+            </tr>
+        <?php endif; ?>
+    </table>
+</form>

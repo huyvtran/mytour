@@ -1,0 +1,110 @@
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left"><h2><?php _e(translate('default.admin.hotel.ruleprice')) ?></h2></td>
+            <td align="right">
+                <?php
+                _e(tpl_search_form(baseUrl() . '/Hotel/RulePrice/Index?s=' . self::get('s'), null, 'Tiêu đề'));
+                ?>                
+                <a href="#Hotel/RulePrice/Add" class="x-button x-button-add"><?php _e(translate('default.add')) ?></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php
+list($posts, $vars, $page) = self::get(array('posts', 'vars', 'page'));
+$link = '#Hotel/RulePrice/Index';
+$id = getId();
+?>
+<form  id="<?php _e($id); ?>" method="post"  onsubmit="return ajax_form(this)" > 
+    <table cellpadding="0" class="x-list" width="100%">
+        <?php if (isset($posts) && count($posts) > 0): ?>
+            <tr>
+                <th class="k"><?php _e(translate('default.list.index')) ?></th>
+
+                <th witdth="30%"> 
+                    <?php show_order_link(translate('default.title'), 'title', $link, $vars); ?>
+                </th>
+
+                <th> 
+                    <?php show_order_link(translate('default.hotel.field.date_start'), 'date_start', $link, $vars); ?>
+                </th>
+
+                <th> 
+                    <?php show_order_link(translate('default.hotel.field.date_end'), 'date_end', $link, $vars); ?>
+                </th>
+
+                <th> 
+                    <?php _e(translate('default.hotel.rule.type')) ?>
+                </th>
+                <th> 
+                    <?php show_order_link('Mức ưu tiên', 'priority', $link, $vars); ?>
+                </th>
+
+                <th colspan="2" witdh="25"><?php _e(translate('default.list.action')); ?></th>
+
+                <th class="k">
+            <div class="x-check-container">                
+                <div class="x-check">
+                    <input rows="tr" type="checkbox" class="x-checkbox"/>
+                </div>
+                <div class="x-check-options">
+                    <div class="s"><span><?php _e(translate('default.action.check')) ?></span></div>
+                    <a class="x-check-item" rows="tr">
+                        <?php _e(translate('default.action.check_all')) ?>
+                    </a>                
+                    <div class="x-check-actions">
+                        <div class="s"><span><?php _e(translate('default.action.dones')) ?></span></div>
+                        <a onclick="module_delete('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/Delete','<?php _e($id); ?>',this)" class="x-check-action">
+                            <?php _e(translate('default.action.remove')) ?>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            </th>
+            </tr>
+            <?php
+            foreach ($posts as $k => $a):
+                ?>
+                <tr>
+                    <td align="center"><?php _e($k + 1) ?> </td> 
+                    <td witdth="30%">
+                         <a href="#Hotel/RulePrice/View?ID=<?php _e($a['ID']) ?>">
+                             <?php _e($a['title']) ?>
+                         </a>
+                    </td>
+                    <td align="center"> <?php _e(show_date('d/m/Y', $a['date_start'])) ?></td>
+                    <td align="center"> <?php _e(show_date('d/m/Y', $a['date_end'])) ?></td>
+                    <td align="center">
+                        <?php
+                        if ($a['currency_id'] == 0) {
+                            $a['currency_title'] = '%';
+                        };
+                        ?>
+                        <?php _e($a['sign'] . $a['value'] . ' ' . $a['currency_title']) ?>
+                    </td>
+                     <td align="center"><?php _e($a['priority']) ?> </td> 
+                    <td width='30' align='center'>
+                        <a href="#Hotel/RulePrice/Edit?ID=<?php _e($a['ID']) ?>" class="x-edit"></a>
+                    </td>
+                    <td class="k" align='center'>
+                        <a onclick='module_delete("<?php _e(baseUrl()); ?>/Hotel/RulePrice/Delete?ID[]=<?php _e($a['ID']); ?>")' class='x-delete'></a>
+                    </td>
+                    <td align="center">
+                        <input name="ID[]" value="<?php _e($a['ID']) ?>" type="checkbox"/>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <tr>
+            <td colspan="10" class="page">
+                <div class="x-page">
+                    <?php self::e("page"); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</form>
+

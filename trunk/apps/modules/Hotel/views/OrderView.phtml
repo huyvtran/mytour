@@ -1,0 +1,258 @@
+<?php
+$post = self::get('post');
+$hotel = self::get('hotel');
+$status = self::get('status');
+$order_price_days = self::get('order_price_days');
+
+
+$countries = Plugins::getCountries();
+
+$states = Plugins::getDefaultStates();
+
+$id = getId();
+
+$orderOlds = self::get('orderOlds');
+
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.view.order")) ?></h2>
+            </td>
+            <?php if ($post['status'] == 3) { ?>
+                <td align="right">
+                    <a onclick="ajax_load('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/AcceptEdit?ID=<?php _e($post['ID']) ?>&status=<?php _e($post['status']) ?>&is_accept=1')" class="x-button" >
+                        Xác nhận sửa
+                    </a>
+                    <a onclick="ajax_load('<?php _e(baseUrl()); ?>/<?php _e(self::getModule()) ?>/<?php _e(self::getController()) ?>/CancelEdit?ID=<?php _e($post['ID']) ?>&status=<?php _e($post['status']) ?>&is_accept=0')" class="x-button" >
+                        Không xác nhận
+                    </a>
+                    <?php _e(tpl_button_cancel('#Hotel/Order')) ?>
+                </td>
+
+            <?php } elseif ($post['status'] == 0) { ?>
+                <td align="right">
+                    <div class="x-list-options">
+                        <a class="x-button" onclick="ajax_load('<?php _e(baseUrl()) ?>/Hotel/Order/AcceptOrder?ID=<?php _e($post['ID']) ?>')">
+                            Xác nhận đơn
+                        </a>
+                        <a class="x-button" onclick="ajax_load('<?php _e(baseUrl()) ?>/Hotel/Order/CancelOrder?ID=<?php _e($post['ID']) ?>')">
+                            Hủy đơn
+                        </a>
+                        <a href="#Hotel/Order/Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                            Chỉnh sửa
+                        </a>
+                        <?php _e(tpl_button_cancel('#Hotel/Order')) ?>
+
+                    </div>
+                </td>
+            <?php } elseif ($post['status'] == 1) { ?>
+                <td align="right">
+                    <div class="x-list-options">
+                        <a href="#Hotel/Order/Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                            Chỉnh sửa
+                        </a>
+                        <?php _e(tpl_button_cancel('#Hotel/Order')) ?>
+                    </div>
+                </td>
+            <?php } ?>
+
+
+        </tr>
+    </table>
+</div>
+<?php
+foreach ($orderOlds as $post):
+    ?>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+
+        <div class="tabs">
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-info">
+                        <tr>
+                            <td colspan="4"> <h2>Thời gian : <?php _e(date('d/m/Y H:i:s', strtotime($post['date_created']))) ?></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="x-info-label">
+                               Mã đơn đặt phòng:
+                            </td>
+                            <td class="x-info-content">
+                                <span style="color:red;font-weight: bold">HD-<?php _e($post['root_id']) ?></span>
+                            </td>
+
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.field.hotel_id') . ':') ?>
+                            </td>
+                            <td class="x-info-content">
+                                <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>">
+                                    <?php _e($hotel['title']) ?>
+                                </a>	
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.field.number') . ':') ?>
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['amount']) ?>
+                            </td>
+
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.field.room_types') . ':') ?>
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['room_title']) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.field.date_start') . ':') ?>
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e(show_date('d/m/Y', $post['date_start'])) ?>
+                            </td>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.field.date_end') . ':') ?>
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e(show_date('d/m/Y', $post['date_end'])) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.customer_name')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['customer_name']) ?>
+                            </td>
+
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.customer_email')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['customer_email']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.location_id')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php
+                                foreach ($countries as $value) {
+                                    if ($value['ID'] == $post['location_id']) {
+                                        _e($value['title']);
+                                        break;
+                                    }
+                                }
+                                ?>
+                            </td>
+
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.state_id')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php
+                                foreach ($states as $value) {
+                                    if ($value['ID'] == $post['state_id']) {
+                                        _e($value['title']);
+                                        break;
+                                    }
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('Quận huyện')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e(self::get('districts')) ?>
+                            </td>
+                        </tr>                    
+
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.customer_address')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['customer_address']) ?>
+                            </td>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.status')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($status[$post['status']]) ?>
+                            </td>   
+                        </tr>
+                        <tr>
+
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.customer_phone')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['customer_phone']) ?>
+                            </td>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.has_extrabed')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php ($post['has_extrabed'] == 0) ? _e('Không') : _e('Có') ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="x-info-label">Hình thức đặt phòng:</td>
+                            <td class="x-info-content">
+                                <?php _e($post['order_type_title']) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-info-label">
+                                <?php _e(translate('default.hotel.orders.desc')); ?>:
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['desc']) ?>
+                            </td>
+                            <td class="x-info-label">
+                                <?php _e('Tổng giá :'); ?>
+                            </td>
+                            <td class="x-info-content">
+                                <?php _e($post['total_price'] . '  ' . $post['symbol']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="x-info-label">Giá từng ngày :</td>
+                            <td class="x-info-content">
+                                <table>
+                                    <?php
+                                    if (count($order_price_days) > 0) :
+                                        foreach ($order_price_days as $value) :
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?php
+                                                    _e('Giá phòng ngày ' . date('d-m-Y', strtotime($value['date'])) . ' là : '
+                                                            . $value['price'] . ' ' . $post['symbol'] . ' / 1 phòng');
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+endforeach;
+?>

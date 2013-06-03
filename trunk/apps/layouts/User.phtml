@@ -1,0 +1,196 @@
+<?php $config = self::get('configs'); ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>E-Office</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <?php $style_directory = BASE_URL . "/style" ?>
+            <link rel="shortcut icon" href="<?php _e($style_directory) ?>/fav.ico" type="image/x-icon"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/layout.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/lightbox.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/plugins/tree/tree.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/date.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/calendar.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/table-calendar.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/chat.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/style.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/home.css"/>
+            <link rel="stylesheet" href="<?php _e($style_directory) ?>/css/menu.css"/>
+            
+            <script>
+                var baseURL    = "<?php _e(BASE_URL); ?>";
+                var PHPSESSID  = "<?php _e(session_id()); ?>";
+                var timeNotice = parseInt("<?php _e($config['time_notice']) ?>")||5;
+                var timeChat   = parseInt("<?php _e($config['time_chat']) ?>")||5;
+            </script>
+            <!-- Owl Library -->
+            <script src="<?php _e($style_directory) ?>/plugins/jquery.js"></script>
+            <script src="<?php _e($style_directory) ?>/owl.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/owl.easing.min.js"></script>
+            <!-- Most plugins js extend fro application -->
+            <script src="<?php _e($style_directory) ?>/plugins/ui.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/date.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/tree/tree.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/lightbox.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/tab.js"></script>            
+            <script src="<?php _e($style_directory) ?>/plugins/highchart.js"></script>            
+            <script src="<?php _e($style_directory) ?>/plugins/exporting.js"></script>            
+            <script src="<?php _e($style_directory) ?>/plugins/table-calendar.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/toolbar.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/owl.scroll.min.js"></script>
+
+            <!--runtime-ajax-->
+            <script src="<?php _e($style_directory) ?>/modules/notice.js"></script>
+
+            <script src="<?php _e($style_directory) ?>/modules/union.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/hotel.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/ajax.js"></script>
+            <script src="<?php _e($style_directory) ?>/plugins/table.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/upload/swfupload.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/upload/handlers.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/ajax.upload.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/label.js"></script>
+            <script src="<?php _e($style_directory) ?>/modules/admin.js"></script>
+            <script src="<?php _e($style_directory) ?>/editor/ckeditor/ckeditor.js"></script>
+            <script src="<?php _e($style_directory) ?>/editor/ckfinder/ckfinder.js"></script>
+            <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyDsduDYKlBFr7ZxGMdOqDvJuvC47vHsB3Y"></script>
+
+
+            <script type="text/javascript">
+<?php
+$langs = 'check_empty_notice,ajax_can_not_load';
+$a = explode(',', $langs);
+foreach ($a as $i) {
+    $term = preg_replace('#\n#i', '', trim($i));
+    _e("App.addLang('$term','" . translate($term) . "')\n");
+}
+?>
+            </script>
+            <script>
+                $(function(){
+                    $('.qadd')
+                    .onMouseenter(function(){
+                        $(this)
+                        .find('.la')
+                        .show(200,{
+                            width:false,
+                            height:false
+                        });
+                    })
+                    .onMouseleave(function(){
+                        $(this)
+                        .find('.la')
+                        .hide(200,{
+                            width:false,
+                            height:false
+                        });
+                    })
+                });
+                
+            </script>
+    </head>
+    <body>
+        <div id="banner">
+            <table cellpadding="0" style="width:100%">
+                <tr>
+                    <td width="50" height="50" valign="bottom" nowrap="nowrap" style="padding:5px 0px">
+                        <?php if (file_exists('files/configs/logo.png')) : ?>
+                            <img src="<?php _e(baseUrl()) ?>/files/configs/logo_new.png"/>
+                        <?php endif; ?>
+                    </td>
+                    <td align="left" valign="bottom" style="padding:5px 0px">
+                        <div style="font-size:15px">
+                            <h1><?php _e($config['title']); ?></h1>
+                            <div class="desc"><?php _e($config['desc']); ?></div>
+                        </div>
+                    </td>
+                    <td align="right" nowrap="nowrap">
+                        <?php $user = self::get('user'); ?>
+                        <div id='usercp'>
+                            <div class="l">
+                                <a class="username" href="#Private/Personnel">
+                                    <b><?php _e($user['username']); ?></b></a> [ <a href='<?php _e(baseUrl()); ?>/Logout'>thoát</a> ]
+
+                                | <a title="Tùy chỉnh cá nhân" onclick="load_inframe('<?php _e(baseUrl()); ?>/User/Setting',{id:'user-settings',auto_hidden:true,title:'Cấu hình hiển thị'})">
+
+                                    <a href="#Hotel">Khách sạn của tôi</a>
+                                    | <a href="#Config">Cấu hình chung</a>
+                            </div>
+                        </div>
+                    </td></tr>
+            </table>
+        </div>
+        <div id="wrapper">
+
+            <!--
+            <div id="header">
+                <div id="menu">
+                    <ul class='menu'>
+                        <li class='main-link m-home'><a href="#Home" class="icon-menu-home">Trang chủ</a></li>
+
+                        <li class='main-link m-hotel'><a href="#Hotel">Khách sạn</a></li>
+
+            <?php if (self::hasRole('ADMIN_ROLE')) : ?>
+                                            <li class="main-link m-admin">
+                                                <a href="#Admin"><?php _e(translate('default.module.admin')) ?></a>
+                                            </li>
+            <?php endif; ?>
+                    </ul>
+                    <div class="qadd">
+                        <span class="bt" id="notice-lb">+</span>
+                        <div class="la">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <?php
+            $bg = "";
+            if (self::getConfig('user.bg_accept') == 'yes') {
+                $img = self::getConfig('user.bg_img', '');
+                $pos = self::getConfig('user.bg_pos', '');
+                $repeat = self::getConfig('user.bg_repeat', '');
+                $bg = " style='background: transparent url(\"" . BASE_URL . "/files/images/$img\") $repeat $pos !important;background-attachment:fixed' ";
+            }
+            ?>
+            <div id="main-content"<?php _e($bg) ?>>
+                <table width="100%" height="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="toolbar" style="display:none">
+                <div id="toolbar-bts">
+                    <div id="app-option">
+                        <div id="app-list">
+                            <div class="app-item app-item-sticky" onclick="open_sticky()">Sticky</div>
+
+                        </div>
+                    </div>
+                    <div id="notice-option">
+                        <div class="nice-title">
+                            <div class="nice-title-content"></div>
+                            <div class="nice-title-bottom"></div>
+                        </div>
+                    </div>
+                    <div id="chat-option">
+                        <div class="nice-title">
+                            <div class="nice-title-content"></div>
+                            <div class="nice-title-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="toolbar-body">
+                    <div id="toolbar-body-main"></div>
+                    <div id="toolbar-body-control">
+                        <a class="ml"><span class="ml-no"></span></a>
+                        <a class="mr"><span class="mr-no"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $notice_file = self::getConfig('user.notice_voice', 'yahoo'); ?>
+        <audio id='noticesound' src='<?php _e(baseUrl()); ?>/style/sounds/<?php _e($notice_file); ?>.wav'></audio>
+    </body>
+</html>

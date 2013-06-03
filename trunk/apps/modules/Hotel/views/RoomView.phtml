@@ -1,0 +1,195 @@
+<?php
+$post = self::get('post');
+$hotel = self::get('hotel');
+$rules_checked = self::get('rules_checked');
+$rules_all = self::get('rules_all');
+$room_services = self::get('room_services');
+$colum = 4;
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2><?php _e(translate("default.hotel.view.room_types")) ?></h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <a href="#Hotel/Room/Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                         Chỉnh Sửa
+                    </a>
+                    <?php _e(tpl_button_cancel('#Hotel/Room')) ?>   
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="tab-container" style="overflow: true;margin-top:-2px">
+    <div class="tabs">
+        <!-- GENERAL -->
+        <div class="tab tab-active" >
+            <div class="x-form-container">
+                <table width="100%" cellpadding="4" class="x-info">
+                    <tr>
+                        <td rowspan="21" align="center" width="200" valign="top">
+                            <img src="<?php _e(baseUrl()) ?>/files/<?php if (!$post['img']): ?>photo/noavatar.gif<?php else : ?>/rooms/<?php _e($post['img']); ?><?php endif; ?>" style="max-width:120px" class="personnel-photo"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.room.field.title')); ?>:
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['title']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.hotel_id') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>">
+                                <?php _e($hotel['title']) ?>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.price') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['price'] . ' ' . $post['currency_title']) ?>
+                        </td>
+
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.area') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['area']) ?> m&sup2;
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.number') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['number']) ?>
+                        </td>
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.size_people') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['size_people']) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="x-info-label">
+                            Giá thêm giường
+                        </td>
+                        <td class="x-info-content">
+                            <?php
+                            if ($post['has_extrabed'] == 1) {
+                                _e($post['extrabed_price'] . ' ' . $post['currency_title']);
+                            } elseif ($post['has_extrabed'] == 0) {
+                                _e('Không có DV thêm giường');
+                            }
+                            ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                    <!--<td class = "x-info-label">
+                    Số phòng dành cho Mytour.vn :
+                    </td>
+                    <td class = "x-info-content">
+                        <?php _e($post['number_mytour']);
+                        ?>
+                </td>-->
+                        <td class="x-info-label">
+                            <?php _e(translate('default.hotel.field.desc') . ':') ?>
+                        </td>
+                        <td class="x-info-content">
+                            <?php _e($post['desc']) ?>
+                        </td>
+                    </tr>
+                    <!--Rule Price -->
+                    <tr>
+                        <td >
+                            <?php _e('Áp dụng quản lý giá:') ?>
+                        </td>
+                        <td colspan="3">
+                            <table cellpadding="10" width ="100%">
+                                <?php
+                                if (isset($rules_all) && count($rules_all) > 0):
+                                    $row_rules = ceil(count($rules_all) / $colum);
+                                    for ($i = 0; $i < $row_rules; $i++):
+                                        ?>
+                                        <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $rules_all[$i * $colum + $j];
+                                            ?>
+                                                <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php
+                                                if (isset($a['ID'])):
+                                                    if ($rules_checked) {
+                                                        (in_array($a['ID'], $rules_checked)) ? $check = ' checked' : $check = '';
+                                                    }
+                                                    ?>
+                                                        <input type="checkbox" name="room_rules []" value="<?php _e($a['ID']) ?>" <?php _e($check) ?> disabled/>
+                                                        <?php _e($a['title']); ?></br>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <?php endfor; ?>
+                                            </tr>
+                                                        <?php
+                                                    endfor;
+                                                endif;
+                                                ?>
+                            </table>
+                        </td>
+                    </tr>
+
+
+                    <!-- SERVICES -->
+                    <tr>
+                        <td >
+                            <?php _e(translate("default.hotel.room.services")) ?>
+                        </td>
+                        <td colspan="3">
+                            <table cellpadding="10" width ="100%">
+                            <?php
+                            if (isset($room_services) && count($room_services) > 0):
+                                $row_services = ceil(count($room_services) / $colum);
+                                for ($i = 0; $i < $row_services; $i++):
+                                    ?>
+                                        <tr width="100%">
+                                        <?php
+                                        for ($j = 0; $j < $colum; $j++):
+                                            $a = $room_services[$i * $colum + $j];
+                                            ?>
+                                                <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                <?php if (isset($a['ID'])): ?>
+                                                        <input type="checkbox" name="services[]" value="<?php _e($a['ID']) ?>"<?php _e($a['checked']); ?> disabled />
+                                                    <?php _e($a['title']); ?>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <?php endfor; ?>
+                                        </tr>
+                                            <?php
+                                        endfor;
+                                    endif;
+                                    ?>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

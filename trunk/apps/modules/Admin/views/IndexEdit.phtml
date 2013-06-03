@@ -1,0 +1,152 @@
+<form action="<?php _e(actionUrl())?>" onsubmit="return load_form(this)" method="post" onreset="calendar_check_day($('#dfi').k(0))">
+<input type="hidden" name="ID" value="<?php _e(get('ID'));?>"/>
+<div class="x-form-title">
+	<h2>Lịch mới</h2>
+	<div class="x-list-button">
+	<button type="reset" class="x-button">Làm mới</button>
+	<button type="submit" class="x-button">Lưu lại</button>
+	</div>
+</div>
+<?php self::e("message"); ?>
+<?php $a = self::get('post'); ?>
+<table class="x-form" cellpadding="5" width="100%">
+<tr>
+	<td width="100" class="x-label">
+		Tiều đề
+	</td>
+	<td>
+		<input name="title" type="text" class="x-text" style="width:400px" placeholder="Điền vào tiêu đề" value="<?php _e(get('title',$a['title']))?>"/>		
+	</td>
+</tr>
+<tr>
+	<td class="x-label">
+		Ngày thực hiện
+	</td>
+	<td>
+		<input name="date_start" onclick="date_picker(this,{noTime:true})" onblur="calendar_fill_date_end(this)" type="text" class="x-text x-date" size="10" value="<?php _e(get('date_start',$a['date_start']))?>"/>
+	</td>
+</tr>
+<tr>
+	<td class="x-label">
+		Thời gian
+	</td>
+	<td>
+		Từ <input onclick="time_picker(this)" type="text" class="x-text x-time" size="7" name="time_start" value="<?php _e(get('time_start', date('H:i',strtotime($a['time_start'])) ));?>"/>
+		
+		 đến <input onclick="time_picker(this)" type="text" class="x-text x-time" size="7" name="time_end" value="<?php _e(get('time_end',  date('H:i',strtotime($a['time_end'])) ));?>"/> 
+	</td>
+</tr>
+<tr>
+	<td class="x-label" valign="top">
+		<div style="padding:2px 0px">Tùy chỉnh</div>	
+	</td>
+	<td>
+		<div class="tab-container">
+			<div class="tab-bar">
+				<a class="tab-link tab-link-first tab-link-active" onclick="do_tab(this,1)">Chi tiết</a>
+				<a class="tab-link" onclick="do_tab(this,2)">Lặp lại</a>
+				<a class="tab-link" onclick="do_tab(this,3)">Nhắc nhở</a>
+				<span class="clear"></span>
+			</div>
+			<div class="tabs" style="border-width:1px 0px 0px 1px">
+				<div class="tab tab-active">
+					<table cellpadding="2" width="100%">
+					<tr>
+						<td width="10%" align="right">
+							<b>Nội dung</b>
+						</td>
+						<td>
+							<textarea class="x-text" name="content" style="width:100%;height:100px"><?php _e(get('content', $a['content'])); ?></textarea>
+						</td>	
+					</tr>
+					</table>
+				</div>
+				<div class="tab">
+					<table cellpadding="5" width="100%">
+					<tr>
+						<td width="12%" align="right">
+							<b>Kiểu lặp lại</b>
+						</td>
+						<td>
+							<input onclick="calendar_check_day(this)" type="radio" name="repeat_type" value="NONE"<?php get('repeat_type',$a['repeat_type'])=='NONE' ? _e(' checked') :'' ?>/> Không lặp
+							<input onclick="calendar_check_day(this)" type="radio" name="repeat_type" value="DAY"<?php get('repeat_type',$a['repeat_type'])=='DAY' ? _e(' checked') :'' ?>/> Hàng ngày
+							<input onclick="calendar_check_day(this)" type="radio" name="repeat_type" value="WEEK"<?php get('repeat_type',$a['repeat_type'])=='WEEK' ? _e(' checked') :'' ?>/> Hàng tuần
+							<input onclick="calendar_check_day(this)" type="radio" name="repeat_type" value="MONTH"<?php get('repeat_type',$a['repeat_type'])=='MONTH' ? _e(' checked') :'' ?>/> Hàng tháng
+							<input onclick="calendar_check_day(this)" type="radio" name="repeat_type" value="YEAR"<?php get('repeat_type',$a['repeat_type'])=='YEAR' ? _e(' checked') :'' ?>/> Hàng năm
+						</td>
+					</tr><tr>		
+						<td align="right">
+							<b>Chọn thứ </b>
+						</td>
+						<td id="cday">
+							<?php
+$disabled = get('repeat_type', $a['repeat_type']) != 'DAY' ? ' disabled ' : ' ';
+$rp = isset($_POST['repeat_day']) ? (array) $_POST['repeat_day'] : explode(',', $a['repeat_day']);
+?>
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" id="dfi" value="0"<?php in_array('0',$rp ) ? _e(' checked') :'' ?>/>Thứ 2
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="1"<?php in_array('1',$rp ) ? _e(' checked') :'' ?>/>Thứ 3
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="2"<?php in_array('2',$rp ) ? _e(' checked') :'' ?>/>Thứ 4
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="3"<?php in_array('3',$rp ) ? _e(' checked') :'' ?>/>Thứ 5
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="4"<?php in_array('4',$rp ) ? _e(' checked') :'' ?>/>Thứ 6
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="5"<?php in_array('5',$rp ) ? _e(' checked') :'' ?>/>Thứ 7
+							<input<?php _e($disabled);?>type="checkbox" name="repeat_day[]" value="6"<?php in_array('6',$rp ) ? _e(' checked') :'' ?>/>Chủ nhật
+							
+						</td>
+					</tr><tr>		
+						<td align="right">
+							<b>Ngày kết thúc lặp</b>
+						</td>
+						<td id="cday">
+							<input name="repeat_date_end" id="d-end" onclick="date_picker(this,{noTime:true});this._focused=true" type="text" class="x-text x-date" size="10" value="<?php _e(get('repeat_date_end',$a['repeat_date_end']))?>"<?php get('repeat_type',$a['repeat_type']) == 'NONE' ? _e(' disabled') : ''; ?>/><br/>							
+							<input type="checkbox" onclick="$('#d-end').set('disabled',this.checked ? true: false)" name="no_date_end" value="yes"<?php get('no_date_end')=='yes' || ( !isset($_POST['no_date_end']) && $a['repeat_date_end'] != '' )  ? _e(' checked') :''?><?php get('repeat_type',$a['repeat_type']) == 'NONE' ? _e(' disabled') : ''; ?>/> 
+							<i>Không có ngày kết thúc</i>
+						</td>						
+					</tr>
+					</table>									
+				</div>
+				<div class="tab">
+					<table cellpadding="5" width="100%">
+					<tr>
+						<td width="12%" align="right">
+							<b>Kiểu nhắc nhở</b>
+						</td>
+						<td>
+							<input type="checkbox" name="repeat_alert" value="yes"<?php get('repeat_alert',$a['repeat_alert'])=='yes' ? _e(' checked') :'' ?>/> Hiện bảng thông báo <br/>
+							<input type="checkbox" name="repeat_email" value="yes"<?php get('repeat_email',$a['repeat_email'])=='yes' ? _e(' checked') :'' ?>/> Gửi email <br/>
+						</td>
+					</tr><tr>		
+						<td align="right">
+							<b>Nhắc trước</b>
+						</td>
+						<td id="cday">
+							<?php $disabled = get('repeat_type', $a['repeat_type']) != 'DAY' ? ' disabled ' : ' '; ?>
+							<select name="repeat_time_number" class="x-select">
+								<option value="0"<?php get('repeat_time_number',$a['repeat_time_number'])  == '0' ? _e(' selected'):''?>>0</option>
+								<option value="1"<?php get('repeat_time_number',$a['repeat_time_number'])  == '1' ? _e(' selected'):''?>>1</option>
+								<option value="2"<?php get('repeat_time_number',$a['repeat_time_number'])  == '2' ? _e(' selected'):''?>>2</option>
+								<option value="5"<?php get('repeat_time_number',$a['repeat_time_number'])  == '5' ? _e(' selected'):''?>>5</option>
+								<option value="10"<?php get('repeat_time_number',$a['repeat_time_number']) == '10' ? _e(' selected'):''?>>10</option>
+								<option value="30"<?php get('repeat_time_number',$a['repeat_time_number']) == '30' ? _e(' selected'):''?>>30</option>
+							</select>		
+							<select name="repeat_time_unit" class="x-select">
+								<option value="1"<?php get('repeat_time_unit',$a['repeat_time_unit'])     == '1' ? _e(' selected'):''?>>phút</option>	
+								<option value="60"<?php get('repeat_time_unit',$a['repeat_time_unit'])    == '60' ? _e(' selected'):''?>>giờ</option>	
+								<option value="1440"<?php get('repeat_time_unit',$a['repeat_time_unit'])  == '1440' ? _e(' selected'):''?>>ngày</option>	
+								<option value="10080"<?php get('repeat_time_unit',$a['repeat_time_unit']) == '10080' ? _e(' selected'):''?>>tuần</option>	
+							</select>		
+						</td>
+					</tr>
+					</table>											
+				</div>
+			</div>	
+		</div>		
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<button type="reset" class="x-button">Làm mới</button>
+		<button type="submit" class="x-button">Lưu lại</button>	
+	</td>
+</tr>
+</table>
+</form>

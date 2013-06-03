@@ -1,0 +1,85 @@
+<?php
+list($post, $surcharge_types) = self::get(array(post, surcharge_types));
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Chỉnh sửa phụ phí</h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input name="ID" type="hidden" value="<?php _e(self::get('ID', getInt('ID'))) ?>"/>
+    <div class="x-form-container" style="overflow: true;">
+        <div class="form-message"></div>
+        <table width="100%" border="0" cellpadding="5" class="x-form">    
+            <tr>
+                <td class="x-form-label"><?php _e('Tên phụ phí ' . ':') ?></td>
+                <td class="x-form-content">
+                    <?php _e(tpl_select('surcharge_id', 'ID', 'title',$surcharge_types, $post['surcharge_id'])) ?>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Ngày bắt đầu</td>
+                <td class="c2">
+                    <?php _e(tpl_input_date('date_start', $post['date_start'])); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td class="x-form-label">Ngày kết thúc</td>
+                <td class="x-form-content">
+                    <?php _e(tpl_input_date('date_end', $post['date_end'])); ?>
+                </td>
+            </tr>            
+            <tr>
+                <td class="x-form-label">
+                    <?php _e(translate('default.hotel.field.days')) ?>:
+                </td>
+                <td class="x-form-content" nowrap="nowrap">
+                    <?php
+                    $n = explode(',', $post['days']);
+                    ?>
+                    <?php for ($i = 1; $i < 7; $i++): ?>
+                        <input name="days[]" type="checkbox" value="<?php _e($i % 7) ?>"<?php _e(in_array($i, $n) ? ' checked' : '' ) ?> />
+                        <?php _e(translate('default.work.day' . ($i))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php endfor; ?>
+                    <input name="days[]" type="checkbox" value="0"<?php _e(in_array(0, $n) ? ' checked' : '' ) ?> />
+                    <?php _e(translate('default.work.day' . (0))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>          
+
+            <tr>
+                <td class="x-form-label"><?php _e('Số tiền') ?></td>
+                <td class="x-form-content">                    
+                    <?php _e(tpl_input_number('money', $post['money'])) ?>                      
+                    <select class="bor" name="currency" id="">
+                        <?php foreach (self::get('currencies') as $currency): ?>
+                            <option value="<?php _e($currency['ID']) ?>" <?php _e(($post['currency'] == $currency['ID']) ? 'selected=selected' : '') ?>><?php _e($currency['title']) ?></option>
+                        <?php endforeach; ?>
+                    </select>                    
+                </td>
+            </tr>
+
+            <tr>	
+                <td class="x-form-label" valign="top"><?php _e(translate('default.desc') . ':') ?></td>
+                <td class="x-form-content">                    
+                    <?php _e(tpl_textarea('desc', $post['desc'])) ?>
+                </td>
+            </tr>        
+            <tr>
+                <td align="center" colspan="2">
+                    <?php _e(tpl_button_add()) ?>
+                    <?php _e(tpl_button_cancel("#Hotel/Surcharge")) ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

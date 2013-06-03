@@ -1,0 +1,79 @@
+<?php
+function faq_map($items) {
+	foreach ($items as $k => $item) {
+		$t = true;
+		for ($i = 0; $i < count($items); $i++) {
+			if ($item['parent_id'] == $items[$i]['ID']) {
+				$t = false;
+				break;
+			}
+		}
+		if ($t) {
+			$items[$k]['parent_id'] = '0';
+		}
+	}
+	return faq_map_recruise($items);
+}
+
+$dp_ord = 1;
+
+function faq_map_recruise($items, $parent_id = '0', $c = 0) {
+	global $dp_ord;
+	if (!$dp_ord)
+		$dp_ord = 1;
+	//limit deep
+	if ($c > 10)
+		return "";
+	$html = "";
+	foreach ($items as $k => $a) {
+		if ($a['parent_id'] == $parent_id) {
+			$html .= "<tr>
+					<td></td>
+					<td>
+						<a ".($a['is_menu'] == 'yes' ? ' style="font-weight:bold" ' : '')."href='#Admin/Faq/Edit?ID={$a['ID']}'>".str_repeat('+ ', $c).$a['title']."</a>
+					</td>
+					<td width='30' align='center'>
+						<a href='#Admin/Faq/Edit?ID={$a['ID']}' class='x-edit'></a>
+					</td>
+					<td width='30' align='center'>
+					<a href='#Admin/Faq/delete?ID={$a['ID']}' class='x-delete'></a>
+					</td>
+					</tr>";
+
+			unset($items[$k]);
+			$html .= faq_map_recruise($items, $a['ID'], $c + 1);
+		}
+	}
+	return $html;
+}
+?>	
+
+<div class="x-list-title">
+<table width="100%" border="0" height="100%">
+<tr>
+	<td align="left">
+		<h2>Thư viện FAQ</h2>
+	</td>
+	<td align="right">	
+		<div class="x-list-options">
+			<a href="#Admin/Faq/Add" class="x-button x-button-add">Thêm câu hỏi</a>
+		</div>
+	</td>
+</tr>
+</table>	
+</div>
+		
+<table width="100%" cellpadding="5" class="x-list">
+	<tr>
+		<th width="5"></th>
+		<th>
+			Câu hỏi
+		</th>
+		<th width="25" colspan="2">Tác vụ</th>
+	</tr>
+	<?php _e(faq_map(self::get('posts'))); ?>
+	<tr>		
+		<td colspan="4"></td>
+	</tr>
+</table>
+	

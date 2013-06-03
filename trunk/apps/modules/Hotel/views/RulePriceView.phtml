@@ -1,0 +1,157 @@
+<?php
+$hotel = self::get('hotel');
+$room_types = self::get('room_types');
+$post = self::get('post');
+$colum = 4;
+$currencies = self::get('currencies');
+$id = getId();
+?>
+<div class="x-list-title">
+    <table width="100%" border="0" height="100%">
+        <tr>
+            <td align="left">
+                <h2>Chi tiết quản lý giá</h2>
+            </td>
+            <td align="right">
+                <div class="x-list-options">
+                    <a href="#Hotel/RulePrice/Edit?ID=<?php _e($post['ID']) ?>" class="x-button" >
+                        Chỉnh Sửa
+                    </a>
+                    <?php _e(tpl_button_cancel('#Hotel/RulePrice')) ?>   
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form  method="post" action="<?php _e(actionUrl()) ?>" onsubmit="return ajax_form(this)">
+    <input type="hidden" name="ID" value="<?php _e(self::get('ID', getInt('ID'))); ?>"/>
+    <div class="tab-container" style="overflow: true;margin-top:-2px">
+        <div class="form-message"></div>
+        <div class="tabs">
+
+            <!-- GENERAL -->
+            <div class="tab tab-active" >
+                <div class="x-form-container">
+                    <table width="100%" cellpadding="4" class="x-form">
+
+                        <tr>
+                            <td class="c1">
+                                <?php _e(translate('default.title') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <?php _e($post['title']); ?>
+                            </td>
+
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.hotel_id') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <a href="#Hotel/Index/View?ID=<?php _e($hotel['ID']) ?>"> <?php _e($hotel['title']); ?></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1"><?php _e(translate('default.hotel.field.date_start')) ?>:</td>
+                            <td class="c2">
+                                <?php _e(show_date($post['date_start'])); ?>
+                            </td>
+
+                            <td class="c1"><?php _e(translate('default.hotel.field.date_end')) ?>:</td>
+                            <td class="c2">
+                                <?php _e(show_date($post['date_end'])); ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="x-form-label">
+                                <?php _e(translate('default.hotel.field.days')) ?>:
+                            </td>
+                            <td class="x-form-content" nowrap="nowrap">
+                                <?php
+                                $n = explode(',', $post['days']);
+                                ?>
+                                <?php for ($i = 1; $i < 7; $i++): ?>
+                                    <input name="days[]" type="checkbox" value="<?php _e($i % 7) ?>"<?php _e(in_array($i, $n) ? ' checked' : '' ) ?> disabled />
+                                    <?php _e(translate('default.work.day' . ($i))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php endfor; ?>
+                                <input name="days[]" type="checkbox" value="0"<?php _e(in_array(0, $n) ? ' checked' : '' ) ?> disabled/>
+                                <?php _e(translate('default.work.day' . (0))) ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr id="<?php _e($id) ?>">
+                            <td class="c1">
+                                <?php _e(translate('default.hotel.field.value') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <?php _e($post['sign']) ?>
+                                <?php _e($post['value']); ?>
+                                <?php
+                                foreach ($currencies as $value) {
+                                    if ($post['currency_id'] == $value['ID']) {
+                                        _e($value['title']);
+                                    } elseif ($post['currency_id'] == '0') {
+                                        _e('%');
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td class="c1">
+                                Mức ưu tiên :
+                            </td>
+                            <td class="c2">
+                                <?php _e($post['priority']) ?>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="c1">
+                                <?php _e(translate('default.desc') . ':') ?>
+                            </td>
+                            <td class="c2">
+                                <?php _e($post['desc']) ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="c1" >
+                                <?php _e(translate("default.hotel.rule.room_types")) ?>: 
+                            </td>
+                            <td colspan="3">
+                                <table cellpadding="10" width ="100%">
+                                    <?php
+                                    if (isset($room_types) && count($room_types) > 0):
+                                        $row_rooms = ceil(count($room_types) / $colum);
+                                        for ($i = 0; $i < $row_rooms; $i++):
+                                            ?>
+                                            <tr width="100%">
+                                                <?php
+                                                for ($j = 0; $j < $colum; $j++):
+                                                    $a = $room_types[$i * $colum + $j];
+                                                    ?>
+                                                    <td valign="top" width="<?php _e(ceil(100 / $colum)) ?>%"  >
+                                                        <?php if (isset($a['ID'])): ?>
+                                                            <input type="checkbox" name="room_types[]" value="<?php _e($a['ID']) ?>" <?php _e($a['checked']); ?> disabled/>
+                                                            <?php _e($a['title']); ?></br>
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                <?php endfor; ?>
+                                            </tr>
+                                            <?php
+                                        endfor;
+                                    endif;
+                                    ?>
+                                </table>
+                            </td>
+                        </tr>
+          
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
